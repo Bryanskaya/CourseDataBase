@@ -29,6 +29,10 @@
 
 ![image](https://user-images.githubusercontent.com/54107546/105752863-e04f8280-5f58-11eb-9217-75982f33a25a.png)
 
+![image](https://user-images.githubusercontent.com/54107546/105753932-79cb6400-5f5a-11eb-92ab-2b8f1c5183ae.png)
+
+(Аналогично с оружием, только будет добавить и всё)
+
 # Если ты егерь
 
 
