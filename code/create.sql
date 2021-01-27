@@ -6,7 +6,6 @@ DROP TABLE hunters CASCADE;
 DROP TABLE price_list CASCADE;
 DROP TABLE vouchers CASCADE;
 
--- done
 CREATE TABLE IF NOT EXISTS hunting_grounds(
 	id SERIAL PRIMARY KEY,
 	ground_name VARCHAR(30) UNIQUE NOT NULL,
@@ -14,20 +13,20 @@ CREATE TABLE IF NOT EXISTS hunting_grounds(
 	max_num_sectors INTEGER CONSTRAINT valid_max_num CHECK (max_num_sectors > 0)
 );
 
---done
+
 CREATE TABLE IF NOT EXISTS sectors(
 	id SERIAL PRIMARY KEY,
 	square NUMERIC CONSTRAINT valid_square CHECK (square > 0),
 	id_husbandry INTEGER REFERENCES hunting_grounds
 );
 
---done
+
 CREATE TABLE IF NOT EXISTS accounts(
 	login VARCHAR(20) PRIMARY KEY,
 	pswd TEXT CONSTRAINT valid_password CHECK (length(pswd) >= 6)
 );
 
---done
+
 CREATE TABLE IF NOT EXISTS huntsmen(
 	id INTEGER REFERENCES sectors,
 	PRIMARY KEY (id),
@@ -44,7 +43,7 @@ CREATE TABLE IF NOT EXISTS huntsmen(
 	login VARCHAR(20) REFERENCES accounts
 );
 
---done
+
 CREATE TABLE IF NOT EXISTS hunters(
 	ticket_num INTEGER PRIMARY KEY,
 	surname VARCHAR(30) NOT NULL,
@@ -58,7 +57,7 @@ CREATE TABLE IF NOT EXISTS hunters(
 	login VARCHAR(20) REFERENCES accounts
 );
 
---done
+
 CREATE TABLE IF NOT EXISTS price_list(
 	id SERIAL PRIMARY KEY,
 	animal TEXT NOT NULL,
@@ -67,7 +66,7 @@ CREATE TABLE IF NOT EXISTS price_list(
 	id_sector INTEGER REFERENCES sectors
 );
 
---done
+
 CREATE TABLE IF NOT EXISTS vouchers(
 	id SERIAL PRIMARY KEY,
 	duration_days INTEGER CONSTRAINT valid_days CHECK (duration_days > 0),
@@ -101,4 +100,9 @@ FROM 'C:\msys64\home\bryan\CourseDataBase\code\generator\vouchers.cvg'	 DELIMITE
 
 	
 SELECT * FROM hunting_grounds;
-SELECT * FROM accounts;
+SELECT * FROM vouchers;
+
+UPDATE vouchers
+SET price = price_list.price * amount_animals
+FROM price_list
+WHERE vouchers.id_pricelist = price_list.id
