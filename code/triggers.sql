@@ -18,6 +18,7 @@ BEGIN
 		from vouchers
 	);
 	
+	RAISE INFO 'Итоговая сумма путёвки подсчитана';
 	RETURN NULL;
 END;
 $$
