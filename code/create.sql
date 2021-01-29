@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS hunters(
 	surname VARCHAR(30) NOT NULL,
 	firstname VARCHAR(30) NOT NULL,
 	patronymic VARCHAR(30),
-	date_of_birth date NOT NULL,
+	date_of_birth DATE NOT NULL,
 	sex CHAR NOT NULL,
 	residence VARCHAR(100) NOT NULL,
 	mobile_phone VARCHAR(30) NOT NULL,
@@ -101,6 +101,9 @@ FROM 'C:\msys64\home\bryan\CourseDataBase\code\generator\vouchers.cvg'	 DELIMITE
 	
 SELECT * FROM hunting_grounds;
 SELECT * FROM vouchers;
+SELECT * FROM hunters;
+SELECT * FROM price_list;
+SELECT * FROM huntsmen;
 
 UPDATE vouchers
 SET price = price_list.price * amount_animals
