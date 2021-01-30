@@ -192,3 +192,105 @@ LANGUAGE PLpgSql;
 
 /*SELECT *
 FROM ShowHuntmen();*/
+
+
+-- Найти охотника по ФИО и получить подробнейшую инфу о нём (включая все путёвки, которые у него есть)
+DROP TYPE table_hntr CASCADE;
+CREATE TYPE table_hntr AS
+(
+	ticket_num 		INTEGER,
+	surname 		VARCHAR(30),
+	firstname 		VARCHAR(30),
+	patronymic		VARCHAR(30),
+	date_of_birth 	DATE,
+	sex 			CHAR,
+	mobile_phone 	VARCHAR(30),
+	email 			VARCHAR(40),
+	residence 		VARCHAR(100),
+	id_voucher		INTEGER,
+	animal			TEXT,
+	num_animals		INTEGER,
+	num_days		INTEGER,
+	price			NUMERIC,
+	id_sector		INTEGER
+);
+
+
+DROP FUNCTION ShowHuntersBySFP(surname VARCHAR(30), firstname VARCHAR(30), patronymic VARCHAR(30));
+CREATE OR REPLACE FUNCTION ShowHuntersBySFP(t_surname VARCHAR(30), t_firstname VARCHAR(30), t_patronymic VARCHAR(30))
+RETURNS SETOF table_hntr
+AS $$
+BEGIN
+	RETURN QUERY
+	(
+		SELECT hunters.ticket_num,
+			   hunters.surname, hunters.firstname, hunters.patronymic,
+			   hunters.date_of_birth,
+			   hunters.sex,
+			   hunters.mobile_phone,
+			   hunters.email,
+			   hunters.residence,
+			   vouchers.id,
+			   price_list.animal,
+			   vouchers.amount_animals,
+			   vouchers.duration_days,
+			   vouchers.price,
+			   price_list.id_sector
+		FROM hunters JOIN vouchers ON hunters.ticket_num = vouchers.id_hunter
+			JOIN price_list ON vouchers.id_pricelist = price_list.id
+		WHERE hunters.surname = t_surname AND hunters.firstname = t_firstname AND hunters.patronymic = t_patronymic
+		ORDER BY price_list.animal
+	);
+END;
+$$
+LANGUAGE PLpgSql;
+
+
+/*SELECT * FROM ShowHuntersBySFP('Шубина', 'Анна', 'Болеславовна');*/
+
+
+-- Получить всех охотников, которых охотятся в конкретном секторе
+DROP TYPE table_hntr_sct CASCADE;
+CREATE TYPE table_hntr_sct AS
+(
+	ticket_num 		INTEGER,
+	surname 		VARCHAR(30),
+	firstname 		VARCHAR(30),
+	patronymic		VARCHAR(30),
+	mobile_phone 	VARCHAR(30),
+	email 			VARCHAR(40),
+	id_voucher		INTEGER,
+	animal			TEXT,
+	num_animals		INTEGER,
+	num_days		INTEGER,
+	price			NUMERIC
+);
+
+
+DROP FUNCTION ShowHuntersByIdSct(id_sct INTEGER);
+CREATE OR REPLACE FUNCTION ShowHuntersByIdSct(id_sct INTEGER)
+RETURNS SETOF table_hntr_sct
+AS $$
+BEGIN
+	RETURN QUERY
+	(
+		SELECT hunters.ticket_num,
+			   hunters.surname, hunters.firstname, hunters.patronymic,
+			   hunters.mobile_phone,
+			   hunters.email,
+			   vouchers.id,
+			   price_list.animal,
+			   vouchers.amount_animals,
+			   vouchers.duration_days,
+			   vouchers.price
+		FROM hunters JOIN vouchers ON hunters.ticket_num = vouchers.id_hunter
+			JOIN price_list ON vouchers.id_pricelist = price_list.id
+		WHERE price_list.id_sector = id_sct
+		ORDER BY hunters.surname, hunters.firstname, hunters.patronymic, price_list.animal
+	);
+END;
+$$
+LANGUAGE PLpgSql;
+
+
+/*SELECT * FROM ShowHuntersByIdSct(10);*/
