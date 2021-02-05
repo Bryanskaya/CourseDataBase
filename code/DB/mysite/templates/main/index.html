@@ -7,7 +7,16 @@
 {% block info %}
     <h1>Попытка номер раз</h1>
     <h3>Начало</h3>
-    {{ tasks }}
+    {% if info %}
+        {% for element in info %}
+            <div style="background: pink">
+                <h3>{{ element.login }}</h3>
+                <p>{{ element.pswd }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Нет записей</p>
+    {% endif %}
     <h3>Конец</h3>
 {% endblock %}
 
