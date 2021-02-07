@@ -11,7 +11,8 @@ END;
 $$
 LANGUAGE PLpgSql;
 
-/*CALL AddVoucher(10, 21, 0, 26703800, 1);*/
+/*CALL AddVoucher(10, 21, 0, 26703800, 2);*/
+-- select * from vouchers
 
 
 -- Удалить (закрыть) путёвку по её id
@@ -59,6 +60,8 @@ $$
 LANGUAGE PLpgSql;
 	
 
-/*CALL AddPointPriceList('чирок', 1000, 89);*/
+/*CALL AddPointPriceList('чирок', 900, 89);*/
 
-
+select *
+from price_list
+where id_sector = 89

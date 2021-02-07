@@ -10,8 +10,9 @@
     {% if info %}
         {% for element in info %}
             <div style="background: pink">
-                <h3>{{ element.id_voucher }}</h3>
-                <p>{{ element.surname }}</p>
+                <h3>{{ element.ticket_num }}</h3>
+                <p>{{ element.mobile_phone }}</p>
+                <p>{{ element.email }}</p>
                 <!--<h3>{{ element }}<h3>-->
             </div>
         {% endfor %}

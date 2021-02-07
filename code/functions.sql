@@ -117,14 +117,15 @@ LANGUAGE PLpgSql;
 FROM ShowPriceListByIdSct(89);*/
 
 -- Получить информацию следующего вида: 
--- название хозяйства - номер сектора - название животного - количество выданных путёвок - цена
+-- название хозяйства - номер сектора - название животного - количество выданных путёвок - средняя цена
 DROP TYPE table_genprices CASCADE;
 CREATE TYPE table_genprices AS
 (
 	ground_name		VARCHAR(30),
 	id_sector		INTEGER,
 	animal			TEXT,
-	price			NUMERIC
+	num				BIGINT,
+	avg_price		NUMERIC
 );
 
 DROP FUNCTION ShowDeneralInfoPrices();
@@ -137,12 +138,13 @@ BEGIN
 		SELECT hunting_grounds.ground_name,
 			   temp_res.id_sector,
 			   temp_res.animal,
+			   temp_res.num,
 			   temp_res.price
 		FROM hunting_grounds JOIN sectors ON hunting_grounds.id = sectors.id_husbandry
 			JOIN 
 		(
-			SELECT price_list.id_sector, price_list.animal, COUNT(price_list.animal) AS num, ROUND(AVG(price_list.price), 2) AS price
-			FROM vouchers JOIN price_list ON vouchers.id_pricelist = price_list.id
+			SELECT price_list.id_sector, price_list.animal, COUNT(vouchers.id_pricelist) AS num, ROUND(AVG(price_list.price), 2) AS price
+			FROM price_list LEFT JOIN vouchers ON vouchers.id_pricelist = price_list.id
 			GROUP BY price_list.id_sector, price_list.animal
 			ORDER BY price_list.id_sector, price_list.animal
 		) AS temp_res ON sectors.id = temp_res.id_sector
@@ -195,6 +197,8 @@ FROM ShowHuntmen();*/
 
 
 -- Найти охотника по ФИО и получить подробнейшую инфу о нём (включая все путёвки, которые у него есть)
+-- СПОРНЫЙ МОМЕНТ, ЕСЛИ ДЕЛАТЬ ПО ЭТОЙ ФУНКЦИИ ТО ИНФА ПРО ОХОТНИКА БУДЕТ ПОСТОЯННО ДУБЛИРОВАТЬСЯ В ЗАВИСИМОСТИ ОТ КОЛИЧЕСТВА ПУТЁВОК
+-- НО ЕСЛИ ДЕЛАТЬ В ДВЕ ФУНКЦИИ, ТО НУЖНО ТОГДА УЧИТЫВАТЬ ПОЛНОЕ СОВПАДЕНИЕ ПО ФИО НЕСКОЛЬКИХ ЧЕЛОВЕК
 DROP TYPE table_hntr CASCADE;
 CREATE TYPE table_hntr AS
 (
@@ -247,6 +251,45 @@ LANGUAGE PLpgSql;
 
 
 /*SELECT * FROM ShowHuntersBySFP('Шубина', 'Анна', 'Болеславовна');*/
+
+-- Получить некоторую информацию об охотнике по ФИО
+DROP TYPE table_hntr_part1 CASCADE;
+CREATE TYPE table_hntr_part1 AS
+(
+	ticket_num 		INTEGER,
+	surname 		VARCHAR(30),
+	firstname 		VARCHAR(30),
+	patronymic		VARCHAR(30),
+	date_of_birth 	DATE,
+	sex 			CHAR,
+	mobile_phone 	VARCHAR(30),
+	email 			VARCHAR(40),
+	residence 		VARCHAR(100)
+);
+
+
+DROP FUNCTION ShowHunterBySFP(surname VARCHAR(30), firstname VARCHAR(30), patronymic VARCHAR(30));
+CREATE OR REPLACE FUNCTION ShowHunterBySFP(t_surname VARCHAR(30), t_firstname VARCHAR(30), t_patronymic VARCHAR(30))
+RETURNS SETOF table_hntr_part1
+AS $$
+BEGIN
+	RETURN QUERY
+	(
+		SELECT hunters.ticket_num,
+			   hunters.surname, hunters.firstname, hunters.patronymic,
+			   hunters.date_of_birth,
+			   hunters.sex,
+			   hunters.mobile_phone,
+			   hunters.email,
+			   hunters.residence
+		FROM hunters
+		WHERE hunters.surname = t_surname AND hunters.firstname = t_firstname AND hunters.patronymic = t_patronymic
+	);
+END;
+$$
+LANGUAGE PLpgSql;
+
+/*SELECT * FROM ShowHunterBySFP('Шубина', 'Анна', 'Болеславовна');*/
 
 
 -- Получить всех охотников, которых охотятся в конкретном секторе
