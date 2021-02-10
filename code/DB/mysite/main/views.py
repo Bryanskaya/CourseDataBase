@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # from .models import Accounts
 from .models import *
+from .forms import *
 
 
 def home(request):
@@ -29,6 +30,24 @@ def home(request):
     proc_add_point_pricelist('чирок', 870, 89)
     return render(request, 'main\index.html', {'title': 'Пробуем вывести'})
     '''
+
+    if request.method == 'POST':
+        error = ''
+        form = UserForm(request.POST)
+        print(form)
+
+        if form.is_valid():
+            #form.save()
+            return redirect('index')
+        else:
+            error = 'Неверные данные'
+
+    form = UserForm()
+    context = {
+        'form': form,
+        'error': error
+    }
+    return render(request, 'main\index.html', context)
 
 
 

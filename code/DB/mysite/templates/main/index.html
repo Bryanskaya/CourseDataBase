@@ -4,9 +4,18 @@
 {{ title }}
 {% endblock %}
 
+
 {% block info %}
     <h1>Попытка номер раз</h1>
     <h3>Начало</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.login }}<br><br>
+    {{ form.pswd }}<br><br>
+    <button type="submit" class="btn btn-input">Войти</button>
+    <span>{{ error }}</span>
+</form>
+
     {% if info %}
         {% for element in info %}
             <div style="background: pink">
