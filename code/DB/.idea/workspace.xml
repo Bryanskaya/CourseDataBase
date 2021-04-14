@@ -28,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -51,6 +51,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite\templates\main\static\css" />
+      <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite\templates\main\static" />
       <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite" />
       <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite\main\templates\main" />
     </key>
@@ -96,6 +98,9 @@
     </task>
     <servers />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -113,25 +118,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1612384904972" />
-    <state width="936" height="281" key="GridCell.Tab.0.bottom" timestamp="1612387427903">
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom" timestamp="1618350477416">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="936" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1612387427903" />
-    <state width="936" height="281" key="GridCell.Tab.0.center" timestamp="1612387427903">
+    <state width="1899" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1618350477416" />
+    <state width="1899" height="281" key="GridCell.Tab.0.center" timestamp="1618350477416">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="936" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1612387427903" />
-    <state width="936" height="281" key="GridCell.Tab.0.left" timestamp="1612387427903">
+    <state width="1899" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1618350477416" />
+    <state width="1899" height="281" key="GridCell.Tab.0.left" timestamp="1618350477416">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="936" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1612387427903" />
-    <state width="936" height="281" key="GridCell.Tab.0.right" timestamp="1612387427903">
+    <state width="1899" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1618350477416" />
+    <state width="1899" height="281" key="GridCell.Tab.0.right" timestamp="1618350477416">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="936" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1612387427903" />
-    <state x="828" y="244" key="SettingsEditor" timestamp="1612637707239">
+    <state width="1899" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1618350477416" />
+    <state x="828" y="244" key="SettingsEditor" timestamp="1618340852321">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="828" y="244" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1612637707239" />
+    <state x="828" y="244" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1618340852321" />
   </component>
 </project>
