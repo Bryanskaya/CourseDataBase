@@ -6,10 +6,10 @@ from .forms import *
 
 def home(request):
     #data = Accounts.objects.filter(login__exact='GorNa_03_08_1988')
-    '''
+
     data = get_hunters_by_id_sct(10)
-    return render(request, 'main\index.html', {'title': 'Пробуем вывести', 'info': data})
-    '''
+    return render(request, 'main\static\index.html', {'title': 'Пробуем вывести', 'info': data})
+
 
     '''
     proc_add_voucher(10, 21, 0, 26703800, 1)
@@ -31,7 +31,7 @@ def home(request):
     return render(request, 'main\index.html', {'title': 'Пробуем вывести'})
     '''
 
-    if request.method == 'POST':
+    '''if request.method == 'POST':
         error = ''
         form = UserForm(request.POST)
         print(form)
@@ -47,7 +47,7 @@ def home(request):
         'form': form,
         'error': error
     }
-    return render(request, 'main\index.html', context)
+    return render(request, 'main\index.html', context)'''
 
 
 
