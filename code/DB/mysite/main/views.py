@@ -8,7 +8,7 @@ def home(request):
     #data = Accounts.objects.filter(login__exact='GorNa_03_08_1988')
 
     data = get_hunters_by_id_sct(10)
-    return render(request, 'main\static\index.html', {'title': 'Пробуем вывести', 'info': data})
+    return render(request, 'static/index.html', {'title': 'Пробуем вывести', 'info': data})
 
 
     '''

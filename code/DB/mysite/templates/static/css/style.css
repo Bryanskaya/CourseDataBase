@@ -1,0 +1,22 @@
+h1, h3{
+    color: #ff0000;
+}
+
+body {
+    position: absolute;
+    width: 1440px;
+    height: 1024px;
+    left: calc(50% - 1440px/2);
+    top: calc(50% - 1024px/2);
+
+    background: url(backg.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /*opacity: 0.1;
+    background: rgba(255,245,215,0.9);*/
+}
+
+.btn {
+    background-color: yellow;
+}
