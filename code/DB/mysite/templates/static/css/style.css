@@ -1,18 +1,22 @@
 h1, h3{
-    color: #ff0000;
+    color: #000000;
 }
 
 body {
-    position: absolute;
-    width: 1440px;
+    /*position: absolute;*/
+    /*width: 1440px;
     height: 1024px;
     left: calc(50% - 1440px/2);
-    top: calc(50% - 1024px/2);
+    top: calc(50% - 1024px/2);*/
 
-    background: url(backg.jpg);
-    background-position: top center;
+    /*background: url(backg.jpg);*/
+    /*background-position: center center;*/
+    /*background-size: contain;*/
     background-repeat: no-repeat;
     background-attachment: fixed;
+    /*background-color: #FFD688;*/
+    background-size: cover;
+    background-color: red;
     /*opacity: 0.1;
     background: rgba(255,245,215,0.9);*/
 }
