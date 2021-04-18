@@ -1,21 +1,38 @@
 import inject
-from pattern_repository import rps
+import peewee
+
+from pattern_repository.repository import *
+from pattern_repository.db_config import *
+from load_config_file import *
 
 
-def injector(binder):
-#    binder.install(my_config2)  # Импортируем другую конфигурацию
-#    binder.bind(Db, RedisDb('localhost:1234'))
-#    binder.bind_to_provider(CurrentUser, get_current_user)
-    binder.bind_to_constructor(Cache, lambda: RedisCache(address='localhost:1234'))
-    binder.bind("database", )
+def init_injector(bnd):
+    bnd.bind(peewee.Database, peewee.PostgresqlDatabase)
+    bnd.bind_to_constructor(load_config,
+                            lambda: load_config('config.json'))
+    bnd.bind_to_constructor(CurConnection,
+                            lambda: get_config_params(inject.instance(peewee.Database), inject.instance(load_config)))
 
 
+inject.configure(init_injector)
+
+from pattern_repository.hunter_repository import *
+from pattern_repository.hunting_grounds_repository import *
 
 
-inject.configure(my_config)
+def injector(bnd):
+    init_injector(bnd)
+
+    bnd.bind_to_constructor(HunterRepository, lambda: PW_HunterRepository())
+    bnd.bind_to_constructor(HuntingGroundsRepository, lambda: PW_HuntingGroundsRepository())
+
+inject.clear_and_configure(injector)
+
 
 def main():
-    pass
+    hunter = inject.instance(HunterRepository)
+    print(hunter)
+
 
 if __name__ == "__main__":
     main()
