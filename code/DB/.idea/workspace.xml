@@ -20,23 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="894445a5-5ab7-4d75-8775-a03e38cb5e7b" name="Default Changelist" comment="ADD: items">
-      <change afterPath="$PROJECT_DIR$/BL_objects/hunter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BL_objects/hunting_grounds.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/load_config_file.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pattern_repository/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pattern_repository/db_config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pattern_repository/errors.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pattern_repository/hunter_repository.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pattern_repository/hunting_grounds_repository.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pattern_repository/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/my_inject.py" beforeDir="false" afterPath="$PROJECT_DIR$/man_inject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/main/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/templates/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/templates/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pattern_repository/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/peewee_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pattern_repository/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/repository.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../generator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../generator/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../generator/generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/../generator/generator.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

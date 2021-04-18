@@ -9,9 +9,9 @@ body {
     left: calc(50% - 1440px/2);
     top: calc(50% - 1024px/2);*/
 
-    /*background: url(backg.jpg);*/
+    background: url(backg.jpg);*/
     /*background-position: center center;*/
-    /*background-size: contain;*/
+    background-size: contain;
     /*background-repeat: no-repeat;
     background-attachment: fixed;*/
     background-color: #FFD688;
