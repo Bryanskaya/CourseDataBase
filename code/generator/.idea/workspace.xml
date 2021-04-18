@@ -19,7 +19,31 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e17ca88-198d-4072-a8c2-1ffc4ccbea9c" name="Default Changelist" comment="" />
+    <list default="true" id="2e17ca88-198d-4072-a8c2-1ffc4ccbea9c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../DB/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/BL_objects/hunter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/BL_objects/hunter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/BL_objects/hunting_grounds.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/BL_objects/hunting_grounds.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/load_config_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/load_config_file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/man_inject.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/man_inject.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/mysite/templates/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/mysite/templates/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/db_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/db_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/errors.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/hunter_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/hunter_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/hunting_grounds_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/hunting_grounds_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/peewee_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/peewee_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/accounts.cvg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hunters.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/hunters.cvg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hunting_grounds.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/hunting_grounds.cvg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/huntsmen.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/huntsmen.cvg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/price_list.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/price_list.cvg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sectors.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/sectors.cvg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vouchers.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/vouchers.cvg" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -100,22 +124,22 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1319" height="281" key="GridCell.Tab.0.bottom" timestamp="1611694541908">
+    <state width="936" height="283" key="GridCell.Tab.0.bottom" timestamp="1618722867926">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1319" height="281" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1611694541908" />
-    <state width="1319" height="281" key="GridCell.Tab.0.center" timestamp="1611694541908">
+    <state width="936" height="283" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1618722867926" />
+    <state width="936" height="283" key="GridCell.Tab.0.center" timestamp="1618722867926">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1319" height="281" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1611694541908" />
-    <state width="1319" height="281" key="GridCell.Tab.0.left" timestamp="1611694541908">
+    <state width="936" height="283" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1618722867926" />
+    <state width="936" height="283" key="GridCell.Tab.0.left" timestamp="1618722867926">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1319" height="281" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1611694541908" />
-    <state width="1319" height="281" key="GridCell.Tab.0.right" timestamp="1611694541908">
+    <state width="936" height="283" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1618722867926" />
+    <state width="936" height="283" key="GridCell.Tab.0.right" timestamp="1618722867926">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1319" height="281" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1611694541908" />
+    <state width="936" height="283" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1618722867926" />
     <state x="922" y="168" key="SettingsEditor" timestamp="1611691705453">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

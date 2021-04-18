@@ -3,8 +3,6 @@ from random import choice
 import secrets
 import pytils.translit  #
 
-SQUARE = []
-MAX_NUM_SECTORS = []
 
 NUM_SECTORS = 100
 MAX_AMOUNT = 1000
@@ -37,20 +35,16 @@ def generate_hunting_grounds():
             continue
 
         s = choice(range(100, 10000))
-        SQUARE.append(s)
 
-        max_num = choice(range(1, 10))
-        MAX_NUM_SECTORS.append(max_num)
-
-        line = "{0}|{1}|{2}\n".format(
+        line = "{0}|{1}\n".format(
             name,
-            s,
-            max_num
+            s
         )
 
         f.write(line)
         i += 1
     f.close()
+
 
 def generate_sectors():
     f = open('sectors.cvg', 'w')
@@ -58,24 +52,8 @@ def generate_sectors():
     i = 1
     while i <= NUM_SECTORS:
         id_husbandry = choice(range(1, 70))
-        if MAX_NUM_SECTORS[id_husbandry - 1] == 0:
-            continue
 
         s = choice(range(100, 10000))
-        if SQUARE[id_husbandry - 1] < s:
-            continue
-        if SQUARE[id_husbandry - 1] == s:
-            if MAX_NUM_SECTORS[id_husbandry - 1] == 1:
-                MAX_NUM_SECTORS[id_husbandry - 1] -=1
-                SQUARE[id_husbandry - 1] -= s
-                i += 1
-            else:
-                continue
-        else:
-            if MAX_NUM_SECTORS[id_husbandry - 1]:
-                MAX_NUM_SECTORS[id_husbandry - 1] -= 1
-                SQUARE[id_husbandry - 1] -= s
-                i += 1
 
         line = "{0}|{1}\n".format(
             s,
@@ -83,7 +61,9 @@ def generate_sectors():
         )
 
         f.write(line)
+        i += 1
     f.close()
+
 
 def generate_price_list():
     f = open('price_list.cvg', 'w')
@@ -115,9 +95,8 @@ def generate_price_list():
 
     f.close()
 
-def generate_huntsmen():
-    fake_ru = Faker('ru_Ru')
 
+def generate_huntsmen():
     f = open('huntsmen.cvg', 'w', encoding='utf-8')
 
     i = 0
@@ -126,6 +105,51 @@ def generate_huntsmen():
         id_sector = huntsmen_sectors[ind]
         del huntsmen_sectors[ind]
 
+        experience = choice(range(0, 50))
+        salary = choice(range(10000, 80000, 5000))
+        lgn = login[i]
+
+        line = "{0}|{1}|{2}|{3}\n".format(
+            id_sector,
+            experience,
+            salary,
+            lgn
+        )
+
+        f.write(line)
+        i += 1
+    f.close()
+
+
+def generate_hunters():
+    fake_ru = Faker('ru_Ru')
+
+    f = open('hunters.cvg', 'w')
+
+    for i in range(MAX_AMOUNT):
+        address = fake_ru.address()
+        num_ticket = fake_ru.ean(length = 8)
+        hunters.append(num_ticket)
+
+        lgn = login[NUM_SECTORS + i]
+
+        line = "{0}|{1}|{2}\n".format(
+                num_ticket,
+                address,
+                lgn)
+
+        f.write(line)
+    f.close()
+
+
+def generate_accounts():
+    fake = Faker()
+    fake_ru = Faker('ru_Ru')
+
+    f = open('accounts.cvg', 'w')
+
+    i = 0
+    while i < NUM_SECTORS + MAX_AMOUNT:
         sex_p = choice(sex)
         if sex_p == 'м':
             surname = fake_ru.last_name_male()
@@ -137,10 +161,9 @@ def generate_huntsmen():
             patronymic = fake_ru.middle_name_female()
 
         date_of_brth = fake_ru.date_of_birth(None, 21, 80)
-        experience = choice(range(0, 50))
         phone = fake_ru.phone_number()
         email = fake_ru.email()
-        salary = choice(range(10000, 80000, 5000))
+
         lgn = surname[:3] + name[:2] + '_' + str(date_of_brth).split('-')[2] + \
               '_' + str(date_of_brth).split('-')[1] + \
               '_' + str(date_of_brth).split('-')[0]
@@ -148,88 +171,31 @@ def generate_huntsmen():
 
         login.append(lgn)
 
-        line = "{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}\n".format(
-            id_sector,
+        pswd = fake.password(length=8, special_chars=False, digits=True, upper_case=True, lower_case=True)
+
+        if i < NUM_SECTORS:
+            status = 'егерь'
+        else:
+            status = 'охотник'
+
+        line = "{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}\n".format(
+            lgn,
+            pswd,
             surname,
             name,
             patronymic,
             date_of_brth,
             sex_p,
-            experience,
             phone,
             email,
-            salary,
-            lgn
+            status
         )
 
         f.write(line)
         i += 1
-    f.close()
-
-def generate_hunters():
-    fake_ru = Faker('ru_Ru')
-
-    f = open('hunters.cvg', 'w')
-
-    for i in range(MAX_AMOUNT):
-        sex_p = choice(sex)
-        if sex_p == 'м':
-            surname = fake_ru.last_name_male()
-            name = fake_ru.first_name_male()
-            middle_name = fake_ru.middle_name_male()
-        else:
-            surname = fake_ru.last_name_female()
-            name = fake_ru.first_name_female()
-            middle_name = fake_ru.middle_name_female()
-
-        date_of_brth = fake_ru.date_of_birth(None, 21, 80)
-        address = fake_ru.address()
-        phone = fake_ru.phone_number()
-        email = fake_ru.email()
-        num_ticket = fake_ru.ean(length = 8)
-
-        hunters.append(num_ticket)
-
-        lgn = surname[:3] + name[:2] + '_' + str(date_of_brth).split('-')[2] + \
-              '_' + str(date_of_brth).split('-')[1] + \
-              '_' + str(date_of_brth).split('-')[0]
-
-        lgn = pytils.translit.translify(lgn)
-
-        login.append(lgn)
-
-        line = "{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}\n".format(
-            num_ticket,
-            surname,
-            name,
-            middle_name,
-            date_of_brth,
-            sex_p,
-            address,
-            phone,
-            email,
-            lgn
-        )
-
-        f.write(line)
-    f.close()
-
-def generate_accounts():
-    fake = Faker()
-
-    f = open('accounts.cvg', 'w')
-
-    for lgn in login:
-        pswd = fake.password(length=8, special_chars=False, digits=True, upper_case=True, lower_case=True)
-
-        line = "{0}|{1}\n".format(
-            lgn,
-            pswd
-        )
-
-        f.write(line)
 
     f.close()
+
 
 def generate_vouchers():
     f = open('vouchers.cvg', 'w')
@@ -253,11 +219,12 @@ def generate_vouchers():
         f.write(line)
     f.close()
 
+
 if __name__ == "__main__":
     generate_hunting_grounds()
     generate_sectors()
     generate_price_list()
+    generate_accounts()
     generate_huntsmen()
     generate_hunters()
-    generate_accounts()
     generate_vouchers()
