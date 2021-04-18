@@ -19,30 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2e17ca88-198d-4072-a8c2-1ffc4ccbea9c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../DB/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/BL_objects/hunter.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/BL_objects/hunter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/BL_objects/hunting_grounds.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/BL_objects/hunting_grounds.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/load_config_file.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/load_config_file.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/man_inject.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/man_inject.py" afterDir="false" />
+    <list default="true" id="2e17ca88-198d-4072-a8c2-1ffc4ccbea9c" name="Default Changelist" comment="CREATED: several models for peewee">
       <change beforePath="$PROJECT_DIR$/../DB/mysite/templates/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/mysite/templates/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/db_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/db_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/errors.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/errors.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/hunter_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/hunter_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/hunting_grounds_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/hunting_grounds_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/peewee_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/peewee_models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../DB/pattern_repository/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/../DB/pattern_repository/repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/accounts.cvg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hunters.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/hunters.cvg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hunting_grounds.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/hunting_grounds.cvg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/huntsmen.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/huntsmen.cvg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/price_list.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/price_list.cvg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sectors.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/sectors.cvg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vouchers.cvg" beforeDir="false" afterPath="$PROJECT_DIR$/vouchers.cvg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +88,140 @@
       <option name="presentableId" value="Default" />
       <updated>1611676384044</updated>
     </task>
+    <task id="LOCAL-00001" summary="MODIFIED: generator.py">
+      <created>1618723723320</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723723320</updated>
+    </task>
+    <task id="LOCAL-00002" summary="CREATED: new data for accounts">
+      <created>1618723757490</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723757490</updated>
+    </task>
+    <task id="LOCAL-00003" summary="CREATED: new data for hunters">
+      <created>1618723768237</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723768237</updated>
+    </task>
+    <task id="LOCAL-00004" summary="CREATED: new data for hunters">
+      <created>1618723780665</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723780665</updated>
+    </task>
+    <task id="LOCAL-00005" summary="CREATED: new data for hunting_grounds">
+      <created>1618723794376</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723794376</updated>
+    </task>
+    <task id="LOCAL-00006" summary="CREATED: new data for huntsmen">
+      <created>1618723811823</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723811823</updated>
+    </task>
+    <task id="LOCAL-00007" summary="CREATED: new data for price_list">
+      <created>1618723825389</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723825389</updated>
+    </task>
+    <task id="LOCAL-00008" summary="CREATED: new data for sectors">
+      <created>1618723838535</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723838535</updated>
+    </task>
+    <task id="LOCAL-00009" summary="CREATED: new data for vouchers">
+      <created>1618723855523</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723855523</updated>
+    </task>
+    <task id="LOCAL-00010" summary="CREATED: file for errors">
+      <created>1618723882758</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723882758</updated>
+    </task>
+    <task id="LOCAL-00011" summary="CREATED: config file">
+      <created>1618723898136</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723898136</updated>
+    </task>
+    <task id="LOCAL-00012" summary="CREATED: pattern repository">
+      <created>1618723922825</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723922825</updated>
+    </task>
+    <task id="LOCAL-00013" summary="CREATED: injections">
+      <created>1618723937162</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723937162</updated>
+    </task>
+    <task id="LOCAL-00014" summary="ADDED: test">
+      <created>1618723952626</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723952626</updated>
+    </task>
+    <task id="LOCAL-00015" summary="CREATED: loader for config files">
+      <created>1618723975944</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723975944</updated>
+    </task>
+    <task id="LOCAL-00016" summary="CREATED: hunter_repository">
+      <created>1618723998324</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1618723998324</updated>
+    </task>
+    <task id="LOCAL-00017" summary="CREATED: hunting_grounds_repository">
+      <created>1618724010983</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1618724010983</updated>
+    </task>
+    <task id="LOCAL-00018" summary="CREATED: object of hunting_grounds">
+      <created>1618724048215</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1618724048215</updated>
+    </task>
+    <task id="LOCAL-00019" summary="CREATED: several models for peewee">
+      <created>1618724068125</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1618724068125</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -122,6 +235,27 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="MODIFIED: generator.py" />
+    <MESSAGE value="CREATED: new data for accounts" />
+    <MESSAGE value="CREATED: new data for hunters" />
+    <MESSAGE value="CREATED: new data for hunting_grounds" />
+    <MESSAGE value="CREATED: new data for huntsmen" />
+    <MESSAGE value="CREATED: new data for price_list" />
+    <MESSAGE value="CREATED: new data for sectors" />
+    <MESSAGE value="CREATED: new data for vouchers" />
+    <MESSAGE value="CREATED: file for errors" />
+    <MESSAGE value="CREATED: config file" />
+    <MESSAGE value="CREATED: pattern repository" />
+    <MESSAGE value="CREATED: injections" />
+    <MESSAGE value="ADDED: test" />
+    <MESSAGE value="CREATED: loader for config files" />
+    <MESSAGE value="CREATED: hunter_repository" />
+    <MESSAGE value="CREATED: hunting_grounds_repository" />
+    <MESSAGE value="CREATED: object of hunting_grounds" />
+    <MESSAGE value="CREATED: several models for peewee" />
+    <option name="LAST_COMMIT_MESSAGE" value="CREATED: several models for peewee" />
   </component>
   <component name="WindowStateProjectService">
     <state width="936" height="283" key="GridCell.Tab.0.bottom" timestamp="1618722867926">
