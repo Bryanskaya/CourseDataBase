@@ -12,15 +12,15 @@ body {
     /*background: url(backg.jpg);*/
     /*background-position: center center;*/
     /*background-size: contain;*/
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    /*background-color: #FFD688;*/
-    background-size: cover;
-    background-color: red;
+    /*background-repeat: no-repeat;
+    background-attachment: fixed;*/
+    background-color: #FFD688;
+    /*background-size: cover;
+    background-color: red;*/
     /*opacity: 0.1;
     background: rgba(255,245,215,0.9);*/
 }
 
 .btn {
-    background-color: yellow;
+    background-color: green;
 }
