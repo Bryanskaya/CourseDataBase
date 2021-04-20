@@ -7,8 +7,10 @@ from .forms import *
 def home(request):
     #data = Accounts.objects.filter(login__exact='GorNa_03_08_1988')
 
-    data = get_hunters_by_id_sct(10)
-    return render(request, 'static/index.html', {'title': 'Пробуем вывести', 'info': data})
+    #data = get_hunters_by_id_sct(10)
+    #return render(request, 'static/index.html', {'title': 'Пробуем вывести', 'info': {'test1': 1, 'test2': 22}})
+    return render(request, 'static/main_page.html')
+
 
 
     '''
