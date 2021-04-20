@@ -3,7 +3,7 @@ class HuntingGrounds(object):
     ground_name = None
     square = None
 
-    def __init__(self, data):   #**
+    def __init__(self, data):  # **
         if data is None:
             return
 
@@ -12,5 +12,7 @@ class HuntingGrounds(object):
         self.square = data['square']
 
     def get_id(self):           return self.id
+
     def get_ground_name(self):  return self.ground_name
+
     def get_square(self):       return self.square
