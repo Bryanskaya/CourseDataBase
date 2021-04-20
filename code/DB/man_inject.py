@@ -18,6 +18,8 @@ inject.configure(init_injector)
 
 from pattern_repository.hunter_repository import *
 from pattern_repository.hunting_grounds_repository import *
+from pattern_repository.sectors_repository import *
+from pattern_repository.accounts_repository import *
 
 
 def injector(bnd):
@@ -25,6 +27,9 @@ def injector(bnd):
 
     bnd.bind_to_constructor(HunterRepository, lambda: PW_HunterRepository())
     bnd.bind_to_constructor(HuntingGroundsRepository, lambda: PW_HuntingGroundsRepository())
+    bnd.bind_to_constructor(SectorsRepository, lambda: PW_SectorsRepository())
+    bnd.bind_to_constructor(AccountsRepository, lambda: PW_AccountsRepository())
+
 
 inject.clear_and_configure(injector)
 
