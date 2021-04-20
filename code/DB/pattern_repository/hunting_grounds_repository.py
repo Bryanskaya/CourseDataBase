@@ -13,7 +13,7 @@ class PW_HuntingGroundsRepository(HuntingGroundsRepository):
     def __init__(self):
         pass
 
-    def create(self, obj):
+    def create(self, obj: HuntingGrounds):
         # try:
         HuntingGroundsModel.create(id=obj.get_id(),
                                    ground_name=obj.get_ground_name(),
