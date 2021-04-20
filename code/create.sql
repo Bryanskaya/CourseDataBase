@@ -97,6 +97,7 @@ SELECT * FROM hunters;
 SELECT * FROM price_list;
 SELECT * FROM huntsmen;
 SELECT * FROM accounts;
+SELECT * FROM sectors;
 
 UPDATE vouchers
 SET price = price_list.price * amount_animals
