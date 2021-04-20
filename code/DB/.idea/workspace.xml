@@ -19,11 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="894445a5-5ab7-4d75-8775-a03e38cb5e7b" name="Default Changelist" comment="ADD: items">
+    <list default="true" id="894445a5-5ab7-4d75-8775-a03e38cb5e7b" name="Default Changelist" comment="MODIFIED: sectors repository">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/main/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/templates/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/templates/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../generator/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../generator/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/templates/static/main_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/templates/static/main_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pattern_repository/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pattern_repository/peewee_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/peewee_models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../create.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../create.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,11 +59,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite\templates\static\css" />
+      <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite\templates\static" />
       <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\pattern_repository" />
       <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite\templates\main\static\css" />
       <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite\templates\main\static" />
-      <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite" />
-      <recent name="C:\msys64\home\bryan\CourseDataBase\code\DB\mysite\main\templates\main" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main (1)">
@@ -153,7 +156,49 @@
       <option name="project" value="LOCAL" />
       <updated>1618667074814</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ADD: items">
+      <created>1618724655203</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618724655203</updated>
+    </task>
+    <task id="LOCAL-00003" summary="MODIFIED: accounts_repository.py">
+      <created>1618950483903</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618950483903</updated>
+    </task>
+    <task id="LOCAL-00004" summary="MODIFIED: hunting_grounds_repository.py">
+      <created>1618950527829</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1618950527829</updated>
+    </task>
+    <task id="LOCAL-00005" summary="MODIFIED: hunting_repository.py">
+      <created>1618950539241</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618950539241</updated>
+    </task>
+    <task id="LOCAL-00006" summary="MODIFIED: injection">
+      <created>1618950573955</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1618950573955</updated>
+    </task>
+    <task id="LOCAL-00007" summary="MODIFIED: sectors repository">
+      <created>1618950631090</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1618950631090</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -173,29 +218,34 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ADD: items" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: items" />
+    <MESSAGE value="MODIFIED: accounts_repository.py" />
+    <MESSAGE value="MODIFIED: hunting_grounds_repository.py" />
+    <MESSAGE value="MODIFIED: hunting_repository.py" />
+    <MESSAGE value="MODIFIED: injection" />
+    <MESSAGE value="MODIFIED: sectors repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="MODIFIED: sectors repository" />
   </component>
   <component name="WindowStateProjectService">
     <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612384904972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1612384904972" />
-    <state width="1899" height="451" key="GridCell.Tab.0.bottom" timestamp="1618696682756">
+    <state width="1899" height="187" key="GridCell.Tab.0.bottom" timestamp="1618784024992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="451" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1618696682756" />
-    <state width="1899" height="451" key="GridCell.Tab.0.center" timestamp="1618696682756">
+    <state width="1899" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1618784024992" />
+    <state width="1899" height="187" key="GridCell.Tab.0.center" timestamp="1618784024992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="451" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1618696682756" />
-    <state width="1899" height="451" key="GridCell.Tab.0.left" timestamp="1618696682756">
+    <state width="1899" height="187" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1618784024992" />
+    <state width="1899" height="187" key="GridCell.Tab.0.left" timestamp="1618784024992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="451" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1618696682756" />
-    <state width="1899" height="451" key="GridCell.Tab.0.right" timestamp="1618696682756">
+    <state width="1899" height="187" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1618784024992" />
+    <state width="1899" height="187" key="GridCell.Tab.0.right" timestamp="1618784024992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="451" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1618696682756" />
+    <state width="1899" height="187" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1618784024992" />
     <state x="828" y="244" key="SettingsEditor" timestamp="1618340852321">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

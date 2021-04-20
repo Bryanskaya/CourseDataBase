@@ -1,7 +1,3 @@
-h1, h3{
-    color: #000000;
-}
-
 body {
     /*position: absolute;*/
     /*width: 1440px; /*определение размеров рабочей области*/
@@ -10,49 +6,48 @@ body {
     top: calc(50% - 1024px/2);*/
 
     background: url(new.jpg);
-    /*background-position: center center;
-    background-size: contain;*/
-    /*background-repeat: no-repeat;
+    background-position: center center;
+    /*background-size: contain;*/
+    background-repeat: no-repeat;
     background-attachment: fixed;
     background-color: #FFD688;
-    background-size: cover;*/
-    background-color: red;
-    /*opacity: 0.6;*/
-    /*background: rgba(255,245,215,0.9);*/
+    /*background-size: cover;*/
+    /*background-color: red;
+    /*opacity: 0.1;*/
+    /*background: rgba(255,245,215,0.2);*/
 }
 
 .btn {
     background-color: green;
 }
 
-/*header {
+header {
    width: 100%;
-   background: red;
    box-shadow: 3px 3px 1px rgba(0, 0, 0, .05);
    padding: 15px 0;
    margin-bottom: 30px;
    position: relative;
-}*/
+}
 /* логотип */
-/*.logo {
+.logo {
    display: block;
    float: left;
    color: red;
 }
 .logo span {
-   color: red; /*white*/
-   /*display: inline-block;
+   color: white;
+   display: inline-block;
    width: 30px;
    height: 30px;
    line-height: 30px;
    border-radius: 50%;
    margin: 5px 0;
    text-align: center;
-   text-shadow: 2px 2px 1px rgba(0, 0, 0, .4);*/
+   text-shadow: 2px 2px 1px rgba(0, 0, 0, .4);
 }
-/*.logo span:nth-child(odd) {
+.logo span:nth-child(odd) {
    background: #EF5A42;
 }
 .logo span:nth-child(even) {
    background: #F8B763;
-}*/
+}
