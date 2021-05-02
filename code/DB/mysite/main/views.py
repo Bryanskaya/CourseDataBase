@@ -9,7 +9,9 @@ def home(request):
 
     #data = get_hunters_by_id_sct(10)
     #return render(request, 'static/index.html', {'title': 'Пробуем вывести', 'info': {'test1': 1, 'test2': 22}})
-    return render(request, 'static/main_page.html')
+    #return render(request, 'static/main_page.html')
+    #return render(request, 'static/start_hunter.html')
+    #return render(request, 'static/start_huntsman.html')
 
 
 
