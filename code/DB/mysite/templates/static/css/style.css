@@ -47,7 +47,7 @@ a:hover {
 .container-login
 {
     width: 100%;
-    min-height: 98vh; /*470px 90vh*/
+    min-height: 90vh; /*470px 90vh*/
     display: flex;
     flex-wrap: wrap; /**/
     justify-content: center;
@@ -148,8 +148,6 @@ a:hover {
     flex-wrap: wrap;
     justify-content: center;
     text-align: center;
-
-
 }
 
 .btn {
@@ -199,6 +197,10 @@ header {
    padding: 15px;
    margin-bottom: 30px;
    position: relative;
+
+   border-bottom: solid 2px; /*line bottom logo*/
+   border-color: #946e29;
+   padding-bottom: 50px;
 }
 /* логотип */
 .logo {
