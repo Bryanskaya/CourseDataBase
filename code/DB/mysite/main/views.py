@@ -12,6 +12,7 @@ def home(request):
     #return render(request, 'static/main_page.html')
     #return render(request, 'static/start_hunter.html')
     #return render(request, 'static/start_huntsman.html')
+    return render(request, 'static/map.html')
 
 
 
