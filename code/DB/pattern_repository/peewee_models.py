@@ -37,7 +37,6 @@ class AccountModel(BaseModel):
 class HunterModel(BaseModel):
     ticket_num = IntegerField(column_name='ticket_num', primary_key=True)
     residence = TextField(column_name='residence')
-    #login = TextField(column_name='login')
     login = ForeignKeyField(AccountModel, column_name='login')
 
     class Meta:
@@ -61,6 +60,38 @@ class SectorModel(BaseModel):
     class Meta:
         table_name = 'sectors'
 
+
+class HuntsmanModel(BaseModel):
+    id = ForeignKeyField(SectorModel, column_name='id', primary_key=True)
+    experience = IntegerField(column_name='experience')
+    salary = FloatField(column_name='salary')
+    login = ForeignKeyField(AccountModel, column_name='login')
+
+    class Meta:
+        table_name = 'huntsmen'
+
+
+class PriceListModel(BaseModel):
+    id = IntegerField(column_name='id', primary_key=True)
+    animal = TextField(column_name='animal')
+    price = FloatField(column_name='price')
+    is_relevant = BooleanField(column_name='is_relevant')
+    id_sector = ForeignKeyField(SectorModel, column_name='id_sector')
+
+    class Meta:
+        table_name = 'price_list'
+
+
+class VoucherModel(BaseModel):
+    id = IntegerField(column_name='id', primary_key=True)
+    duration_days = IntegerField(column_name='duration_days')
+    amount_animals = IntegerField(column_name='amount_animals')
+    price = FloatField(column_name='price')
+    id_hunter = ForeignKeyField(HunterModel, column_name='id_hunter')
+    id_pricelist = ForeignKeyField(PriceListModel, column_name='id_pricelist')
+
+    class Meta:
+        table_name = 'vouchers'
 
 
 
