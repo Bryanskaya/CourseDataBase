@@ -1,6 +1,6 @@
 class Repository(object):
-    def __init__(self):
-        pass
+    # def __init__(self):
+    #     pass
 
     def create(self, obj):
         raise NotImplementedError

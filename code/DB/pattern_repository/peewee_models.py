@@ -1,7 +1,7 @@
+from pattern_repository.repository import CurConnection
 from peewee import *
 import inject
-
-from pattern_repository.repository import CurConnection
+print("-----------------------------------------------\n")
 
 
 def transf_to_objs(data, to_class):
@@ -12,11 +12,11 @@ def transf_to_objs(data, to_class):
 
     return arr
 
-
 class BaseModel(Model):
     class Meta:
         database = inject.instance(CurConnection)
 
+print("-----------------------------------------------\n")
 
 class AccountModel(BaseModel):
     login = TextField(column_name='login', primary_key=True)
@@ -32,7 +32,6 @@ class AccountModel(BaseModel):
 
     class Meta:
         table_name = 'accounts'
-
 
 class HunterModel(BaseModel):
     ticket_num = IntegerField(column_name='ticket_num', primary_key=True)
@@ -92,6 +91,8 @@ class VoucherModel(BaseModel):
 
     class Meta:
         table_name = 'vouchers'
+
+
 
 
 

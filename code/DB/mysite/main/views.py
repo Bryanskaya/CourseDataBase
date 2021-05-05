@@ -3,17 +3,24 @@ from django.shortcuts import render, redirect
 from .models import *
 from .forms import *
 
+import  sys
+sys.path.append("..")
+
+from inject_config import *
 
 def home(request):
     #data = Accounts.objects.filter(login__exact='GorNa_03_08_1988')
 
     #data = get_hunters_by_id_sct(10)
     #return render(request, 'static/index.html', {'title': 'Пробуем вывести', 'info': {'test1': 1, 'test2': 22}})
-    #return render(request, 'static/main_page.html')
+
+    if request.method == 'POST':
+        print(request.POST)
+
+    return render(request, 'static/main_page.html')
     #return render(request, 'static/start_hunter.html')
     #return render(request, 'static/start_huntsman.html')
-    return render(request, 'static/map.html')
-
+    #return render(request, 'static/map.html')
 
 
     '''
@@ -55,7 +62,11 @@ def home(request):
     return render(request, 'main\index.html', context)'''
 
 
+def authorise(request):
+    if request.method == 'POST':
+        print(request.POST)
 
+    return render(request, 'static/start_hunter.html')
 
 
 

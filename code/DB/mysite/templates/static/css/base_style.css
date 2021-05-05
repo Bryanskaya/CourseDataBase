@@ -1,0 +1,42 @@
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%; /**/
+}
+
+body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.5)), url(img/new.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* логотип */
+.logo {
+   display: block;
+   float: left;
+   color: red;
+   padding-left: 10px;
+}
+.logo span {
+   color: white;
+   display: inline-block;
+   width: 30px;
+   height: 30px;
+   line-height: 30px;
+   border-radius: 50%;
+   margin: 5px 0;
+   text-align: center;
+   text-shadow: 2px 2px 1px rgba(0, 0, 0, .4);
+}
+.logo span:nth-child(odd) {
+   background: #d1ab81;
+}
+.logo span:nth-child(even) {
+   background: #c68f3f;
+}

@@ -3,7 +3,6 @@ from pattern_repository.peewee_models import *
 from BL_objects.hunter import *
 from pattern_repository.errors import *
 
-
 class HunterRepository(Repository):
     def __init__(self):
         pass
