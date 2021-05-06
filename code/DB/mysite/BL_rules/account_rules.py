@@ -17,8 +17,13 @@ class AccountRules(object):
         account = accounts_set.get_by_login(login)
 
         if not len(account):
-            return False #TODO прокинуть ошибку
+            return False
         elif AccountRules.is_relevant_password(account[0], password):
-            return account[0]  #TODO где прокинуть страницу
+            return account[0].get_dict()  #TODO где прокинуть страницу
         else:
-            return False #TODO сделать разные коды ошибок
+            return False
+
+    @staticmethod
+    def get_person(login):
+        accounts_set = inject.instance(AccountsRepository)
+        return accounts_set.get_by_login(login)[0].get_dict()

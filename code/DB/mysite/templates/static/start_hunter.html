@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    {% block head %}
     <meta charset="UTF-8">
-    <title>Личный кабинет охотника</title>
-    <link rel="stylesheet" href="static\css\style_hunter.css">
-    <link rel="icon" type="image/png" href="static\css\img\hunter.ico"/>
+<!--    <title>Личный кабинет охотника</title>-->
+    <title>{% block title %}{% endblock %} - My Webpage</title>
+    <link rel="stylesheet" href="..\static\css\style_hunter.css"/>
+    <link rel="icon" type="image/png" href="..\static\css\img\hunter.ico"/>
+    {% endblock %}
 </head>
 <body>
     <header>
@@ -32,15 +35,17 @@
         </nav>
 
         <div class="user-img">
-            <p><img src="static/css/img/user2.png" alt="Охотник" width="33"></p>
+            <p><img src="../static/css/img/user2.png" alt="Охотник" width="33"></p>
         </div>
 
-        <div class="user-name">Иванов Иван Иванович</div>
+        <div class="user-name">
+            {{ account.surname }} {{ account.firstname }} {{ account.patronymic}}
+        </div>
     </header>
 
     <ul class="main-menu">
         <li class="active">
-            <a href="#url">О себе</a>
+            <a href="..\static\about.html">О себе</a>
         </li>
         <li class="menu-children">
             <a href="#url">Путёвки</a>
@@ -61,7 +66,9 @@
         <li><a href="#url">Карта</a></li>
     </ul>
 
-
+    <div class="temp">
+        {% block content %}{% endblock %}
+    </div>
 
 </body>
 </html>

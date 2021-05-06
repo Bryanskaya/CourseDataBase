@@ -1,7 +1,8 @@
 import peewee
 
-from mysite.pattern_repository.db_config import *
-from mysite.load_config_file import *
+from pattern_repository.db_config import *
+from pattern_repository.repository import * #for CurConnection
+from load_config_file import *
 
 
 def init_injector(bnd):
@@ -12,15 +13,16 @@ def init_injector(bnd):
                             lambda: get_config_params(inject.instance(peewee.Database), inject.instance(load_config)))
 
 
-inject.configure(init_injector)
+inject.clear_and_configure(init_injector)
 
-from mysite.pattern_repository.hunter_repository import *
-from mysite.pattern_repository.hunting_grounds_repository import *
-from mysite.pattern_repository.sectors_repository import *
-from mysite.pattern_repository.accounts_repository import *
-from mysite.pattern_repository.huntsman_repository import *
-from mysite.pattern_repository.price_list_repository import *
-from mysite.pattern_repository.voucher_repository import *
+from pattern_repository.hunter_repository import HunterRepository, PW_HunterRepository
+from pattern_repository.hunting_grounds_repository import *
+from pattern_repository.sectors_repository import *
+from pattern_repository.accounts_repository import *
+from pattern_repository.huntsman_repository import *
+from pattern_repository.price_list_repository import *
+from pattern_repository.voucher_repository import *
+
 
 
 def injector(bnd):
@@ -36,12 +38,3 @@ def injector(bnd):
 
 
 inject.clear_and_configure(injector)
-
-
-def main():
-    hunter = inject.instance(HunterRepository)
-    print(hunter)
-
-
-if __name__ == "__main__":
-    main()

@@ -1,14 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-from .models import *
-from .forms import *
 
 import sys
 
 sys.path.append("../")
 
-from inject_config import *
 from BL_rules.account_rules import *
 
 
@@ -71,21 +68,27 @@ def authorise(request):
 
     account = AccountRules.is_log_in(request.POST['username'], request.POST['password'])
     if account:
-        role = account.get_type_role()
-        if role == 'охотник':
-            #return render(request, '/static/start_hunter.html')
+        if account['type_role'] == 'охотник':
+            request.session['login'] = account['login']
+
             return HttpResponseRedirect(reverse('start:hunter'))
-        elif role == 'егерь':
-            return render(request, '/static/start_huntsman.html')
-        elif role == 'админ':
+        elif account['type_role'] == 'егерь':
+            #return render(request, '/static/start_huntsman.html')
+            return HttpResponseRedirect(reverse('start:huntsman'))
+        elif account['type_role'] == 'админ':
             return HttpResponse('Я - админ')  # TODO страница для админа
     else:
-        # return HttpResponseRedirect(reverse('start:start_page', kwargs={
-        #     'error_message': 'Неверный логин/пароль'
-        # }))
         return render(request, 'static/start_page.html', {
             'error_message': 'Неверный логин/пароль',
         })
 
+
 def account_hunter(request):
-    return render(request, 'static/start_hunter.html')
+    account = AccountRules.get_person(request.session['login'])
+    return render(request, 'static/start_hunter.html', locals())
+
+
+def account_huntsman(request):
+    print("------------------------------------------------")
+    print("*********get-person*******", request.session['login'])
+    return render(request, 'static/start_huntsman.html')
