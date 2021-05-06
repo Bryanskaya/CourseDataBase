@@ -1,10 +1,11 @@
-from man_inject import *
+#from man_inject import *
 from pattern_repository.hunter_repository import *
 from pattern_repository.hunting_grounds_repository import *
 from BL_objects import *
 
 
 if __name__ == '__main__':
+    pass
     # hunters = inject.instance(HunterRepository)
     # hunters.create(Hunter({'ticket_num': '0000000000',
     #                       'residence': 'г. Москва',

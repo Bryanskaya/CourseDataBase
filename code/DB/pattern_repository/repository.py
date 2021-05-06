@@ -14,6 +14,9 @@ class Repository(object):
     def update(self, obj):
         raise NotImplementedError
 
+    def get_all(self, obj):
+        raise NotImplementedError
+
 
 class CurConnection(object):
     pass

@@ -5,14 +5,20 @@ from pattern_repository.errors import *
 
 
 class AccountsRepository(Repository):
-    def __init__(self):
-        pass
+    def create(self, obj: Account):
+        raise NotImplementedError
+
+    def get_all(self) -> [Account]:
+        raise NotImplementedError
+
+    def get_by_login(self, login) -> Account:
+        raise NotImplementedError
+
+    def is_relevant_password(self, password: str):
+        raise NotImplementedError
 
 
 class PW_AccountsRepository(AccountsRepository):
-    def __init__(self):
-        pass
-
     def create(self, obj: Account):
         # try:
         AccountModel.create(login=obj.get_login(),
@@ -28,7 +34,12 @@ class PW_AccountsRepository(AccountsRepository):
     # except:
     #    return CreareBLObjectError
 
-    def get(self):
+    def get_all(self) -> [Account]:
         temp = AccountModel.select()
-
         return transf_to_objs(temp, Account)
+
+    def get_by_login(self, login: str) -> Account:
+        temp = AccountModel.select().where(AccountModel.login == login)
+        print("-------accounts_repository-----", transf_to_objs(temp, Account))
+        return transf_to_objs(temp, Account)#[0]
+

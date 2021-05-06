@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Общество охотников</title>
-    <link rel="stylesheet" href="static\css\style.css">
-    <link rel="icon" type="image/png" href="static\css\img\favicon.ico"/>
+
+    <link rel="stylesheet" href="\static\css\style.css">
+    <link rel="icon" type="image/png" href="\static\css\img\favicon.ico"/>
+
+
 </head>
 <body>
     <header>
@@ -32,17 +35,20 @@
         </nav>
     </header>
 
-<!--    <form method="POST" action="main_page/" class="login-form">-->
-<!--                {% csrf_token %}-->
-
     <div class="limiter">
     <div class="container-login">
         <div class="wrap-login">
-            <form class="login-form p-l-55 p-r-55 p-t-178" method="POST" action="main_page/">
+            <form class="login-form p-l-55 p-r-55 p-t-178" method="POST" action="{% url 'start:authorise' %}">
                 {% csrf_token %}
                 <span class="login-form-title">
                     Личный кабинет
                 </span>
+
+                {% if error_message %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error_message }}</strong>
+                    </div>
+                {% endif %}
 
                 <div class="input-username m-b-16">
                     <input class="input1 m-b-16" type="text" name="username" placeholder="Логин" required>
@@ -64,7 +70,6 @@
 <!--                    </a>-->
 <!--                </div>-->
 
-
                 <div class="container-btn">
                     <button class="btn btn-in" type="submit">
                         Вход
@@ -84,6 +89,7 @@
     </form>
 </body>
 </html>
+
 
 
 

@@ -226,3 +226,22 @@ header {
 .logo span:nth-child(even) {
    background: #c68f3f;
 }
+
+.alert {
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    line-height: 1;
+
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    /*border-radius: 20px;*/
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+

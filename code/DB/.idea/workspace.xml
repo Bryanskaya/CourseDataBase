@@ -20,15 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="894445a5-5ab7-4d75-8775-a03e38cb5e7b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/mysite/templates/static/css/base_style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/BL_rules/__init__" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mysite/BL_rules/account_rules.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inject_config/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/inject_config/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/main/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/main/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/templates/static/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/templates/static/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/mysite/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/mysite/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mysite/templates/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/templates/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mysite/templates/static/main_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/templates/static/main_page.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pattern_repository/db_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/db_config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pattern_repository/hunter_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/hunter_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mysite/templates/static/main_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/mysite/templates/static/start_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pattern_repository/accounts_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/accounts_repository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pattern_repository/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pattern_repository/peewee_models.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/peewee_models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pattern_repository/repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/pattern_repository/repository.py" afterDir="false" />
     </list>
@@ -310,30 +312,30 @@
     <option name="LAST_COMMIT_MESSAGE" value="ADDED: pictures" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1618953469934">
+    <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1620230476690">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1618953469934" />
-    <state width="1899" height="187" key="GridCell.Tab.0.bottom" timestamp="1620165310728">
+    <state x="719" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1620230476690" />
+    <state width="972" height="186" key="GridCell.Tab.0.bottom" timestamp="1620249413860">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620165310728" />
-    <state width="1899" height="187" key="GridCell.Tab.0.center" timestamp="1620165310727">
+    <state width="972" height="186" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1620249413860" />
+    <state width="972" height="186" key="GridCell.Tab.0.center" timestamp="1620249413859">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="187" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620165310727" />
-    <state width="1899" height="187" key="GridCell.Tab.0.left" timestamp="1620165310727">
+    <state width="972" height="186" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1620249413859" />
+    <state width="972" height="186" key="GridCell.Tab.0.left" timestamp="1620249413859">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="187" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620165310727" />
-    <state width="1899" height="187" key="GridCell.Tab.0.right" timestamp="1620165310728">
+    <state width="972" height="186" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1620249413859" />
+    <state width="972" height="186" key="GridCell.Tab.0.right" timestamp="1620249413860">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1899" height="187" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620165310728" />
-    <state x="828" y="244" key="SettingsEditor" timestamp="1618340852321">
+    <state width="972" height="186" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1620249413860" />
+    <state x="828" y="244" key="SettingsEditor" timestamp="1620243916051">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="828" y="244" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1618340852321" />
+    <state x="828" y="244" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1620243916051" />
     <state x="769" y="434" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1619955698474">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

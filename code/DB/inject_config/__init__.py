@@ -5,12 +5,11 @@ from pattern_repository.repository import *
 from pattern_repository.db_config import *
 from load_config_file import *
 
-print("***** I'm here!!")
 
 def init_injector(bnd):
     bnd.bind(peewee.Database, peewee.PostgresqlDatabase)
     bnd.bind_to_constructor(load_config,
-                            lambda: load_config('config.json'))
+                            lambda: load_config('..\\pattern_repository\\config.json'))
     bnd.bind_to_constructor(CurConnection,
                             lambda: get_config_params(inject.instance(peewee.Database), inject.instance(load_config)))
 
@@ -18,7 +17,6 @@ def init_injector(bnd):
 inject.configure(init_injector)
 
 from pattern_repository.hunter_repository import HunterRepository, PW_HunterRepository
-print("***** ////////////////!!")
 from pattern_repository.hunting_grounds_repository import *
 from pattern_repository.sectors_repository import *
 from pattern_repository.accounts_repository import *
@@ -41,6 +39,3 @@ def injector(bnd):
 
 
 inject.clear_and_configure(injector)
-
-
-print("***** It's end!!")
