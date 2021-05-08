@@ -2,6 +2,7 @@ from faker import Faker
 from random import choice
 import secrets
 import pytils.translit  #
+import hashlib, uuid
 
 
 NUM_SECTORS = 100
@@ -147,6 +148,7 @@ def generate_accounts():
     fake_ru = Faker('ru_Ru')
 
     f = open('accounts.cvg', 'w')
+    f_me = open('account_passwords', 'w')
 
     i = 0
     while i < NUM_SECTORS + MAX_AMOUNT:
@@ -172,15 +174,20 @@ def generate_accounts():
         login.append(lgn)
 
         pswd = fake.password(length=8, special_chars=False, digits=True, upper_case=True, lower_case=True)
+        salt = uuid.uuid4().hex
+        salt_pw = pswd.encode('utf-8') + salt.encode('utf-8')
+        hashed_pswd = hashlib.sha256(salt_pw).hexdigest()
+
 
         if i < NUM_SECTORS:
             status = 'егерь'
         else:
             status = 'охотник'
 
-        line = "{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}\n".format(
+        line = "{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|{10}\n".format(
             lgn,
-            pswd,
+            salt,
+            hashed_pswd,
             surname,
             name,
             patronymic,
@@ -191,7 +198,17 @@ def generate_accounts():
             status
         )
 
+        line_me = "{0}|{1}|{2}|{3}|{4}\n".format(
+            lgn,
+            pswd,
+            surname,
+            name,
+            patronymic
+        )
+
         f.write(line)
+        f_me.write(line_me)
+
         i += 1
 
     f.close()
