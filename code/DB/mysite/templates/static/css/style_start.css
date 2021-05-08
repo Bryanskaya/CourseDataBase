@@ -1,0 +1,205 @@
+input {
+	outline: none;
+}
+
+input:focus {
+    color: black;
+    font-weight: bold;
+}
+
+a {
+	font-size: 18px;
+	color: black;
+}
+
+a:focus {
+	outline: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #1b3815;
+}
+
+.limiter
+{
+    width: 100%;
+    margin: 0 auto;
+}
+.container-login
+{
+    width: 100%;
+    min-height: 90vh; /*470px 90vh*/
+    display: flex;
+    flex-wrap: wrap; /**/
+    justify-content: center;
+    align-items: center;
+    /*padding: 15px;*/ /*убрать, иначе - скролл снизу*/
+    position: relative;/**/
+    /*background-color: #fff;/**/
+}
+
+.wrap-login
+{
+    width: 434px;
+    background: #fff;
+    /*opacity: 90%;*/
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.login-form
+{
+    width: 100%;
+    position: relative;
+}
+
+.login-form-title
+{
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+    line-height: 1.2;
+    text-align: center;
+
+    display: block;
+    position: absolute;/**/
+    width: 100%;
+    top: 0;/**/
+    left: 0;/**/
+    background: #B98853;/*#C59A2B;*/
+    border-radius: 20px 20px 0px 0px; /*?*/
+    padding-top: 50px; /*9*/
+    padding-bottom: 39px; /*39*/
+}
+
+/* Field login */
+.p-t-178 {
+    padding-top: 178px;
+}
+
+.p-l-55 {
+    padding-left: 55px;
+}
+
+.p-r-55 {
+    padding-right: 55px;
+}
+
+.m-b-16 {
+    margin-bottom: 16px;
+}
+
+.input-username, input-password
+{
+    width: 100%;
+    background-color: #fff;
+
+    border-radius: 20px;
+    position: relative;
+
+    z-index: 1;/**/
+}
+.input1
+{
+	font-family: JosefinSans;
+	font-size: 20px;
+	color: #ABAAAA;
+	line-height: 1.2;
+
+	position: relative;
+	display: block;/**/
+	width: 100%;
+	height: 55px;
+	border-radius: 20px;
+	padding: 0px 15px 0 15px;/**/
+}
+
+/*Forgot username/password*/
+.forgot-smth {
+    margin-top: 5px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+/*Buttons*/
+.container-btn {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 20px;
+
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 22px;
+    color: black;
+    line-height: 2;
+    margin-bottom: 16px;
+
+    text-decoration: none; /*without ___link___*/
+
+    border: solid 2px;
+    border-radius: 20px;
+    border-color: black;
+}
+
+.btn:hover {
+    background: #814B38;
+    cursor: pointer;
+}
+
+.btn-in {
+    background: #B98853;
+    transition: all 0.4s;
+}
+
+.btn-reg {
+    background: #e9e9e9;/*#AFA799;*/
+    margin-bottom: 35px;
+}
+
+@media (max-width: 576px) {
+  .login-form {
+    padding-left: 55px;
+    padding-right: 55px;
+  }
+}
+
+header {
+   width: 100%;
+   box-shadow: 3px 3px 1px rgba(0, 0, 0, .05);
+   padding: 15px;
+   margin-bottom: 30px;
+   position: relative;
+
+   border-bottom: solid 2px; /*line bottom logo*/
+   border-color: #946e29;
+   padding-bottom: 50px;
+}
+
+.alert {
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    line-height: 1;
+
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    /*border-radius: 20px;*/
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
