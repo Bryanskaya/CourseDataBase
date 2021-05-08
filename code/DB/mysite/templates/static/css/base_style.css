@@ -148,10 +148,10 @@ header {
 .main-menu > li.active a:after {
     width: 100%;
 }*/
-.main-menu li {
-    margin: 0;
-    white-space: nowrap;
+.main-menu li:hover {
+    background: #d1ab81;
 }
+
 .main-menu li.menu-children {
     position: relative;
     /*margin-right: 12px;*/

@@ -1,3 +1,5 @@
+import hashlib, uuid
+
 import sys
 sys.path.append("..")
 
@@ -20,10 +22,16 @@ class AccountRules(object):
             return role
 
     @staticmethod
+    def make_password_hashed(password, salt):
+        salt_password = password.encode('utf-8') + salt.encode('utf-8')
+        return hashlib.sha256(salt_password).hexdigest()
+
+    @staticmethod
     def is_relevant_password(account, password):
-        if account.get_password() == password:
-            return True #TODO проверка пароля
-        return False
+        salt = account.get_salt()
+        hashed_password = AccountRules.make_password_hashed(password, salt)
+        print("PASSWORD: %s %s\n", hashed_password, account.get_hashed_password())
+        return hashed_password == account.get_hashed_password()
 
     @staticmethod
     def is_log_in(login, password):
@@ -35,6 +43,7 @@ class AccountRules(object):
         elif AccountRules.is_relevant_password(account, password):
             return account
         else:
+            print("***********password*******\n",)
             return None
 
     @staticmethod
@@ -44,7 +53,6 @@ class AccountRules(object):
 
     @staticmethod
     def get_cookie(account: Account) -> dict:
-        print("********** ", account)
         res_dict = {
             'login': account.get_login(),
             'role': account.get_type_role(),

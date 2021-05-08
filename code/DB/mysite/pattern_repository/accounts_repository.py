@@ -21,7 +21,8 @@ class PW_AccountsRepository(AccountsRepository):
     def create(self, obj: Account):
         # try:
         AccountModel.create(login=obj.get_login(),
-                            pswd=obj.get_password(),
+                            salt=obj.get_salt(),
+                            hashed_password=obj.get_hashed_password(),
                             surname=obj.get_surname(),
                             firstname=obj.get_firstname(),
                             patronymic=obj.get_patronymic(),

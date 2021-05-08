@@ -19,7 +19,8 @@ class BaseModel(Model):
 
 class AccountModel(BaseModel):
     login = TextField(column_name='login', primary_key=True)
-    pswd = TextField(column_name='pswd')
+    salt = TextField(column_name='salt')
+    hashed_password = TextField(column_name='hashed_password')
     surname = TextField(column_name='surname')
     firstname = TextField(column_name='firstname')
     patronymic = TextField(column_name='patronymic')

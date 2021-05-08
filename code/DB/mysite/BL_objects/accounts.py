@@ -1,6 +1,7 @@
 class Account(object):
     login = None
-    pswd = None
+    salt = None
+    hashed_password = None
     surname = None
     firstname = None
     patronymic = None
@@ -15,7 +16,8 @@ class Account(object):
             return
 
         self.login = data['login']
-        self.pswd = data['pswd']
+        self.salt = data['salt']
+        self.hashed_password = data['hashed_password']
         self.surname = data['surname']
         self.firstname = data['firstname']
         self.patronymic = data['patronymic']
@@ -27,7 +29,8 @@ class Account(object):
 
     def get_dict(self) -> dict:
         return {'login': self.login,
-                'password': self.pswd,
+                'salt': self.salt,
+                'hashed_password': self.hashed_password,
                 'surname': self.surname,
                 'firstname': self.firstname,
                 'patronymic': self.patronymic,
@@ -38,21 +41,25 @@ class Account(object):
                 'type_role': self.type_role}
 
     def get_login(self):            return self.login
-
-    def get_password(self):         return self.pswd
-
+    def get_salt(self):             return self.salt
+    def get_hashed_password(self):  return self.hashed_password
     def get_surname(self):          return self.surname
-
     def get_firstname(self):        return self.firstname
-
     def get_patronymic(self):       return self.patronymic
-
     def get_date_of_birth(self):    return self.date_of_birth
-
     def get_sex(self):              return self.sex
-
     def get_mobile_phone(self):     return self.mobile_phone
-
     def get_email(self):            return self.email
-
     def get_type_role(self):        return self.type_role
+
+    def set_login(self, login):                     self.login = login
+    def set_salt(self, salt):                       self.salt = salt
+    def set_hashed_password(self, hashed_password): self.hashed_password = hashed_password
+    def set_surname(self, surname):                 self.surname = surname
+    def set_firstname(self, firstname):             self.firstname = firstname
+    def set_patronymic(self, patronymic):           self.patronymic = patronymic
+    def set_date_of_birth(self, date):              self.date_of_birth = date
+    def set_sex(self, sex):                         self.sex = sex
+    def set_mobile_phone(self, phone):              self.mobile_phone = phone
+    def set_email(self, email):                     self.email = email
+    def set_type_role(self, role):                  self.type_role = role
