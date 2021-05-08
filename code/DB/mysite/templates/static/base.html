@@ -32,9 +32,13 @@
                 <span>В</span>
             </div>
         </nav>
+
+        {% block name_info %}{% endblock %}
+
     </header>
 
     <main role="main">
+        {% block table %}{% endblock %}
         {% block content %}{% endblock %}
     </main>
 
