@@ -1,0 +1,68 @@
+.personal-info {
+   display: flex;
+   /*flex-direction: row;*/
+   /*justify-content: space-start;*/
+   margin: 70px;
+}
+
+.user-photo {
+    padding-right: 100px;
+}
+
+.user-table {
+    width: 100%;
+}
+
+table {
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    line-height: 1.5;
+
+    text-align: left;
+}
+
+th, td {
+  padding: 15px 15px;
+}
+
+thead {
+  background: linear-gradient(#B98853, #d1ab81);
+  color: black;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+th:first-child {
+  border-top-left-radius: 5px;
+}
+
+th:last-child {
+  border-top-right-radius: 5px;
+}
+
+tbody tr:nth-child(even) {
+  background: #f0f0f2c1;
+}
+
+tbody tr:nth-child(odd) {
+  background: #d1ab81c6;
+}
+
+td {
+  border: 1px solid black;
+}
+td:first-child {
+  border-left: 1px solid black;
+}
+
+.item {
+    width: 30%;
+    font-size: 21px;
+    text-decoration: underline;
+}
+
+.mean {
+    width: 70%;
+}
