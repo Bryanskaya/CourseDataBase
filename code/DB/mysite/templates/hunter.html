@@ -1,50 +1,27 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    {% block head %}
-    <meta charset="UTF-8">
-    <title>Личный кабинет охотника</title>
-    <link rel="stylesheet" href="..\static\css\style_hunter.css"/>
-    <link rel="icon" type="image/png" href="..\static\css\img\hunter.ico"/>
-    {% endblock %}
-</head>
-<body>
-    <header>
-        <nav class="container">
-            <div class="logo">
-                <span>О</span>
-                <span>Б</span>
-                <span>Щ</span>
-                <span>Е</span>
-                <span>С</span>
-                <span>Т</span>
-                <span>В</span>
-                <span>О</span>
-                <span>•</span>
-                <span>О</span>
-                <span>Х</span>
-                <span>О</span>
-                <span>Т</span>
-                <span>Н</span>
-                <span>И</span>
-                <span>К</span>
-                <span>О</span>
-                <span>В</span>
-            </div>
-        </nav>
+{% extends "static\base.html" %}{% load static %}
 
-        <div class="user-img">
-            <p><img src="../static/css/img/user2.png" alt="Охотник" width="33"></p>
-        </div>
+{% block title %} Личный кабинет охотника {% endblock %}
 
-        <div class="user-name">
-            {{ account.surname }} {{ account.firstname }} {{ account.patronymic}}
-        </div>
-    </header>
+{% block head_temp %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '\css\style_hunter.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static '\css\img\hunter.ico' %}"/>
+{% endblock %}
 
+{% block name_info %}
+    <div class="user-img">
+        <p><img src="{% static '\css\img\user2.png' %}" alt="Охотник" width="33"></p>
+    </div>
+
+    <div class="user-name">
+        {{ account.surname }} {{ account.firstname }} {{ account.patronymic}}
+    </div>
+{% endblock %}
+
+{% block table %}
     <ul class="main-menu">
         <li class="active">
-            <a href="..\static\about.html">О себе</a>
+            <a href="{% url 'users:account' account.login %}">Обо мне</a>
         </li>
         <li class="menu-children">
             <a href="#url">Путёвки</a>
@@ -64,10 +41,4 @@
         <li><a href="#url">Цены</a></li>
         <li><a href="#url">Карта</a></li>
     </ul>
-
-    <div class="temp">
-        {% block content %}{% endblock %}
-    </div>
-
-</body>
-</html>
+{% endblock %}
