@@ -9,8 +9,12 @@
 {% endblock %}
 
 {% block name_info %}
-    <div class="user-img">
-        <p><img src="{% static '\css\img\user2.png' %}" alt="Егерь" width="33"></p>
+    <div class="exit-img">
+        <p>
+            <a href="{% url 'start:exit_from'%}">
+                <img src="{% static '\css\img\exit.png' %}" alt="Выход" width="33">
+            </a>
+        </p>
     </div>
 
     <div class="user-name">

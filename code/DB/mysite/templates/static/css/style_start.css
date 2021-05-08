@@ -182,7 +182,7 @@ header {
 
    border-bottom: solid 2px; /*line bottom logo*/
    border-color: #946e29;
-   padding-bottom: 50px;
+   /*padding-bottom: 50px;*/
 }
 
 .alert {

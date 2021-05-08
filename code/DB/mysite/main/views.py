@@ -27,6 +27,12 @@ def start(request):
     return HttpResponseRedirect(reverse('users:about'))
 
 
+def exit_from(request):
+    if 'user' in request.session:
+        del request.session['user']
+    return HttpResponseRedirect(reverse('start:start_page'))
+
+
 def authorise(request):
     account = AccountRules.is_log_in(request.POST['username'], request.POST['password'])
     if account is not None:
