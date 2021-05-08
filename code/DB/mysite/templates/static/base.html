@@ -3,14 +3,10 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    {% block head %}
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static '\css\style.css' %}"/>
-
-    <!--'\static\css\style.css'-->
-
-    {% endblock %}
+    <link rel="stylesheet" href="{% static '\css\base_style.css' %}"/>
+    {% block head_temp %}{% endblock %}
 </head>
 <body>
     <header>
@@ -24,7 +20,7 @@
                 <span>Т</span>
                 <span>В</span>
                 <span>О</span>
-                <span>•</span>
+                <span>&nbsp;</span>
                 <span>О</span>
                 <span>Х</span>
                 <span>О</span>
@@ -39,9 +35,7 @@
     </header>
 
     <main role="main">
-        <div class="limiter">
-            {% block content %}{% endblock %}
-        </div>
+        {% block content %}{% endblock %}
     </main>
 
 </body>

@@ -1,4 +1,4 @@
-* {
+/** {
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
@@ -14,7 +14,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
+}*/
 
 input {
 	outline: none;
@@ -203,7 +203,7 @@ header {
    padding-bottom: 50px;
 }
 /* логотип */
-.logo {
+/*.logo {
    display: block;
    float: left;
    color: red;
@@ -225,7 +225,7 @@ header {
 }
 .logo span:nth-child(even) {
    background: #c68f3f;
-}
+}*/
 
 .alert {
     font-family: JosefinSans;

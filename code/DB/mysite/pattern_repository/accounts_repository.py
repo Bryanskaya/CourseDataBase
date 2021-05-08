@@ -39,6 +39,9 @@ class PW_AccountsRepository(AccountsRepository):
 
     def get_by_login(self, login: str) -> Account:
         temp = AccountModel.select().where(AccountModel.login == login)
-        print("-------accounts_repository-----", transf_to_objs(temp, Account))
-        return transf_to_objs(temp, Account)#[0]
+        accounts_set = transf_to_objs(temp, Account)
+
+        if len(accounts_set):
+            return accounts_set[0]
+        return None
 

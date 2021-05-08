@@ -1,1 +1,0 @@
-CreareBLObjectError = -1

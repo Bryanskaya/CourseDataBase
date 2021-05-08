@@ -1,102 +1,63 @@
-{% extends "static\base.html" %}
+{% extends "static\base.html" %}{% load static %}
 
-<title>Общество охотников</title>
-{% block head %}
-    {{ block.super }}
+{% block title %} Общество охотников {% endblock %}
 
-    <!--<link rel="stylesheet" href="\static\css\style.css">-->
-    <link rel="icon" type="image/png" href="\static\css\img\favicon.ico"/>
-
+{% block head_temp %}
+    <link rel="stylesheet" href="{% static '\css\start_style.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static '\css\img\favicon.ico' %}"/>
 {% endblock %}
 
 {% block content %}
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="ru">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Общество охотников</title>-->
-
-<!--    <link rel="stylesheet" href="\static\css\style.css">-->
-<!--    <link rel="icon" type="image/png" href="\static\css\img\favicon.ico"/>-->
-
-<!--</head>-->
-<!--<body>-->
-<!--    <header>-->
-<!--        <nav class="container">-->
-<!--            <div class="logo">-->
-<!--                <span>О</span>-->
-<!--                <span>Б</span>-->
-<!--                <span>Щ</span>-->
-<!--                <span>Е</span>-->
-<!--                <span>С</span>-->
-<!--                <span>Т</span>-->
-<!--                <span>В</span>-->
-<!--                <span>О</span>-->
-<!--                <span>•</span>-->
-<!--                <span>О</span>-->
-<!--                <span>Х</span>-->
-<!--                <span>О</span>-->
-<!--                <span>Т</span>-->
-<!--                <span>Н</span>-->
-<!--                <span>И</span>-->
-<!--                <span>К</span>-->
-<!--                <span>О</span>-->
-<!--                <span>В</span>-->
-<!--            </div>-->
-<!--        </nav>-->
-<!--    </header>-->
-
     <div class="limiter">
-    <div class="container-login">
-        <div class="wrap-login">
-            <form class="login-form p-l-55 p-r-55 p-t-178" method="POST" action="{% url 'start:authorise' %}">
-                {% csrf_token %}
-                <span class="login-form-title">
-                    Личный кабинет
-                </span>
+        <div class="container-login">
+            <div class="wrap-login">
+                <form class="login-form p-l-55 p-r-55 p-t-178" method="POST" action="{% url 'start:authorise' %}">
+                    {% csrf_token %}
+                    <span class="login-form-title">
+                        Личный кабинет
+                    </span>
 
-                {% if error_message %}
-                    <div class="alert alert-danger">
-                        <strong>{{ error_message }}</strong>
+                    {% if error_message %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error_message }}</strong>
+                        </div>
+                    {% endif %}
+
+                    <div class="input-username m-b-16">
+                        <input class="input1 m-b-16" type="text" name="username" placeholder="Логин" required>
                     </div>
-                {% endif %}
 
-                <div class="input-username m-b-16">
-                    <input class="input1 m-b-16" type="text" name="username" placeholder="Логин" required>
-                </div>
+                    <div class="input-password validate-input m-b-16">
+                        <input class="input1 m-b-16" type="password" name="password" placeholder="Пароль" required>
+                    </div>
 
-                <div class="input-password validate-input m-b-16">
-                    <input class="input1 m-b-16" type="password" name="password" placeholder="Пароль" required>
-                </div>
+                    <div class="forgot-smth m-b-13">
+                        <a href="#" class="a1 txt1">
+                            Не помню пароль
+                        </a>
+                    </div>
 
-                <div class="forgot-smth m-b-13">
-                    <a href="#" class="a1 txt1">
-                        Не помню пароль
-                    </a>
-                </div>
+    <!--                <div class="container-btn">-->
+    <!--                    <a href='static/hunter.html' class="btn btn-in">-->
+    <!--                        Вход-->
+    <!--                    </a>-->
+    <!--                </div>-->
 
-<!--                <div class="container-btn">-->
-<!--                    <a href='static/start_hunter.html' class="btn btn-in">-->
-<!--                        Вход-->
-<!--                    </a>-->
-<!--                </div>-->
+                    <div class="container-btn">
+                        <button class="btn btn-in" type="submit">
+                            Вход
+                        </button>
+                    </div>
 
-                <div class="container-btn">
-                    <button class="btn btn-in" type="submit">
-                        Вход
-                    </button>
-                </div>
+                    <div class="container-btn">
+                        <button class="btn btn-reg">
+                            Регистрация
+                        </button>
+                    </div>
 
-                <div class="container-btn">
-                    <button class="btn btn-reg">
-                        Регистрация
-                    </button>
-                </div>
-
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
     </div>
 <!--    </form>-->
 <!--</body>-->
@@ -126,7 +87,7 @@
 <!--<head>-->
 <!--    <meta charset="UTF-8">-->
 <!--    <title>Общество охотников</title>-->
-<!--    <link rel="stylesheet" href="static\css\style.css">-->
+<!--    <link rel="stylesheet" href="static\css\start_style.css">-->
 <!--    <link rel="icon" type="image/png" href="static\css\img\favicon.ico"/>-->
 <!--</head>-->
 <!--<body>-->
@@ -177,7 +138,7 @@
 <!--                </div>-->
 
 <!--                <div class="container-btn">-->
-<!--                    <a href='static/start_hunter.html' class="btn btn-in">-->
+<!--                    <a href='static/hunter.html' class="btn btn-in">-->
 <!--                        Вход-->
 <!--                    </a>-->
 <!--                </div>-->

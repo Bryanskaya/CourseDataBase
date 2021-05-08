@@ -1,3 +1,20 @@
-{% extends "start_hunter.html" %}
+{% extends "static\general_extend.html" %}
 
-{% block title %}Обо мне{% endblock %}
+{% block title %} Обо мне {% endblock %}
+
+{% block content %}
+    <h1> Личные данные </h1>
+    <div>
+        <table>
+            <tr>    <td>Фамилия</td>            <td>{{account.surname}}</td> </tr>
+            <tr>    <td>Имя</td>                <td>{{account.firstname}}</td> </tr>
+            <tr>    <td>Отчество</td>           <td>{{account.patronymic}}</td> </tr>
+            <tr>    <td>Логин</td>              <td>{{account.login}}</td> </tr>
+            <tr>    <td>Дата рождения</td>      <td>{{account.date_of_birth}}</td> </tr>
+            <tr>    <td>Пол</td>                <td>{{account.sex}}</td> </tr>
+            <tr>    <td>Мобильный телефон</td>  <td>{{account.mobile_phone}}</td> </tr>
+            <tr>    <td>Электронная почта</td>  <td>{{account.email}}</td> </tr>
+            <tr>    <td>Статус</td>             <td>{{account.type_role}}</td> </tr>
+        </table>
+    </div>
+{% endblock %}
