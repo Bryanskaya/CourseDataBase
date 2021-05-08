@@ -48,9 +48,9 @@ def about(request):
 
 
 def account(request, login):
-    check = prove_account(request, AllRolesCheck())
-    if check:
-        return check
+    test = prove_account(request, AllRolesCheck())
+    if test:
+        return test
 
     if login == request.session['user']['login']:
         return HttpResponseRedirect(reverse('users:about'))
