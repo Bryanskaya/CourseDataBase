@@ -1,10 +1,275 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "static\base.html" %}{% load static %}
+
+{% block title %} Регистрация {% endblock %}
+
+{% block head_temp %}
+    <link rel="stylesheet" href="{% static '\css\style_register.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static '\css\img\reg.ico' %}"/>
+{% endblock %}
+
+{% block content %}
+    <div class="limiter">
+        <div class="container-register">
+            <div class="wrap-register">
+                <form class="register-form p-l-55 p-r-55 p-t-150" method="POST" action="{% url 'start:register' %}">
+                    {% csrf_token %}
+                    <span class="register-form-title">
+                        Форма регистрации
+                    </span>
+
+                    {% if data.error_message %}
+                        <div class="alert alert-danger">
+                            <strong>{{ data.error_message }}</strong>
+                        </div>
+                    {% endif %}
+
+                    <div class="full-name">
+                        <div class="input-surname m-b-16">
+                            <label>ФИО</label>
+                            <input
+                                    class="input1 m-b-14"
+                                    type="text"
+                                    placeholder="Фамилия"
+                                    name="surname"
+                                    value="{{ data.surname }}"
+                                    title="Используйте только кириллицу и дефис"
+                                    pattern="[А-Яа-я\-]{1,30}"
+                                    required />
+                        </div>
+
+                        <div class="input-firstname">
+                            <label></label>
+                            <input class="input1 m-b-14"
+                                   type="text"
+                                   placeholder="Имя"
+                                   name="firstname"
+                                   value="{{ data.firstname }}"
+                                   title="Используйте только кириллицу и дефис"
+                                   pattern="[А-Яа-я\-]{1,30}"
+                                   required />
+                        </div>
+
+                        <div class="input-patronymic">
+                            <label></label>
+                            <input
+                                    class="input1 m-b-14"
+                                    type="text"
+                                    placeholder="Отчество"
+                                    name="patronymic"
+                                    value="{{ data.patronymic }}"
+                                    pattern="[А-Яа-я\-]{1,30}"
+                                    title="Используйте только кириллицу и дефис">
+                        </div>
+                    </div>
+
+                    <div class="bd-and-sex p-b-3">
+                        <div class="input-bd">
+                            <label for="date_of_birth">Дата рождения:</label>
+                            <input
+                                    class="input1 input2 m-b-16"
+                                    type="date"
+                                    placeholder="Дата рождения"
+                                    name="date_of_birth"
+                                    value="{{ data.date_of_birth }}"
+                                    required>
+                        </div>
+
+                        <label>Пол:</label>
+                        <div class="input-sex p-r-5">
+                            <label>
+                                {% if data.sex == "м" %}
+                                <input class="input-male"
+                                       type="radio"
+                                       name="sex"
+                                       value="м"
+                                       checked
+                                       required />
+                                {% else %}
+                                <input class="input-male"
+                                       type="radio"
+                                       name="sex"
+                                       value="м"
+                                       required />
+                                 {% endif %}
+                                Мужчина
+                            </label>
+
+                            <label>
+                                {% if data.sex == "ж" %}
+                                <input class="input-female"
+                                       type="radio"
+                                       name="sex"
+                                       value="ж"
+                                       checked
+                                       required/>
+                                {% else %}
+                                <input class="input-female"
+                                       type="radio"
+                                       name="sex"
+                                       value="ж"
+                                       required/>
+                                {% endif %}
+                                Женщина
+                            </label>
+
+                        </div>
+
+                        <div class="input-role m-b-16">
+                            <label for="role">Статус:</label>
+                            <p><select name="role" id="role" onchange="HiddenFields()" required>
+                                {% if data.role %}
+                                    <option disabled value="">Выберите статус</option>
+                                {% else %}
+                                    <option disabled value="" selected>Выберите статус</option>
+                                {% endif %}
+
+                                {% for key, value in roles.items %}
+                                    {% if data.role == value %}
+                                        <option selected value="{{key}}"> {{key}} </option>
+                                    {% else %}
+                                        <option value="{{key}}"> {{key}} </option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select></p>
+                        </div>
+
+                    </div>
+
+                    <div class="contacts d-f m-b-16 p-b-3">
+                        <div class="input-phone m-r-18">
+                            <label>Контакты:</label>
+                            <input class="input1"
+                                   type="tel"
+                                   placeholder="Мобильный телефон: +7-xxx-xxx-xx-xx"
+                                   name="phone"
+                                   title="Используйте только цифры. Формат: +7-xxx-xxx-xx-xx"
+                                   pattern="[+]{1}[7]{1}-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"
+                                   maxlength="16"
+                                   value="{{ data.phone }}"
+                                   required />
+                        </div>
+
+                        <div class="input-email">
+                            <label></label>
+                            <input class="input1"
+                                   type="email"
+                                   placeholder="Электронная почта"
+                                   name="email"
+                                   title="Используйте только латиницу, цифры и символы '.-_@'"
+                                   pattern="[A-Za-z.0-9_-]{1,40}@[a-z0-9_]{1,10}\.[a-z]{1,5}"
+                                   value="{{ data.email }}"
+                                   required >
+                        </div>
+                    </div>
+
+                    {% if data.role == "hunter" %}
+                    <div class="add-info d-f m-b-16 p-b-3" id="add-info">
+                        <div class="input-address m-r-18">
+                                <label id="label-info">Дополнительная информация:</label>
+                                <input name="address"
+                                       type="text"
+                                       placeholder="Адрес прописки"
+                                       class="input1"
+                                       value="{{ data.address }}"
+                                       id="address"
+                                       required />
+                        </div>
+
+                        <div class="input-ticket-num m-b-16 p-b-3">
+                            <label></label>
+                            <input type="text"
+                                   name="ticket_num"
+                                   placeholder="Номер охотничьего билета"
+                                   id="ticket_num"
+                                   class="input1"
+                                   value="{{ data.ticket_num }}"
+                                   title="Используйте только цифры."
+                                   pattern="[0-9]*"
+                                   required/>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="add-info d-f m-b-16 p-b-3" id="add-info" style="display:none;">
+                        <div class="input-address m-r-18">
+                            <label id="label-info">Дополнительная информация:</label>
+                            <input name="address"
+                                   type="text"
+                                   placeholder="Адрес прописки"
+                                   class="input1"
+                                   id="address"
+                                   required />
+                        </div>
+
+                        <div class="input-ticket-num m-b-16 p-b-3">
+                        <label></label>
+                        <input type="text"
+                                   name="ticket_num"
+                                   placeholder="Номер охотничьего билета"
+                                   id="ticket_num"
+                                   class="input1"
+                                   value="{{ data.ticket_num }}"
+                                   title="Используйте только цифры."
+                                   pattern="[0-9]*"
+                                   required/>
+                        </div>
+                    </div>
+                    {% endif %}
+
+
+                    <div class="login-password">
+                        <div class="input-login">
+                            <label>Логин и пароль:</label>
+                            <input class="input1"
+                                   type="text"
+                                   placeholder="Логин"
+                                   name="login"
+                                   title="Используйте только латиницу, цифры и символ '_'"
+                                   pattern="[A-Za-z0-9_]{1,40}"
+                                   minlength="5"
+                                   value="{{ data.login }}"
+                                   required>
+                        </div>
+
+                        <div class="input-password1">
+                            <label></label>
+                            <input class="input1"
+                                   type="password"
+                                   placeholder="Пароль"
+                                   name="password"
+                                   title="Используйте только латиницу, цифры и символы '._!@#$%&'"
+                                   pattern="[A-Za-z0-9._!@#$%&]{1,40}"
+                                   minlength="8"
+                                   value="{{ data.password }}"
+                                   required>
+                        </div>
+
+                        <div class="input-password2">
+                            <label></label>
+                            <input class="input1"
+                                   type="password"
+                                   placeholder="Повторите пароль"
+                                   name="repeated_password"
+                                   value="{{ data.repeated_password }}"
+                                   required>
+                        </div>
+                    </div>
+
+                    <div class="container-btn">
+                        <button class="btn btn-reg" type="submit">
+                            Зарегистрироваться
+                        </button>
+                    </div>
+
+                    <div class="exit m-b-13">
+                        <a href="{% url 'start:start_page'%}">
+                            Назад
+                        </a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

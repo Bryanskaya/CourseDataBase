@@ -4,6 +4,9 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static '\css\base_style.css' %}"/>
     {% block head_temp %}{% endblock %}
@@ -12,6 +15,7 @@
     <header>
         <nav class="container">
             <div class="logo">
+                <!--<img src="{% static '\css\img\my_logo.svg' %}" alt="логотип" width="70" height="70">-->
                 <span>О</span>
                 <span>Б</span>
                 <span>Щ</span>
@@ -41,5 +45,7 @@
         {% block content %}{% endblock %}
     </main>
 
+
+    <script src="{% static '\js\main.js' %}"></script>
 </body>
 </html>

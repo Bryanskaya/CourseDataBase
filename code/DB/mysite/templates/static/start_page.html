@@ -10,6 +10,11 @@
 {% block content %}
     <div class="limiter">
         <div class="container-login">
+            {% if data.info_message %}
+                <div class="alert-info">
+                    <strong>{{ data.info_message }}</strong>
+                </div>
+            {% endif %}
             <div class="wrap-login">
                 <form class="login-form p-l-55 p-r-55 p-t-178" method="POST" action="{% url 'start:authorise' %}">
                     {% csrf_token %}
@@ -37,22 +42,22 @@
                         </a>
                     </div>
 
-    <!--                <div class="container-btn">-->
-    <!--                    <a href='static/hunter.html' class="btn btn-in">-->
-    <!--                        Вход-->
-    <!--                    </a>-->
-    <!--                </div>-->
-
                     <div class="container-btn">
                         <button class="btn btn-in" type="submit">
                             Вход
                         </button>
                     </div>
 
+<!--                    <div class="container-btn">-->
+<!--                        <button class="btn btn-reg">-->
+<!--                            Регистрация-->
+<!--                        </button>-->
+<!--                    </div>-->
+
                     <div class="container-btn">
-                        <button class="btn btn-reg">
+                        <a href="{% url 'start:register_form'%}" class="btn btn-reg">
                             Регистрация
-                        </button>
+                        </a>
                     </div>
 
                 </form>
