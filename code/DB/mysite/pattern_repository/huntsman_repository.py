@@ -15,8 +15,6 @@ class PW_HuntsmanRepository(HuntsmanRepository):
     def create(self, obj: HuntsmanModel):
         # try:
         HuntsmanModel.create(id=obj.get_id(),
-                             experience=obj.get_experience(),
-                             salary=obj.get_salary(),
                              login=obj.get_login())
     # except:
     #    return CreareBLObjectError

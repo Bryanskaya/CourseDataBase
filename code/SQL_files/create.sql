@@ -38,8 +38,6 @@ CREATE TABLE IF NOT EXISTS accounts(
 CREATE TABLE IF NOT EXISTS huntsmen(
 	id INTEGER REFERENCES sectors,
 	PRIMARY KEY (id),
-	experience INTEGER CONSTRAINT valid_experience CHECK (experience >= 0),
-	salary NUMERIC CONSTRAINT valid_salary CHECK (salary > 0),
 	login VARCHAR(20) REFERENCES accounts
 );
 
