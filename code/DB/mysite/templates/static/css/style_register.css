@@ -1,48 +1,346 @@
-#regForm {
-  background-color: #ffffff;
-  margin: 100px auto;
-  padding: 40px;
-  width: 70%;
-  min-width: 300px;
-}
-
-/* Style the input fields */
 input {
-  padding: 10px;
-  width: 100%;
-  font-size: 17px;
-  font-family: Raleway;
-  border: 1px solid #aaaaaa;
+	outline: none;
 }
 
-/* Mark input boxes that gets an error on validation: */
-input.invalid {
-  background-color: #ffdddd;
+input:focus {
+    color: black;
+    font-weight: bold;
 }
 
-/* Hide all steps by default: */
-.tab {
-  display: none;
+a {
+	font-size: 18px;
+	color: black;
 }
 
-/* Make circles that indicate the steps of the form: */
-.step {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbbbbb;
-  border: none;
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0.5;
+a:focus {
+	outline: none;
 }
 
-/* Mark the active step: */
-.step.active {
-  opacity: 1;
+a:hover {
+    text-decoration: none;
+    color: #1b3815;
 }
 
-/* Mark the steps that are finished and valid: */
-.step.finish {
-  background-color: #4CAF50;
+.limiter
+{
+    width: 100%;
+    margin: 0 auto;
 }
+.container-register
+{
+    width: 100%;
+    min-height: 90vh; /*470px 90vh*/
+    display: flex;
+    flex-wrap: wrap; /**/
+    justify-content: center;
+    align-items: center;
+    /*padding: 15px;*/ /*убрать, иначе - скролл снизу*/
+    position: relative;/**/
+    /*background-color: #fff;/**/
+}
+
+.wrap-register
+{
+    width: 70%;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.register-form
+{
+    width: 100%;
+    position: relative;
+}
+
+.register-form-title
+{
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+    line-height: 1.2;
+    text-align: center;
+
+    display: block;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #B98853;
+    border-radius: 20px 20px 0px 0px;
+    padding-top: 50px;
+    padding-bottom: 39px;
+}
+
+.p-t-150 {
+    padding-top: 150px;
+}
+
+.p-l-55 {
+    padding-left: 55px;
+}
+
+.p-r-55 {
+    padding-right: 55px;
+}
+
+.p-r-25 {
+    padding-right: 25px;
+}
+
+.p-r-5 {
+    padding-right: 5px;
+}
+
+.p-b-3 {
+    padding-bottom: 3px;
+}
+
+.m-b-14 {
+    margin-bottom: 14px;
+}
+
+.m-b-16 {
+    margin-bottom: 16px;
+}
+
+.m-r-18 {
+    margin-right: 18px;
+}
+
+.d-f {
+    display: flex;
+}
+
+.full-name {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login-password {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+}
+
+.input-surname, .input-firstname, .input-patronymic {
+    width: 400px;
+    background-color: #fff;
+
+    border-radius: 20px;
+    position: relative;
+
+    z-index: 1;/**/
+}
+
+.input-bd {
+    width: 32.5%;
+    margin-right: 1px;
+}
+
+.input-sex {
+	width: 32.5%;
+	padding: 20px;
+	/*padding-left: 5%;*/
+}
+
+.input-male, .input-female {
+    width: 8%;
+    height: 16px;
+}
+
+.input-email, .input-phone {
+    width: 32.5%;
+}
+
+.input-role {
+    width: 400px;
+}
+
+.input-address {
+    width: 67.5%;
+}
+
+.input-ticket-num {
+    width: 32.5%;
+}
+
+.input-login, .input-password1, .input-password2 {
+    width: 32.5%;
+}
+
+.bd-and-sex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.input1 {
+	font-family: JosefinSans;
+	font-size: 20px;
+	color: black;
+	font-weight: bold;
+	line-height: 1.2;
+
+	position: relative;
+	display: block;/**/
+	width: 100%;
+	height: 50px;
+	border-radius: 20px;
+	padding: 0px 15px 0 15px;/**/
+}
+
+.input1::placeholder {
+    font-family: JosefinSans;
+	font-size: 20px;
+	line-height: 1.2;
+    color: #ABAAAA;
+}
+
+.input2 {
+    color: #ABAAAA;
+}
+
+/*.address {
+	font-family: JosefinSans;
+	font-size: 20px;
+	color: black;
+	font-weight: bold;
+	line-height: 1.2;
+
+	position: relative;
+	display: block;/**/
+	/*width: 100%;
+	border-line: black;
+	border-width: 2px;
+	border-radius: 20px;
+	padding: 0px 15px 0 15px;/**/
+/*}
+.address::placeholder {
+    font-family: JosefinSans;
+	font-size: 20px;
+	line-height: 1.2;
+    color: #ABAAAA;
+}*/
+
+label {
+    font-family: JosefinSans;
+	font-size: 20px;
+	color: black;
+
+	margin-left: 5px;
+}
+
+select {
+    font-family: JosefinSans;
+	font-size: 20px;
+    color: black;
+	line-height: 1.2;
+
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 50px;
+	border-radius: 20px;
+	border-line: black;
+	border-width: 2px;
+	padding: 0px 15px 0 15px;
+}
+select:not(:checked) {
+    color: #ABAAAA;
+}
+
+option::selected {
+    color: black;
+}
+
+
+/*Buttons*/
+.container-btn {
+    width: 100%;
+    display: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 20px;
+
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 22px;
+    color: black;
+    line-height: 2;
+    margin-bottom: 16px;
+
+    text-decoration: none; /*without ___link___*/
+
+    border: solid 2px;
+    border-radius: 20px;
+    border-color: black;
+}
+
+.btn:hover {
+    background: #814B38;
+    cursor: pointer;
+}
+
+.btn-reg {
+    background: #B98853;
+    margin-bottom: 20px;
+    transition: all 0.4s;
+}
+
+.exit {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+@media (max-width: 576px) {
+  .register-form {
+    padding-left: 55px;
+    padding-right: 55px;
+  }
+}
+
+header {
+   width: 100%;
+   box-shadow: 3px 3px 1px rgba(0, 0, 0, .05);
+   padding: 15px;
+   /*margin-bottom: 30px;*/
+   position: relative;
+
+   border-bottom: solid 2px; /*line bottom logo*/
+   border-color: #946e29;
+   /*padding-bottom: 50px;*/
+}
+
+.alert {
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    line-height: 1;
+
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    /*border-radius: 20px;*/
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+input:invalid, select:invalid  {
+    border: 2px solid red;
+}
+
+
+

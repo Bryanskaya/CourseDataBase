@@ -33,6 +33,7 @@ a:hover {
     display: flex;
     flex-wrap: wrap; /**/
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     /*padding: 15px;*/ /*убрать, иначе - скролл снизу*/
     position: relative;/**/
@@ -41,7 +42,7 @@ a:hover {
 
 .wrap-login
 {
-    width: 434px;
+    width: 23%; /*434px;*/
     background: #fff;
     /*opacity: 90%;*/
     border-radius: 20px;
@@ -202,4 +203,19 @@ header {
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
+.alert-info {
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    line-height: 1.2;
 
+    padding: 1.25rem 1.25rem;
+    margin-bottom: 3rem;
+    border: 1px solid transparent;
+
+    background-color: #5ad179;/*#d4edda;*/
+
+    text-align: center;
+    width: 23%;
+}
