@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
+from datetime import datetime, date
 import sys
 
 sys.path.append("../")
@@ -16,7 +17,9 @@ def prove_account(request, controller: BaseAccountCheck):
     try:
         controller.check(request.session['user'])
     except:
-        return HttpResponseRedirect(reverse('start:start_page'))
+        return render(request, 'static/start_page.html', {
+            'error_message': 'Ваша заявка рассматривается',
+        })
 
     return None
 
@@ -46,6 +49,7 @@ def authorise(request):
 
 def about(request):
     check = prove_account(request, AllRolesCheck())
+    print("/// views ", check)
     if check:
         return check
 
@@ -63,3 +67,53 @@ def account(request, login):
 
     account = AccountRules.get_person(login)
     return render(request, 'static/about.html', locals())
+
+
+def register_form(request):
+    roles = AccountRules.get_roles()
+    return render(request, 'static/register_page.html', locals())
+
+
+def calculate_age(born):
+    today = date.today()
+    return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+
+def register(request):
+    data = dict(request.POST.copy())
+    print(data)
+
+    roles = AccountRules.get_roles()
+
+    for key in data.keys():
+        data[key] = data[key][0]
+
+    try:
+        datetime.strptime(data['date_of_birth'], '%Y-%m-%d').date()
+    except:
+        data['error_message'] = 'Неверно введена дата рождения'
+        return render(request, 'static/register_page.html', locals())
+
+    if calculate_age(datetime.strptime(data['date_of_birth'], '%Y-%m-%d').date()) < 18:
+        data['date_of_birth'] = ''
+        data['error_message'] = 'Минимально допустимый возраст - 18 лет'
+        return render(request, 'static/register_page.html', locals())
+
+    if data['password'] != data['repeated_password']:
+        data['repeated_password'] = ''
+        data['error_message'] = 'Пароли не совпадают'
+        return render(request, 'static/register_page.html', locals())
+
+    data['info_message'] = 'Ваша заявка отправлена'
+
+    account = AccountRules.register(data['login'], data['password'],
+                                    data['surname'], data['firstname'],
+                                    data['patronymic'], data['date_of_birth'],
+                                    data['sex'], data['phone'],
+                                    data['email'], data['role'])
+
+    if account is None:
+        data['error_message'] = 'Текущий логин уже используется'
+        data['login'] = ''
+        return render(request, 'static/register_page.html', locals())
+
+    return render(request, 'static/start_page.html', locals())

@@ -1,6 +1,7 @@
 from pattern_repository.repository import *
 from pattern_repository.peewee_models import *
 from BL_objects.accounts import *
+from errors.err_account import *
 
 
 class AccountsRepository(Repository):
@@ -19,20 +20,20 @@ class AccountsRepository(Repository):
 
 class PW_AccountsRepository(AccountsRepository):
     def create(self, obj: Account):
-        # try:
-        AccountModel.create(login=obj.get_login(),
-                            salt=obj.get_salt(),
-                            hashed_password=obj.get_hashed_password(),
-                            surname=obj.get_surname(),
-                            firstname=obj.get_firstname(),
-                            patronymic=obj.get_patronymic(),
-                            date_of_birth=obj.get_date_of_birth(),
-                            sex=obj.get_sex(),
-                            mobile_phone=obj.get_mobile_phone(),
-                            email=obj.get_email(),
-                            type_role=obj.get_type_role())
-    # except:
-    #    return CreareBLObjectError
+        try:
+            AccountModel.create(login=obj.get_login(),
+                                salt=obj.get_salt(),
+                                hashed_password=obj.get_hashed_password(),
+                                surname=obj.get_surname(),
+                                firstname=obj.get_firstname(),
+                                patronymic=obj.get_patronymic(),
+                                date_of_birth=obj.get_date_of_birth(),
+                                sex=obj.get_sex(),
+                                mobile_phone=obj.get_mobile_phone(),
+                                email=obj.get_email(),
+                                type_role=obj.get_type_role())
+        except:
+            raise CreateBLObjectErr()
 
     def get_all(self) -> [Account]:
         temp = AccountModel.select()
