@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS sectors(
 
 CREATE TABLE IF NOT EXISTS accounts(
 	login VARCHAR(20) PRIMARY KEY,
-	pswd TEXT CONSTRAINT valid_password CHECK (length(pswd) >= 6),
+	salt TEXT,
+	hashed_password TEXT,
 	surname VARCHAR(30) NOT NULL,
 	firstname VARCHAR(30) NOT NULL,
 	patronymic VARCHAR(30),
