@@ -124,7 +124,7 @@
                                 {% endif %}
 
                                 {% for key, value in roles.items %}
-                                    {% if data.role == value %}
+                                    {% if data.role == key %}
                                         <option selected value="{{key}}"> {{key}} </option>
                                     {% else %}
                                         <option value="{{key}}"> {{key}} </option>
@@ -162,7 +162,7 @@
                         </div>
                     </div>
 
-                    {% if data.role == "hunter" %}
+                    {% if data.role == "hunter" or data.role == "охотник"%}
                     <div class="add-info d-f m-b-16 p-b-3" id="add-info">
                         <div class="input-address m-r-18">
                                 <label id="label-info">Дополнительная информация:</label>

@@ -1,6 +1,6 @@
 function HiddenFields(){
     var elem = document.getElementById("role").value;
-    if (elem === 'hunter')
+    if (elem === 'hunter' || elem === 'охотник')
     {
         document.getElementById("add-info").style.display = "flex";
         document.getElementById("label-info").style.display = "block";
