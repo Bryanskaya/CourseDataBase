@@ -1,6 +1,5 @@
 class Sector(object):
     id = None
-    square = None
     id_husbandry = None
 
     def __init__(self, data):  # **
@@ -8,11 +7,8 @@ class Sector(object):
             return
 
         self.id = data['id']
-        self.square = data['square']
         self.id_husbandry = data['id_husbandry']
 
     def get_id(self):           return self.id
-
-    def get_square(self):       return self.square
 
     def get_id_husbandry(self): return self.id_husbandry

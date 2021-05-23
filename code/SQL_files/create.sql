@@ -8,14 +8,12 @@ DROP TABLE vouchers CASCADE;
 
 CREATE TABLE IF NOT EXISTS hunting_grounds(
 	id SERIAL PRIMARY KEY,
-	ground_name VARCHAR(30) UNIQUE NOT NULL,
-	square NUMERIC CONSTRAINT valid_square CHECK (square > 0)
+	ground_name TEXT UNIQUE NOT NULL
 );
 
 
 CREATE TABLE IF NOT EXISTS sectors(
 	id SERIAL PRIMARY KEY,
-	square NUMERIC CONSTRAINT valid_square CHECK (square > 0),
 	id_husbandry INTEGER REFERENCES hunting_grounds
 );
 
@@ -68,10 +66,10 @@ CREATE TABLE IF NOT EXISTS vouchers(
 );
 
 
-COPY hunting_grounds(ground_name, square)
-FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\hunting_grounds.cvg'	 DELIMITER '|';
+COPY hunting_grounds(ground_name)
+FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\hunting_grounds_real.cvg'	 DELIMITER '|';
 
-COPY sectors(square, id_husbandry)
+COPY sectors(id_husbandry)
 FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\sectors.cvg'	 DELIMITER '|';
 
 COPY accounts

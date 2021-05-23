@@ -15,7 +15,6 @@ class PW_SectorsRepository(SectorsRepository):
     def create(self, obj: Sector):
         # try:
         SectorModel.create(id=obj.get_id(),
-                           square=obj.get_square(),
                            id_husbandry=obj.get_id_husbandry())
 
     # except:

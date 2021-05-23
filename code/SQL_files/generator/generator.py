@@ -35,11 +35,8 @@ def generate_hunting_grounds():
         else:
             continue
 
-        s = choice(range(100, 10000))
-
-        line = "{0}|{1}\n".format(
-            name,
-            s
+        line = "{0}\n".format(
+            name
         )
 
         f.write(line)
@@ -52,12 +49,9 @@ def generate_sectors():
 
     i = 1
     while i <= NUM_SECTORS:
-        id_husbandry = choice(range(1, 70))
+        id_husbandry = choice(range(1, 84))
 
-        s = choice(range(100, 10000))
-
-        line = "{0}|{1}\n".format(
-            s,
+        line = "{0}\n".format(
             id_husbandry
         )
 
@@ -238,10 +232,10 @@ def generate_vouchers():
 
 
 if __name__ == "__main__":
-    generate_hunting_grounds()
+    #generate_hunting_grounds() не трогай, сделан специальный файл
     generate_sectors()
-    generate_price_list()
+    '''generate_price_list()
     generate_accounts()
     generate_huntsmen()
     generate_hunters()
-    generate_vouchers()
+    generate_vouchers()'''
