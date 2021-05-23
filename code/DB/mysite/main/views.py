@@ -8,6 +8,7 @@ import sys
 sys.path.append("../")
 
 from BL_rules.account_rules import *
+from BL_rules.hunter_rules import *
 
 
 def prove_account(request, controller: BaseAccountCheck):
@@ -115,5 +116,23 @@ def register(request):
         data['error_message'] = 'Текущий логин уже используется'
         data['login'] = ''
         return render(request, 'static/register_page.html', locals())
+
+    cur_role = AccountRules.get_role_eng(account.get_type_role()[1:])
+    if cur_role == 'hunter':
+        hunter = Hunter(data)
+        hunter = HunterRules.register(hunter)
+
+        if hunter is None:
+            AccountRules.delete_account(account)
+            data['error_message'] = 'Ошибка регистрации данных'
+            return render(request, 'static/register_page.html', locals()) # TODO надо ли сохранять введенные данные
+    elif cur_role == 'huntsman':
+        huntsman = Huntsman(data)
+
+
+
+
+    elif cur_role == 'admin':
+        pass
 
     return render(request, 'static/start_page.html', locals())

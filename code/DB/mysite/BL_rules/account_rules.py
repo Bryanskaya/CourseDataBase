@@ -98,11 +98,17 @@ class AccountRules(object):
         account = Account(locals())
         try:
             accounts_set.create(account)
-        except CreateBLObjectErr:
+        except CreateBLObjectAccountErr:
             print("///// error in create\n")
             account = None
 
         return account
+
+    @staticmethod
+    def delete_account(obj: Account):
+        accounts_set = inject.instance(AccountsRepository)
+        accounts_set.delete(obj)
+
 
 
 

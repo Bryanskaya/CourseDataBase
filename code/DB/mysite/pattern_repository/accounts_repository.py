@@ -8,6 +8,9 @@ class AccountsRepository(Repository):
     def create(self, obj: Account):
         raise NotImplementedError
 
+    def delete(self, obj: Account):
+        raise NotImplementedError
+
     def get_all(self) -> [Account]:
         raise NotImplementedError
 
@@ -33,7 +36,11 @@ class PW_AccountsRepository(AccountsRepository):
                                 email=obj.get_email(),
                                 type_role=obj.get_type_role())
         except:
-            raise CreateBLObjectErr()
+            raise CreateBLObjectAccountErr()
+
+    def delete(self, obj: Account):
+        temp = AccountModel.delete().where(AccountModel.login == obj.login)
+        temp.execute()
 
     def get_all(self) -> [Account]:
         temp = AccountModel.select()

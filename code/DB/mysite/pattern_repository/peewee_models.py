@@ -62,8 +62,6 @@ class SectorModel(BaseModel):
 
 class HuntsmanModel(BaseModel):
     id = ForeignKeyField(SectorModel, column_name='id', primary_key=True)
-    experience = IntegerField(column_name='experience')
-    salary = FloatField(column_name='salary')
     login = ForeignKeyField(AccountModel, column_name='login')
 
     class Meta:
