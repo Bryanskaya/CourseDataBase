@@ -9,6 +9,11 @@ class Huntsman(object):
         self.id = data['id']
         self.login = data['login']
 
+    def get_dict(self) -> dict:
+        return {'id': self.id,
+                'residence': self.address,
+                'login': self.login}
+
     def get_id(self):   return self.id
 
     def get_login(self):        return self.login

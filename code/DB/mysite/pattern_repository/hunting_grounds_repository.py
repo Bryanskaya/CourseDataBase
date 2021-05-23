@@ -15,8 +15,7 @@ class PW_HuntingGroundsRepository(HuntingGroundsRepository):
     def create(self, obj: HuntingGrounds):
         # try:
         HuntingGroundsModel.create(id=obj.get_id(),
-                                   ground_name=obj.get_ground_name(),
-                                   square=obj.get_square())
+                                   ground_name=obj.get_ground_name())
 
     # except:
     #    return CreareBLObjectError

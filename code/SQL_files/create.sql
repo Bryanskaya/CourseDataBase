@@ -69,25 +69,25 @@ CREATE TABLE IF NOT EXISTS vouchers(
 
 
 COPY hunting_grounds(ground_name, square)
-FROM 'C:\msys64\home\bryan\CourseDataBase\code\generator\hunting_grounds.cvg'	 DELIMITER '|';
+FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\hunting_grounds.cvg'	 DELIMITER '|';
 
 COPY sectors(square, id_husbandry)
-FROM 'C:\msys64\home\bryan\CourseDataBase\code\generator\sectors.cvg'	 DELIMITER '|';
+FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\sectors.cvg'	 DELIMITER '|';
 
 COPY accounts
-FROM 'C:\msys64\home\bryan\CourseDataBase\code\generator\accounts.cvg'	 DELIMITER '|';
+FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\accounts.cvg'	 DELIMITER '|';
 	
 COPY huntsmen
-FROM 'C:\msys64\home\bryan\CourseDataBase\code\generator\huntsmen.cvg'	 DELIMITER '|';
+FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\huntsmen.cvg'	 DELIMITER '|';
 
 COPY hunters
-FROM 'C:\msys64\home\bryan\CourseDataBase\code\generator\hunters.cvg'	 DELIMITER '|';
+FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\hunters.cvg'	 DELIMITER '|';
 
 COPY price_list(animal, price, is_relevant, id_sector)
-FROM 'C:\msys64\home\bryan\CourseDataBase\code\generator\price_list.cvg'	 DELIMITER '|';
+FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\price_list.cvg'	 DELIMITER '|';
 
 COPY vouchers(duration_days, amount_animals, price, id_hunter, id_pricelist)
-FROM 'C:\msys64\home\bryan\CourseDataBase\code\generator\vouchers.cvg'	 DELIMITER '|';
+FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\vouchers.cvg'	 DELIMITER '|';
 
 
 SELECT * FROM hunting_grounds;
