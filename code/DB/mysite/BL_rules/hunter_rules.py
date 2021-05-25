@@ -1,6 +1,6 @@
 from inject_config import *
 from BL_objects.hunter import *
-from errors.err_account import *
+from errors.err_hunter import *
 
 
 class HunterRules(object):

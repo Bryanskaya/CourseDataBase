@@ -34,7 +34,7 @@ class AccountModel(BaseModel):
         table_name = 'accounts'
 
 class HunterModel(BaseModel):
-    ticket_num = IntegerField(column_name='ticket_num', primary_key=True)
+    ticket_num = TextField(column_name='ticket_num', primary_key=True)
     residence = TextField(column_name='residence')
     login = ForeignKeyField(AccountModel, column_name='login')
 
@@ -53,7 +53,6 @@ class HuntingGroundsModel(BaseModel):
 
 class SectorModel(BaseModel):
     id = IntegerField(column_name='id', primary_key=True)
-    square = FloatField(column_name='square')
     id_husbandry = ForeignKeyField(HuntingGroundsModel, column_name='id_husbandry')
 
     class Meta:

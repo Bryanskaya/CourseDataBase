@@ -1,7 +1,7 @@
 from pattern_repository.repository import *
 from pattern_repository.peewee_models import *
 from BL_objects.hunter import *
-from errors.err_account import *
+from errors.err_hunter import *
 
 
 class HunterRepository(Repository):
@@ -22,7 +22,7 @@ class PW_HunterRepository(HunterRepository):
     def create(self, obj: HunterModel):
         try:
             HunterModel.create(ticket_num=obj.get_ticket_num(),
-                               residence=obj.get_residence(),
+                               residence=obj.get_address(),
                                login=obj.get_login())
         except:
             raise CreateBLObjectHunterErr()
