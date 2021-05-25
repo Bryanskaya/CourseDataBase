@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS huntsmen(
 
 
 CREATE TABLE IF NOT EXISTS hunters(
-	ticket_num INTEGER PRIMARY KEY,
+	ticket_num TEXT PRIMARY KEY,
 	residence VARCHAR(100) NOT NULL,
 	login VARCHAR(20) REFERENCES accounts
 );
@@ -70,7 +70,7 @@ COPY hunting_grounds(ground_name)
 FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\hunting_grounds_real.cvg'	 DELIMITER '|';
 
 COPY sectors(id_husbandry)
-FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\sectors.cvg'	 DELIMITER '|';
+FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\sectors.csv'	 DELIMITER '|';
 
 COPY accounts
 FROM 'C:\msys64\home\bryan\CourseDataBase\code\SQL_files\generator\accounts.cvg'	 DELIMITER '|';
