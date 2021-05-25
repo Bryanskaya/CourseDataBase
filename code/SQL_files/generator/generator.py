@@ -45,7 +45,7 @@ def generate_hunting_grounds():
 
 
 def generate_sectors():
-    f = open('sectors.cvg', 'w')
+    f = open('sectors.csv', 'w')
 
     i = 1
     while i <= NUM_SECTORS:
