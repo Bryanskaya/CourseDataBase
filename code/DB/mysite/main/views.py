@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
 from datetime import datetime, date
@@ -9,6 +9,9 @@ sys.path.append("../")
 
 from BL_rules.account_rules import *
 from BL_rules.hunter_rules import *
+from BL_rules.huntsman_rules import *
+
+from read_data import *
 
 
 def prove_account(request, controller: BaseAccountCheck):
@@ -72,6 +75,14 @@ def account(request, login):
 
 def register_form(request):
     roles = AccountRules.get_roles()
+    hunting_grounds = csv_dict_reader()
+    return render(request, 'static/register_page.html', locals())
+
+
+def recover_password(request):
+    data = dict(request.POST.copy())
+    print(data)
+
     return render(request, 'static/register_page.html', locals())
 
 
@@ -84,6 +95,7 @@ def register(request):
     print(data)
 
     roles = AccountRules.get_roles()
+    hunting_grounds = csv_dict_reader()
 
     for key in data.keys():
         data[key] = data[key][0]
@@ -97,6 +109,12 @@ def register(request):
     if calculate_age(datetime.strptime(data['date_of_birth'], '%Y-%m-%d').date()) < 18:
         data['date_of_birth'] = ''
         data['error_message'] = 'Минимально допустимый возраст - 18 лет'
+        return render(request, 'static/register_page.html', locals())
+
+    if (data['role'] == 'егерь' or data['role'] == 'huntsman') and ['sectors'] == 'null':
+        data['hunting_grounds'] = ''
+        data['sectors'] = ''
+        data['error_message'] = 'Выбранный субъект не доступен, выберете другой'
         return render(request, 'static/register_page.html', locals())
 
     if data['password'] != data['repeated_password']:
@@ -118,21 +136,26 @@ def register(request):
         return render(request, 'static/register_page.html', locals())
 
     cur_role = AccountRules.get_role_eng(account.get_type_role()[1:])
+    user = 'delete_me'
     if cur_role == 'hunter':
-        hunter = Hunter(data)
-        hunter = HunterRules.register(hunter)
-
-        if hunter is None:
-            AccountRules.delete_account(account)
-            data['error_message'] = 'Ошибка регистрации данных'
-            return render(request, 'static/register_page.html', locals()) # TODO надо ли сохранять введенные данные
+        user = Hunter(data)
+        user = HunterRules.register(user)
     elif cur_role == 'huntsman':
-        huntsman = Huntsman(data)
-
-
-
-
+        user = Huntsman(data)
+        user = HuntsmanRules.register(user)
     elif cur_role == 'admin':
         pass
 
+    if user is None:
+        AccountRules.delete_account(account)
+        data['error_message'] = 'Ошибка регистрации данных'
+        return render(request, 'static/register_page.html', locals())
+
     return render(request, 'static/start_page.html', locals())
+
+
+def get_sectors(request):
+    if request.is_ajax and request.method == "POST":
+        sectors_set = inject.instance(SectorsRepository).get_ids(request.POST['id'])
+
+        return JsonResponse({'id': sectors_set}, status=200)
