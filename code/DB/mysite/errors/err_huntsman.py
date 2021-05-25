@@ -1,0 +1,1 @@
+class CreateBLObjectHuntsmanErr(BaseException): pass

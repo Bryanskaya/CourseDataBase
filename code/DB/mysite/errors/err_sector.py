@@ -1,0 +1,1 @@
+class CreateBLObjectSectorErr(BaseException): pass

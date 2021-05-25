@@ -1,0 +1,1 @@
+class CreateBLObjectHunterErr(BaseException): pass
