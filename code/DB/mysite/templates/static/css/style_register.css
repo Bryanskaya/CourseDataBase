@@ -158,11 +158,11 @@ a:hover {
     width: 400px;
 }
 
-.input-address {
+.input-address, .input-ground {
     width: 67.5%;
 }
 
-.input-ticket-num {
+.input-ticket-num, .input-sector {
     width: 32.5%;
 }
 
@@ -253,6 +253,8 @@ select:not(:checked) {
 option::selected {
     color: black;
 }
+
+
 
 
 /*Buttons*/

@@ -159,7 +159,7 @@
                                    placeholder="Электронная почта"
                                    name="email"
                                    maxlength="50"
-                                   title="Используйте только латиницу, цифры и символы '.-_@'"
+                                   title="Используйте только латиницу, цифры и символы '.-_@'. Максимальная длина - 50 символов"
                                    pattern="[A-Za-z.0-9_-]{1,40}@[a-z0-9_]{1,10}\.[a-z]{1,5}"
                                    value="{{ data.email }}"
                                    required >
@@ -167,58 +167,104 @@
                     </div>
 
                     {% if data.role == "hunter" or data.role == "охотник"%}
-                    <div class="add-info d-f m-b-16 p-b-3" id="add-info">
-                        <div class="input-address m-r-18">
-                                <label id="label-info">Дополнительная информация:</label>
-                                <input name="address"
-                                       type="text"
-                                       placeholder="Адрес прописки"
-                                       class="input1"
-                                       value="{{ data.address }}"
-                                       id="address"
-                                       required />
-                        </div>
-
-                        <div class="input-ticket-num m-b-16 p-b-3">
-                            <label></label>
-                            <input type="text"
-                                   name="ticket_num"
-                                   placeholder="Номер охотничьего билета"
-                                   id="ticket_num"
-                                   class="input1"
-                                   value="{{ data.ticket_num }}"
-                                   title="Используйте только цифры."
-                                   pattern="[0-9]*"
-                                   required/>
-                        </div>
-                    </div>
+                        <div class="add-info d-f m-b-14 p-b-3" id="add-info" style="display:flex;">
                     {% else %}
-                    <div class="add-info d-f m-b-16 p-b-3" id="add-info" style="display:none;">
-                        <div class="input-address m-r-18">
-                            <label id="label-info">Дополнительная информация:</label>
-                            <input name="address"
-                                   type="text"
-                                   placeholder="Адрес прописки"
-                                   class="input1"
-                                   id="address"
-                                   required />
-                        </div>
-
-                        <div class="input-ticket-num m-b-16 p-b-3">
-                        <label></label>
-                        <input type="text"
-                                   name="ticket_num"
-                                   placeholder="Номер охотничьего билета"
-                                   id="ticket_num"
-                                   class="input1"
-                                   value="{{ data.ticket_num }}"
-                                   title="Используйте только цифры."
-                                   pattern="[0-9]*"
-                                   required/>
-                        </div>
-                    </div>
+                        <div class="add-info d-f m-b-14 p-b-3" id="add-info" style="display:none;">
                     {% endif %}
+                            <div class="input-address m-r-18">
+                                    <label id="label-info">Дополнительная информация:</label>
+                                    <input name="address"
+                                           type="text"
+                                           placeholder="Адрес прописки"
+                                           class="input1"
+                                           maxlength="100"
+                                           value="{{ data.address }}"
+                                           id="address"
+                                           /> <!--required-->
+                            </div>
 
+                            <div class="input-ticket-num m-b-14 p-b-3">
+                                <label></label>
+                                <input type="text"
+                                       name="ticket_num"
+                                       placeholder="Номер охотничьего билета"
+                                       id="ticket_num"
+                                       class="input1"
+                                       value="{{ data.ticket_num }}"
+                                       maxlength="20"
+                                       title="Используйте только цифры."
+                                       pattern="[0-9]*"
+                                       /> <!--required-->
+                            </div>
+                        </div>
+                    {% if data.role == "huntsman" or data.role == "егерь"%}
+                        <div class="add-work d-f m-b-14 p-b-3" id="add-work" style="display:flex;">
+                    {% else %}
+                        <div class="add-work d-f m-b-14 p-b-3" id="add-work" style="display:none;">
+                    {% endif %}
+                            <div class="input-ground m-r-18">
+                                <label id="label-work">Субъект и номер сектора:</label>
+                                <p><select name="hunting_grounds" id="hunting_grounds" onchange="GetSectors()"> <!--required-->
+                                    <option disabled value="" selected>Выберите субъект</option>
+                                    {% for key, value in hunting_grounds.items %}
+                                        <option value="{{value}}"> {{key}} </option>
+                                    {% endfor %}
+                                </select></p>
+                            </div>
+
+                            <div class="input-sector m-b-14 p-b-3">
+                                <label></label>
+                                <p><select name="sectors" id="sectors"> <!--required-->
+                                    <option disabled value="" selected>Выберите сектор</option>
+                                </select></p>
+                            </div>
+                        </div>
+
+
+                        <script>
+                            function GetSectors() {
+                                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                                var elem = document.getElementById("hunting_grounds").value;
+
+                                const request = new XMLHttpRequest();
+                                const url = "{% url 'start:get_sectors' %}";
+                                const params = "id=" + elem;
+
+                                request.responseType =	"json";
+                                request.open("POST", url, true);
+                                request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                                request.setRequestHeader("X-CSRFToken", csrftoken);
+
+                                request.addEventListener("readystatechange", () => {
+
+                                if (request.readyState === 4 && request.status === 200) {
+                                    let obj = request.response;
+
+                                    console.log(obj.id);
+
+                                    var docfrag = document.createDocumentFragment();
+
+                                    for (var i = 0; i < obj.id.length; i++)
+                                    {
+                                         docfrag.appendChild(new Option(obj.id[i], obj.id[i]));
+                                    }
+
+                                    var select = document.getElementById("sectors");
+                                    select.innerHTML = "";
+
+                                    if (obj.id.length === 0) {
+                                        select.appendChild(new Option("Нет доступных", null));
+                                    }
+                                    else {
+                                        select.appendChild(docfrag);
+                                    }
+                                }
+                            });
+                                console.log(document.getElementById("sectors"));
+                                request.send(params);
+                            }
+                        </script>
 
                     <div class="login-password">
                         <div class="input-login">
@@ -227,8 +273,8 @@
                                    type="text"
                                    placeholder="Логин"
                                    name="login"
-                                   title="Используйте только латиницу, цифры и символ '_'. Максимальная длина - 20 символов"
-                                   pattern="[A-Za-z0-9_]{1,40}"
+                                   title="Используйте только латиницу, цифры и символ '_'. Максимальная длина - 20 символов."
+                                   pattern="[A-Za-z0-9_]{1,20}"
                                    minlength="5"
                                    maxlength="20"
                                    value="{{ data.login }}"
@@ -241,9 +287,10 @@
                                    type="password"
                                    placeholder="Пароль"
                                    name="password"
-                                   title="Используйте только латиницу, цифры и символы '._!@#$%&'"
+                                   title="Используйте только латиницу, цифры и символы '._!@#$%&'. Максимальная длина - 40 символов."
                                    pattern="[A-Za-z0-9._!@#$%&]{1,40}"
                                    minlength="8"
+                                   maxlength="40"
                                    value="{{ data.password }}"
                                    required>
                         </div>
