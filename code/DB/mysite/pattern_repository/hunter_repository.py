@@ -11,6 +11,9 @@ class HunterRepository(Repository):
     def delete(self, obj: Hunter):
         raise NotImplementedError
 
+    def update(self, obj_old: Hunter, obj_upd: Hunter):
+        raise NotImplementedError
+
     def get_all(self) -> [Hunter]:
         raise NotImplementedError
 
@@ -30,6 +33,16 @@ class PW_HunterRepository(HunterRepository):
     def delete(self, obj: Hunter):
         temp = HunterModel.delete().where(HunterModel.login == obj.login)
         temp.execute()
+
+    # def update(self, obj_old: Hunter, obj_upd: Hunter):
+    #     if self.get_by_login(obj_old.login) is None:
+    #         raise LoginHunterNotExists
+    #
+    #     temp = self.model.update(obj_upd.get_dict()).where(HunterModel.login == obj_upd.login)
+    #     try:
+    #         temp.execute()
+    #     except:
+    #         raise UpdateHunterErr
 
     def get_all(self) -> [Hunter]:
         temp = HunterModel.select()
