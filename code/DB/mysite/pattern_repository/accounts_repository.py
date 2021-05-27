@@ -52,7 +52,7 @@ class PW_AccountsRepository(AccountsRepository):
 
     def update(self, obj_old: Account, obj_upd: Account):
         if self.get_by_login(obj_old.login) is None:
-            raise LoginNotExists
+            raise LoginAccountNotExists
 
         temp = self.model.update(obj_upd.get_dict()).where(AccountModel.login == obj_upd.login)
         try:
