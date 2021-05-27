@@ -19,19 +19,6 @@ class AccountRules(BaseRules):
     def generate_salt():
         return uuid.uuid4().hex
 
-    '''@staticmethod
-    def hash_password(password, salt):
-        salt_pswd = password.encode('utf-8') + salt.encode('utf-8')
-        return hashlib.sha256(salt_pswd).hexdigest()'''
-
-    '''@staticmethod
-    def is_correct_password(account, password):
-        salt = account.get_salt()
-        hashed_pswd = AccountRules.make_password_hashed(password, salt)
-
-        return hashed_pswd == account.get_hashed_password()'''
-
-
     @staticmethod
     def get_role_eng(role):
         if role in AccountRules.valuable_roles.keys():

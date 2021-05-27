@@ -40,6 +40,12 @@ class Account(object):
                 'email': self.email,
                 'type_role': self.type_role}
 
+    def __ne__(self, other):
+        return self.get_dict() != other.get_dict()
+
+    def __eq__(self, other):
+        return self.get_dict() == other.get_dict()
+
     def get_login(self):            return self.login
     def get_salt(self):             return self.salt
     def get_hashed_password(self):  return self.hashed_password
