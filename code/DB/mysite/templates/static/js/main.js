@@ -37,6 +37,27 @@ function HiddenFields(){
     }
 }
 
+function RecoverPassword() {
+    var elem = document.getElementById("login").value;
+    console.log(elem);
+
+    if (elem === '') {
+        document.getElementById("btn-in").click();
+    }
+    else {
+        window.location.href = '/recover_password/' + elem;
+    }
+}
+
+function Jump(pos) {
+    var child = document.getElementById('input-code').childNodes;
+    console.log(child);
+    if (pos === 7)
+        return;
+    else
+        child[pos + 2].focus();
+}
+
 //function GetSectors() {
 //    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 //
