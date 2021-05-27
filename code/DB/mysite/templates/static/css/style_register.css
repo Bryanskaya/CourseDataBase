@@ -201,28 +201,6 @@ a:hover {
     color: #ABAAAA;
 }
 
-/*.address {
-	font-family: JosefinSans;
-	font-size: 20px;
-	color: black;
-	font-weight: bold;
-	line-height: 1.2;
-
-	position: relative;
-	display: block;/**/
-	/*width: 100%;
-	border-line: black;
-	border-width: 2px;
-	border-radius: 20px;
-	padding: 0px 15px 0 15px;/**/
-/*}
-.address::placeholder {
-    font-family: JosefinSans;
-	font-size: 20px;
-	line-height: 1.2;
-    color: #ABAAAA;
-}*/
-
 label {
     font-family: JosefinSans;
 	font-size: 20px;
@@ -253,8 +231,6 @@ select:not(:checked) {
 option::selected {
     color: black;
 }
-
-
 
 
 /*Buttons*/
