@@ -106,7 +106,8 @@ a:hover {
 {
 	font-family: JosefinSans;
 	font-size: 20px;
-	color: #ABAAAA;
+	color: black;
+    font-weight: bold;
 	line-height: 1.2;
 
 	position: relative;
@@ -115,6 +116,13 @@ a:hover {
 	height: 55px;
 	border-radius: 20px;
 	padding: 0px 15px 0 15px;/**/
+}
+
+.input1::placeholder {
+    font-family: JosefinSans;
+	font-size: 20px;
+	line-height: 1.2;
+    color: #ABAAAA;
 }
 
 /*Forgot username/password*/
