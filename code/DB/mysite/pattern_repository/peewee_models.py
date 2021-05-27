@@ -29,7 +29,7 @@ class AccountModel(BaseModel):
     surname = TextField(column_name='surname')
     firstname = TextField(column_name='firstname')
     patronymic = TextField(column_name='patronymic')
-    date_of_birth = DateTimeField(column_name='date_of_birth')
+    date_of_birth = DateField(column_name='date_of_birth')
     sex = CharField(column_name='sex')
     mobile_phone = TextField(column_name='mobile_phone')
     email = TextField(column_name='email')
