@@ -31,7 +31,7 @@ def injector(bnd):
     bnd.bind_to_constructor(HunterRepository, lambda: PW_HunterRepository())
     bnd.bind_to_constructor(HuntingGroundsRepository, lambda: PW_HuntingGroundsRepository())
     bnd.bind_to_constructor(SectorsRepository, lambda: PW_SectorsRepository())
-    bnd.bind_to_constructor(AccountsRepository, lambda: PW_AccountsRepository())
+    bnd.bind(AccountsRepository, PW_AccountsRepository)
     bnd.bind_to_constructor(HuntsmanRepository, lambda: PW_HuntsmanRepository())
     bnd.bind_to_constructor(PriceListRepository, lambda: PW_PriceListRepository())
     bnd.bind_to_constructor(VoucherRepository, lambda: PW_VoucherRepository())

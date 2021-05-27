@@ -4,10 +4,11 @@ import sys
 sys.path.append("..")
 
 from inject_config import *
+from BL_rules.base_rules import *
 from errors.err_account import *
 
 
-class AccountRules(object):
+class AccountRules(BaseRules):
     valuable_roles = {
         'админ': 'admin',
         'охотник': 'hunter',
@@ -54,9 +55,8 @@ class AccountRules(object):
         print("PASSWORD: \n", hashed_password, account.get_hashed_password())
         return hashed_password == account.get_hashed_password()
 
-    @staticmethod
-    def is_log_in(login, password):
-        accounts_set = inject.instance(AccountsRepository)
+    def is_log_in(self, login, password):
+        accounts_set = inject.instance(AccountsRepository)(self.connection)
         account = accounts_set.get_by_login(login)
 
         if account is None:
@@ -66,9 +66,14 @@ class AccountRules(object):
         else:
             return None
 
-    @staticmethod
-    def get_person(login):
-        accounts_set = inject.instance(AccountsRepository)
+    def is_exist_login(self, login):
+        accounts_set = inject.instance(AccountsRepository)(self.connection)
+        account = accounts_set.get_by_login(login)
+
+        return account
+
+    def get_person(self, login):
+        accounts_set = inject.instance(AccountsRepository)(self.connection)
         return accounts_set.get_by_login(login)
 
     @staticmethod
@@ -81,10 +86,9 @@ class AccountRules(object):
 
         return res_dict
 
-    @staticmethod
-    def register(login, password, surname, firstname, patronymic, date_of_birth,
+    def register(self, login, password, surname, firstname, patronymic, date_of_birth,
                  sex, mobile_phone, email, type_role):
-        accounts_set = inject.instance(AccountsRepository)
+        accounts_set = inject.instance(AccountsRepository)(self.connection)
         exist_account = accounts_set.get_by_login(login)
 
         if exist_account is not None:
@@ -104,9 +108,8 @@ class AccountRules(object):
 
         return account
 
-    @staticmethod
-    def delete_account(obj: Account):
-        accounts_set = inject.instance(AccountsRepository)
+    def delete_account(self, obj: Account):
+        accounts_set = inject.instance(AccountsRepository)(self.connection)
         accounts_set.delete(obj)
 
 

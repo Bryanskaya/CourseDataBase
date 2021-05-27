@@ -9,7 +9,9 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('authorise/', views.authorise, name='authorise'),
     path('register_page/get_sectors/', views.get_sectors, name='get_sectors'),
-    #path('recover_password/', views.recover_password, name='recover_password'),
+    path('recover_password/<str:login>', views.recover_password, name='recover_password'),
+    path('check_code/', views.check_code, name='check_code'),
+
     #path('hunter/', views.account_hunter, name='hunter'),
     #path('huntsman/', views.account_huntsman, name='huntsman'),
 ]

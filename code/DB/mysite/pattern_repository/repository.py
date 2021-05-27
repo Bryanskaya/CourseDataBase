@@ -18,5 +18,8 @@ class Repository(object):
         raise NotImplementedError
 
 
-class CurConnection(object):
-    pass
+class CurConnection(object): pass
+
+class AdminConnection(object):      pass
+class HunterConnection(object):     pass
+class HuntsmanConnection(object):   pass

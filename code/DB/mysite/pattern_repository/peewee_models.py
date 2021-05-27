@@ -13,6 +13,11 @@ def transf_to_objs(data, to_class):
 
 
 class BaseModel(Model):
+    def __init__(self, connection, *args, **kwargs):
+        super(BaseModel, self).__init__(*args, **kwargs)
+        self._meta.database = connection
+
+    # TODO delete class Meta
     class Meta:
         database = inject.instance(CurConnection)
 

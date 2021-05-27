@@ -22,9 +22,14 @@ class AccountsRepository(Repository):
 
 
 class PW_AccountsRepository(AccountsRepository):
+    model = None
+
+    def __init__(self, connection):
+        self.model = AccountModel(connection)
+
     def create(self, obj: Account):
         try:
-            AccountModel.create(login=obj.get_login(),
+            self.model.insert(login=obj.get_login(),
                                 salt=obj.get_salt(),
                                 hashed_password=obj.get_hashed_password(),
                                 surname=obj.get_surname(),
@@ -34,20 +39,20 @@ class PW_AccountsRepository(AccountsRepository):
                                 sex=obj.get_sex(),
                                 mobile_phone=obj.get_mobile_phone(),
                                 email=obj.get_email(),
-                                type_role=obj.get_type_role())
+                                type_role=obj.get_type_role()).execute()
         except:
             raise CreateBLObjectAccountErr()
 
     def delete(self, obj: Account):
-        temp = AccountModel.delete().where(AccountModel.login == obj.login)
+        temp = self.model.delete().where(AccountModel.login == obj.login)
         temp.execute()
 
     def get_all(self) -> [Account]:
-        temp = AccountModel.select()
+        temp = self.model.select()
         return transf_to_objs(temp, Account)
 
     def get_by_login(self, login: str) -> Account:
-        temp = AccountModel.select().where(AccountModel.login == login)
+        temp = self.model.select().where(AccountModel.login == login)
         accounts_set = transf_to_objs(temp, Account)
 
         if len(accounts_set):

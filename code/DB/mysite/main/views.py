@@ -41,9 +41,10 @@ def exit_from(request):
 
 
 def authorise(request):
-    account = AccountRules.is_log_in(request.POST['username'], request.POST['password'])
+    acc_rules = AccountRules('admin')
+    account = acc_rules.is_log_in(request.POST['username'], request.POST['password'])
     if account is not None:
-        request.session['user'] = AccountRules.get_cookie(account)
+        request.session['user'] = acc_rules.get_cookie(account)
         return HttpResponseRedirect(reverse('users:about'))
     else:
         return render(request, 'static/start_page.html', {
@@ -53,11 +54,12 @@ def authorise(request):
 
 def about(request):
     check = prove_account(request, AllRolesCheck())
-    print("/// views ", check)
     if check:
         return check
 
-    account = AccountRules.get_person(request.session['user']['login'])
+    acc_rules = AccountRules(request.session['user']['role_eng'])
+    account = acc_rules.get_person(request.session['user']['login'])
+
     return render(request, 'static/about.html', locals())
 
 
@@ -69,21 +71,51 @@ def account(request, login):
     if login == request.session['user']['login']:
         return HttpResponseRedirect(reverse('users:about'))
 
-    account = AccountRules.get_person(login)
+    acc_rules = AccountRules(request.session['user']['role_eng'])
+    account = acc_rules.get_person(login)
     return render(request, 'static/about.html', locals())
 
 
 def register_form(request):
-    roles = AccountRules.get_roles()
+    acc_rules = AccountRules('admin')
+    roles = acc_rules.get_roles()
     hunting_grounds = csv_dict_reader()
     return render(request, 'static/register_page.html', locals())
 
 
-def recover_password(request):
-    data = dict(request.POST.copy())
-    print(data)
+def recover_password(request, login):
+    acc_rules = AccountRules('admin')
+    account = acc_rules.is_exist_login(login)
 
-    return render(request, 'static/register_page.html', locals())
+    if account is None:
+        return render(request, 'static/recover_password.html', {
+            'error_message': 'Указанного логина нет в системе',
+        })
+
+    if account.get_type_role() not in acc_rules.get_roles():
+        return render(request, 'static/start_page.html', {
+            'error_message': 'Ваша заявка рассматривается',
+        })
+
+    email = account.get_email()
+
+    #TODO send email
+
+    print("++++++", request.session)
+
+
+    return render(request, 'static/recover_password.html', locals())
+
+
+def check_code(request):
+    cur_code = request.POST['num1'] + request.POST['num2'] + \
+               request.POST['num3'] + request.POST['num4']
+    #if cur_code == code:
+    return render(request, 'static/new_password.html')
+    #else
+    # return render(request, 'static/recover_password.html', {
+    #     'error_message': 'Неверный код',
+    # })
 
 
 def calculate_age(born):
@@ -94,7 +126,8 @@ def register(request):
     data = dict(request.POST.copy())
     print(data)
 
-    roles = AccountRules.get_roles()
+    acc_rules = AccountRules('admin')
+    roles = acc_rules.get_roles()
     hunting_grounds = csv_dict_reader()
 
     for key in data.keys():
@@ -124,7 +157,7 @@ def register(request):
 
     data['info_message'] = 'Ваша заявка отправлена'
 
-    account = AccountRules.register(data['login'], data['password'],
+    account = acc_rules.register(data['login'], data['password'],
                                     data['surname'], data['firstname'],
                                     data['patronymic'], data['date_of_birth'],
                                     data['sex'], data['phone'],
@@ -135,7 +168,7 @@ def register(request):
         data['login'] = ''
         return render(request, 'static/register_page.html', locals())
 
-    cur_role = AccountRules.get_role_eng(account.get_type_role()[1:])
+    cur_role = acc_rules.get_role_eng(account.get_type_role()[1:])
     user = 'delete_me'
     if cur_role == 'hunter':
         user = Hunter(data)
@@ -147,7 +180,7 @@ def register(request):
         pass
 
     if user is None:
-        AccountRules.delete_account(account)
+        acc_rules.delete_account(account)
         data['error_message'] = 'Ошибка регистрации данных'
         return render(request, 'static/register_page.html', locals())
 
