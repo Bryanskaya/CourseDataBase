@@ -11,6 +11,9 @@ class AccountsRepository(Repository):
     def delete(self, obj: Account):
         raise NotImplementedError
 
+    def update(self, obj_old: Account, obj_upd: Account):
+        raise NotImplementedError
+
     def get_all(self) -> [Account]:
         raise NotImplementedError
 
@@ -46,6 +49,16 @@ class PW_AccountsRepository(AccountsRepository):
     def delete(self, obj: Account):
         temp = self.model.delete().where(AccountModel.login == obj.login)
         temp.execute()
+
+    def update(self, obj_old: Account, obj_upd: Account):
+        if self.get_by_login(obj_old.login) is None:
+            raise LoginNotExists
+
+        temp = self.model.update(obj_upd.get_dict()).where(AccountModel.login == obj_upd.login)
+        try:
+            temp.execute()
+        except:
+            raise UpdateAccountErr
 
     def get_all(self) -> [Account]:
         temp = self.model.select()
