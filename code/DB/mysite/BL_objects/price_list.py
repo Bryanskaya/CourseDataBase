@@ -22,6 +22,12 @@ class PriceList(object):
                 'is_relevant': self.is_relevant,
                 'id_sector': self.id_sector}
 
+    def __ne__(self, other):
+        return self.get_dict() != other.get_dict()
+
+    def __eq__(self, other):
+        return self.get_dict() == other.get_dict()
+
     def get_id(self):           return self.id
     def get_animal(self):       return self.animal
     def get_price(self):        return self.price
