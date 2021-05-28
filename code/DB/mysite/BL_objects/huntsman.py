@@ -6,8 +6,14 @@ class Huntsman(object):
         if data is None:
             return
 
-        self.id = data['sectors']
+        self.id = data['id']
         self.login = data['login']
+
+    def __ne__(self, other):
+        return self.get_dict() != other.get_dict()
+
+    def __eq__(self, other):
+        return self.get_dict() == other.get_dict()
 
     def get_dict(self) -> dict:
         return {'id': self.id,

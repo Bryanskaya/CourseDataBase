@@ -22,36 +22,38 @@ class HuntsmanRepository(Repository):
 
 
 class PW_HuntsmanRepository(HuntsmanRepository):
-    def __init__(self):
-        pass
+    model = None
+
+    def __init__(self, connection):
+        self.model = HuntsmanModel(connection)
 
     def create(self, obj: HuntsmanModel):
         try:
-            HuntsmanModel.create(id=obj.get_id(),
-                                 login=obj.get_login())
+            self.model.insert(id=obj.get_id(),
+                              login=obj.get_login()).execute()
         except:
            raise CreateBLObjectHuntsmanErr()
 
     def delete(self, obj: Huntsman):
-        temp = HuntsmanModel.delete().where(HuntsmanModel.id == obj.id)
+        temp = self.model.delete().where(HuntsmanModel.id == obj.id)
         temp.execute()
 
-    # def update(self, obj_old: Huntsman, obj_upd: Huntsman):
-    #     if self.get_by_id(obj_old.id) is None:
-    #         raise IdHuntsmanNotExists()
-    #
-    #     temp = self.model.update(obj_upd.get_dict()).where(HuntsmanModel.id == obj_upd.id)
-    #     try:
-    #         temp.execute()
-    #     except:
-    #         raise UpdateHuntsmanErr()
+    def update(self, obj_old: Huntsman, obj_upd: Huntsman):
+        if self.get_by_id(obj_old.id) is None:
+            raise IdHuntsmanNotExists()
+
+        temp = self.model.update(obj_upd.get_dict()).where(HuntsmanModel.id == obj_upd.id)
+        try:
+            temp.execute()
+        except:
+            raise UpdateHuntsmanErr()
 
     def get_all(self) -> [Huntsman]:
-        temp = HuntsmanModel.select()
+        temp = self.model.select()
         return transf_to_objs(temp, Huntsman)
 
     def get_by_id(self, id) -> Huntsman:
-        temp = HuntsmanModel.select().where(HuntsmanModel.id == id)
+        temp = self.model.select().where(HuntsmanModel.id == id)
         huntsman_set = transf_to_objs(temp, Huntsman)
 
         if len(huntsman_set):

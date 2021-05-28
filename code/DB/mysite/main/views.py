@@ -175,8 +175,10 @@ def register(request):
         user = Hunter(data)
         user = hunter_rules.register(user)
     elif cur_role == 'huntsman':
+        huntsman_rules = HuntsmanRules('admin')
+        data['id'] = data['sectors'] #todo check it
         user = Huntsman(data)
-        user = HuntsmanRules.register(user)
+        user = huntsman_rules.register(user)
     elif cur_role == 'admin':
         pass
 
