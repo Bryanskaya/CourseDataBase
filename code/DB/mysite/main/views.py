@@ -171,8 +171,9 @@ def register(request):
     cur_role = acc_rules.get_role_eng(account.get_type_role()[1:])
     user = 'delete_me'
     if cur_role == 'hunter':
+        hunter_rules = HunterRules('admin')
         user = Hunter(data)
-        user = HunterRules.register(user)
+        user = hunter_rules.register(user)
     elif cur_role == 'huntsman':
         user = Huntsman(data)
         user = HuntsmanRules.register(user)
