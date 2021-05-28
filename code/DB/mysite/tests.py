@@ -130,6 +130,82 @@ class HunterRepositoryTest(BaseTests, unittest.TestCase):
         person = self.rep.get_by_ticket_num(self.objects[0].ticket_num)
         self.assertEqual(person, self.objects[0])
 
+class HuntingGroundsRepositoryTest(BaseTests, unittest.TestCase):
+    conn = SqliteDatabase(':memory:')
+    rep = PW_HuntingGroundsRepository(conn)
+    updated_object = HuntingGrounds({'id': '1000', 'ground_name': 'Московская область'})
+
+    objects = [
+        HuntingGrounds({'id': '1000', 'ground_name': 'Рязанская область'}),
+        HuntingGrounds({'id': '1001', 'ground_name': 'Крым'}),
+        HuntingGrounds({'id': '1002', 'ground_name': 'Владимирская область'}),
+    ]
+
+    @staticmethod
+    def get_sorted(arr):
+        return sorted(arr, key=lambda x: x.id)
+
+    def setUp(self):
+        self.conn.connect()
+        self.conn.create_tables([HuntingGroundsModel])
+        super(HuntingGroundsRepositoryTest, self).setUp()
+
+    def test_get_by_id(self):
+        ground = self.rep.get_by_id(self.objects[0].id)
+        self.assertEqual(ground, self.objects[0])
+
+class HuntsmanRepositoryTest(BaseTests, unittest.TestCase):
+    conn = SqliteDatabase(':memory:')
+    rep = PW_HuntsmanRepository(conn)
+    updated_object = Huntsman({'id': '555555555', 'login': '00000000'})
+
+    objects = [
+        Huntsman({'id': '44444444', 'login': '00000000'}),
+        Huntsman({'id': '33333333', 'login': '00000001'}),
+        Huntsman({'id': '22222222', 'login': '00000002'}),
+    ]
+
+    @staticmethod
+    def get_sorted(arr):
+        return sorted(arr, key=lambda x: x.id)
+
+    def setUp(self):
+        self.conn.connect()
+        self.conn.create_tables([HuntsmanModel])
+        super(HuntsmanRepositoryTest, self).setUp()
+
+    def test_get_by_id(self):
+        person = self.rep.get_by_id(self.objects[0].id)
+        self.assertEqual(person, self.objects[0])
+
+class PriceListRepositoryTest(BaseTests, unittest.TestCase):
+    conn = SqliteDatabase(':memory:')
+    rep = PW_PriceListRepository(conn)
+    updated_object = PriceList({'id': '11', 'animal': 'утка',
+                                'price': 320, 'is_relevant': True, 'id_sector': '99999999'})
+
+    objects = [
+        PriceList({'id': '1', 'animal': 'лось',
+                   'price': 10000, 'is_relevant': True, 'id_sector': '99999999'}),
+        PriceList({'id': '11', 'animal': 'бобр',
+                   'price': 5000, 'is_relevant': False, 'id_sector': '77777777'}),
+        PriceList({'id': '111', 'animal': 'гусь',
+                    'price': 3500, 'is_relevant': True, 'id_sector': '99999999'}),
+    ]
+
+    @staticmethod
+    def get_sorted(arr):
+        return sorted(arr, key=lambda x: x.id)
+
+    def setUp(self):
+        self.conn.connect()
+        self.conn.create_tables([PriceListModel])
+        super(PriceListRepositoryTest, self).setUp()
+
+    def test_get_by_id(self):
+        person = self.rep.get_by_id(self.objects[0].id)
+        self.assertEqual(person, self.objects[0])
+
 if __name__ == '__main__':
     unittest.main()
 
