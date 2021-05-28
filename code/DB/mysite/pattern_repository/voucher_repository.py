@@ -22,40 +22,42 @@ class VoucherRepository(Repository):
 
 
 class PW_VoucherRepository(VoucherRepository):
-    def __init__(self):
-        pass
+    model = None
 
-    def create(self, obj: VoucherModel):
+    def __init__(self, connection):
+        self.model = VoucherModel(connection)
+
+    def create(self, obj: Voucher):
         try:
-            VoucherModel.create(id=obj.get_id(),
+            self.model.insert(id=obj.get_id(),
                                 duration_days=obj.get_duration_days(),
                                 amount_animals=obj.get_amount_animals(),
                                 price=obj.get_price(),
                                 id_hunter=obj.get_id_hunter(),
-                                id_pricelist=obj.get_id_pricelist())
+                                id_pricelist=obj.get_id_pricelist()).execute()
         except:
            raise CreateBLObjectVoucherErr()
 
     def delete(self, obj: Voucher):
-        temp = VoucherModel.delete().where(VoucherModel.id == obj.id)
+        temp = self.model.delete().where(VoucherModel.id == obj.id)
         temp.execute()
 
-    # def update(self, obj_old: Voucher, obj_upd: Voucher):
-    #     if self.get_by_id(obj_old.id) is None:
-    #         raise IdVoucherNotExists()
-    #
-    #     temp = self.model.update(obj_upd.get_dict()).where(VoucherModel.id == obj_upd.id)
-    #     try:
-    #         temp.execute()
-    #     except:
-    #         raise UpdateVoucherErr()
+    def update(self, obj_old: Voucher, obj_upd: Voucher):
+        if self.get_by_id(obj_old.id) is None:
+            raise IdVoucherNotExists()
+
+        temp = self.model.update(obj_upd.get_dict()).where(VoucherModel.id == obj_upd.id)
+        try:
+            temp.execute()
+        except:
+            raise UpdateVoucherErr()
 
     def get_all(self) -> [Voucher]:
-        temp = VoucherModel.select()
+        temp = self.model.select()
         return transf_to_objs(temp, Voucher)
 
     def get_by_id(self, id) -> Voucher:
-        temp = VoucherModel.select().where(VoucherModel.id == id)
+        temp = self.model.select().where(VoucherModel.id == id)
         vouchers_set = transf_to_objs(temp, Voucher)
 
         if len(vouchers_set):

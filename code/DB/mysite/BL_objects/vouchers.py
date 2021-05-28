@@ -25,6 +25,12 @@ class Voucher(object):
                 'id_hunter': self.id_hunter,
                 'id_pricelist': self.id_pricelist}
 
+    def __ne__(self, other):
+        return self.get_dict() != other.get_dict()
+
+    def __eq__(self, other):
+        return self.get_dict() == other.get_dict()
+
     def get_id(self):               return self.id
     def get_duration_days(self):    return self.duration_days
     def get_amount_animals(self):   return self.amount_animals
