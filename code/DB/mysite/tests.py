@@ -153,16 +153,16 @@ class HuntingGroundsRepositoryTest(BaseTests, unittest.TestCase):
     def test_get_by_id(self):
         ground = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(ground, self.objects[0])
-'''
+
 class HuntsmanRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
     rep = PW_HuntsmanRepository(conn)
-    updated_object = Huntsman({'id': 555555555, 'login': '00000000'})
+    updated_object = Huntsman({'id': 22222222, 'login': '00000003'})
 
     objects = [
-        Huntsman({'id': 44444444, 'login': '00000000'}),
+        Huntsman({'id': 22222222, 'login': '00000000'}),
         Huntsman({'id': 33333333, 'login': '00000001'}),
-        Huntsman({'id': 22222222, 'login': '00000002'}),
+        Huntsman({'id': 44444444, 'login': '00000002'}),
     ]
 
     @staticmethod
@@ -177,16 +177,16 @@ class HuntsmanRepositoryTest(BaseTests, unittest.TestCase):
     def test_get_by_id(self):
         person = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(person, self.objects[0])
-
+'''
 class PriceListRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
     rep = PW_PriceListRepository(conn)
-    updated_object = PriceList({'id': 11, 'animal': 'утка',
+    updated_object = PriceList({'id': 1, 'animal': 'утка',
                                 'price': 320, 'is_relevant': True, 'id_sector': 99999999})
 
     objects = [
         PriceList({'id': 1, 'animal': 'лось',
-                   'price': 10000, 'is_relevant': True, 'id_sector': 99999999}),
+                   'price': 10000, 'is_relevant': False, 'id_sector': 99999999}),
         PriceList({'id': 11, 'animal': 'бобр',
                    'price': 5000, 'is_relevant': False, 'id_sector': 77777777}),
         PriceList({'id': 111, 'animal': 'гусь',
@@ -205,7 +205,7 @@ class PriceListRepositoryTest(BaseTests, unittest.TestCase):
     def test_get_by_id(self):
         pos = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(pos, self.objects[0])
-
+'''
 class SectorRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
     rep = PW_PriceListRepository(conn)
