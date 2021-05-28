@@ -22,34 +22,39 @@ class HunterRepository(Repository):
 
 
 class PW_HunterRepository(HunterRepository):
-    def create(self, obj: HunterModel):
+    model = None
+
+    def __init__(self, connection):
+        self.model = HunterModel(connection)
+
+    def create(self, obj: Hunter):
         try:
-            HunterModel.create(ticket_num=obj.get_ticket_num(),
-                               residence=obj.get_address(),
-                               login=obj.get_login())
+            self.model.insert(ticket_num=obj.get_ticket_num(),
+                              residence=obj.get_residence(),
+                              login=obj.get_login()).execute()
         except:
             raise CreateBLObjectHunterErr()
 
     def delete(self, obj: Hunter):
-        temp = HunterModel.delete().where(HunterModel.ticket_num == obj.ticket_num)
+        temp = self.model.delete().where(HunterModel.ticket_num == obj.ticket_num)
         temp.execute()
 
-    # def update(self, obj_old: Hunter, obj_upd: Hunter):
-    #     if self.get_by_login(obj_old.login) is None:
-    #         raise LoginHunterNotExists()
-    #
-    #     temp = self.model.update(obj_upd.get_dict()).where(HunterModel.login == obj_upd.login)
-    #     try:
-    #         temp.execute()
-    #     except:
-    #         raise UpdateHunterErr()
+    def update(self, obj_old: Hunter, obj_upd: Hunter):
+        if self.get_by_ticket_num(obj_old.ticket_num) is None:
+            raise LoginHunterNotExists()
+
+        temp = self.model.update(obj_upd.get_dict()).where(HunterModel.ticket_num == obj_upd.ticket_num)
+        try:
+            temp.execute()
+        except:
+            raise UpdateHunterErr()
 
     def get_all(self) -> [Hunter]:
-        temp = HunterModel.select()
+        temp = self.model.select()
         return transf_to_objs(temp, Hunter)
 
     def get_by_ticket_num(self, ticket_num: str) -> Hunter:
-        temp = HunterModel.select().where(HunterModel.ticket_num == ticket_num)
+        temp = self.model.select().where(HunterModel.ticket_num == ticket_num)
         hunters_set = transf_to_objs(temp, Hunter)
 
         if len(hunters_set):
