@@ -17,7 +17,7 @@ class HunterRepository(Repository):
     def get_all(self) -> [Hunter]:
         raise NotImplementedError
 
-    def get_by_login(self, login) -> Hunter:
+    def get_by_ticket_num(self, login) -> Hunter:
         raise NotImplementedError
 
 
@@ -31,7 +31,7 @@ class PW_HunterRepository(HunterRepository):
             raise CreateBLObjectHunterErr()
 
     def delete(self, obj: Hunter):
-        temp = HunterModel.delete().where(HunterModel.login == obj.login)
+        temp = HunterModel.delete().where(HunterModel.ticket_num == obj.ticket_num)
         temp.execute()
 
     # def update(self, obj_old: Hunter, obj_upd: Hunter):
@@ -48,8 +48,8 @@ class PW_HunterRepository(HunterRepository):
         temp = HunterModel.select()
         return transf_to_objs(temp, Hunter)
 
-    def get_by_login(self, login: str) -> Hunter:
-        temp = HunterModel.select().where(HunterModel.login == login)
+    def get_by_ticket_num(self, ticket_num: str) -> Hunter:
+        temp = HunterModel.select().where(HunterModel.ticket_num == ticket_num)
         hunters_set = transf_to_objs(temp, Hunter)
 
         if len(hunters_set):
