@@ -13,6 +13,12 @@ class HuntingGrounds(object):
         return {'id': self.id,
                 'ground_name': self.ground_name}
 
+    def __ne__(self, other):
+        return self.get_dict() != other.get_dict()
+
+    def __eq__(self, other):
+        return self.get_dict() == other.get_dict()
+
     def get_id(self):           return self.id
     def get_ground_name(self):  return self.ground_name
 
