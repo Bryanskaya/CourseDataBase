@@ -178,19 +178,43 @@ class HuntsmanRepositoryTest(BaseTests, unittest.TestCase):
         person = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(person, self.objects[0])
 
+class SectorRepositoryTest(BaseTests, unittest.TestCase):
+    conn = SqliteDatabase(':memory:')
+    rep = PW_SectorsRepository(conn)
+    updated_object = Sector({'id': 101, 'id_husbandry': 1000})
+
+    objects = [
+        Sector({'id': 101, 'id_husbandry': 1001}),
+        Sector({'id': 203, 'id_husbandry': 1001}),
+        Sector({'id': 207, 'id_husbandry': 1002}),
+    ]
+
+    @staticmethod
+    def get_sorted(arr):
+        return sorted(arr, key=lambda x: x.id)
+
+    def setUp(self):
+        self.conn.connect()
+        self.conn.create_tables([SectorModel])
+        super(SectorRepositoryTest, self).setUp()
+
+    def test_get_by_id(self):
+        sector = self.rep.get_by_id(self.objects[0].id)
+        self.assertEqual(sector, self.objects[0])
+
 class PriceListRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
     rep = PW_PriceListRepository(conn)
     updated_object = PriceList({'id': 1, 'animal': 'утка',
-                                'price': 320, 'is_relevant': True, 'id_sector': 99999999})
+                                'price': 320, 'is_relevant': True, 'id_sector': 101})
 
     objects = [
         PriceList({'id': 1, 'animal': 'лось',
-                   'price': 10000, 'is_relevant': False, 'id_sector': 99999999}),
+                   'price': 10000, 'is_relevant': False, 'id_sector': 101}),
         PriceList({'id': 11, 'animal': 'бобр',
-                   'price': 5000, 'is_relevant': False, 'id_sector': 77777777}),
+                   'price': 5000, 'is_relevant': False, 'id_sector': 207}),
         PriceList({'id': 111, 'animal': 'гусь',
-                    'price': 3500, 'is_relevant': True, 'id_sector': 99999999}),
+                    'price': 3500, 'is_relevant': True, 'id_sector': 101}),
     ]
 
     @staticmethod
@@ -206,35 +230,11 @@ class PriceListRepositoryTest(BaseTests, unittest.TestCase):
         pos = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(pos, self.objects[0])
 
-class SectorRepositoryTest(BaseTests, unittest.TestCase):
-    conn = SqliteDatabase(':memory:')
-    rep = PW_PriceListRepository(conn)
-    updated_object = Sector({'id': 207, 'id_husbandry': 1000})
-
-    objects = [
-        Sector({'id': '101', 'id_husbandry': 1001}),
-        Sector({'id': '203', 'id_husbandry': 1001}),
-        Sector({'id': '207', 'id_husbandry': 1002}),
-    ]
-
-    @staticmethod
-    def get_sorted(arr):
-        return sorted(arr, key=lambda x: x.id)
-
-    def setUp(self):
-        self.conn.connect()
-        self.conn.create_tables([SectorModel])
-        super(SectorRepositoryTest, self).setUp()
-
-    def test_get_by_id(self):
-        sector = self.rep.get_by_id(self.objects[0].id)
-        self.assertEqual(sector, self.objects[0])
-'''
 class VoucherRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
     rep = PW_PriceListRepository(conn)
-    updated_object = Voucher({'id': 1000001, 'duration_days': 5, 'amount_animals': 3,
-                             'price': 5000, 'id_hunter': 99999999, 'id_pricelist': 111})
+    updated_object = Voucher({'id': 1000001, 'duration_days': 30, 'amount_animals': 10,
+                             'price': 7500, 'id_hunter': 99999999, 'id_pricelist': 111})
 
     objects = [
         Voucher({'id': 1000001, 'duration_days': 5, 'amount_animals': 3,
@@ -257,7 +257,7 @@ class VoucherRepositoryTest(BaseTests, unittest.TestCase):
     def test_get_by_id(self):
         voucher = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(voucher, self.objects[0])
-'''
+
 
 if __name__ == '__main__':
     unittest.main()
