@@ -191,7 +191,10 @@ class SectorRepositoryTest(BaseTests, unittest.TestCase):
 
     @staticmethod
     def get_sorted(arr):
-        return sorted(arr, key=lambda x: x.id)
+        try:
+            return sorted(arr, key=lambda x: x.id)
+        except:
+            return sorted(arr)
 
     def setUp(self):
         self.conn.connect()
@@ -201,6 +204,44 @@ class SectorRepositoryTest(BaseTests, unittest.TestCase):
     def test_get_by_id(self):
         sector = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(sector, self.objects[0])
+
+    def test_get_ids(self):
+        ids_rep = self.rep.get_ids(self.objects[0].id_husbandry)
+        ids = []
+        for i in self.objects:
+            if i.id_husbandry == self.objects[0].id_husbandry:
+                ids.append(i.id)
+
+        self.assertTrue(self.is_equal_len(ids_rep, ids))
+        self.assertTrue(self.is_equal_data(ids_rep, ids))
+
+class VoucherRepositoryTest(BaseTests, unittest.TestCase):
+    conn = SqliteDatabase(':memory:')
+    rep = PW_VoucherRepository(conn)
+    updated_object = Voucher({'id': 1000001, 'duration_days': 30, 'amount_animals': 10,
+                             'price': 7500, 'id_hunter': '99999999', 'id_pricelist': 111})
+
+    objects = [
+        Voucher({'id': 1000001, 'duration_days': 5, 'amount_animals': 3,
+                 'price': 5000, 'id_hunter': '99999999', 'id_pricelist': 1}),
+        Voucher({'id': 1000002, 'duration_days': 14, 'amount_animals': 1,
+                 'price': 3700, 'id_hunter': '99999999', 'id_pricelist': 1}),
+        Voucher({'id': 1000003, 'duration_days': 60, 'amount_animals': 15,
+                 'price': 6800, 'id_hunter': '77777777', 'id_pricelist': 11}),
+    ]
+
+    @staticmethod
+    def get_sorted(arr):
+        return sorted(arr, key=lambda x: x.id)
+
+    def setUp(self):
+        self.conn.connect()
+        self.conn.create_tables([VoucherModel])
+        super(VoucherRepositoryTest, self).setUp()
+
+    def test_get_by_id(self):
+        voucher = self.rep.get_by_id(self.objects[0].id)
+        self.assertEqual(voucher, self.objects[0])
 
 class PriceListRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
@@ -229,35 +270,6 @@ class PriceListRepositoryTest(BaseTests, unittest.TestCase):
     def test_get_by_id(self):
         pos = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(pos, self.objects[0])
-
-class VoucherRepositoryTest(BaseTests, unittest.TestCase):
-    conn = SqliteDatabase(':memory:')
-    rep = PW_PriceListRepository(conn)
-    updated_object = Voucher({'id': 1000001, 'duration_days': 30, 'amount_animals': 10,
-                             'price': 7500, 'id_hunter': 99999999, 'id_pricelist': 111})
-
-    objects = [
-        Voucher({'id': 1000001, 'duration_days': 5, 'amount_animals': 3,
-                 'price': 5000, 'id_hunter': 99999999, 'id_pricelist': 1}),
-        Voucher({'id': 1000002, 'duration_days': 14, 'amount_animals': 1,
-                 'price': 3700, 'id_hunter': 99999999, 'id_pricelist': 1}),
-        Voucher({'id': 1000003, 'duration_days': 60, 'amount_animals': 15,
-                 'price': 6800, 'id_hunter': 77777777, 'id_pricelist': 11}),
-    ]
-
-    @staticmethod
-    def get_sorted(arr):
-        return sorted(arr, key=lambda x: x.id)
-
-    def setUp(self):
-        self.conn.connect()
-        self.conn.create_tables([VoucherModel])
-        super(VoucherRepositoryTest, self).setUp()
-
-    def test_get_by_id(self):
-        voucher = self.rep.get_by_id(self.objects[0].id)
-        self.assertEqual(voucher, self.objects[0])
-
 
 if __name__ == '__main__':
     unittest.main()
