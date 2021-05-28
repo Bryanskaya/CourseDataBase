@@ -50,7 +50,6 @@ class HunterModel(BaseModel):
 class HuntingGroundsModel(BaseModel):
     id = IntegerField(column_name='id', primary_key=True)
     ground_name = TextField(column_name='ground_name')
-    square = FloatField(column_name='square')
 
     class Meta:
         table_name = 'hunting_grounds'
