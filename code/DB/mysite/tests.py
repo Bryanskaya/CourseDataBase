@@ -177,7 +177,7 @@ class HuntsmanRepositoryTest(BaseTests, unittest.TestCase):
     def test_get_by_id(self):
         person = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(person, self.objects[0])
-'''
+
 class PriceListRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
     rep = PW_PriceListRepository(conn)
@@ -205,7 +205,7 @@ class PriceListRepositoryTest(BaseTests, unittest.TestCase):
     def test_get_by_id(self):
         pos = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(pos, self.objects[0])
-'''
+
 class SectorRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
     rep = PW_PriceListRepository(conn)
@@ -229,7 +229,7 @@ class SectorRepositoryTest(BaseTests, unittest.TestCase):
     def test_get_by_id(self):
         sector = self.rep.get_by_id(self.objects[0].id)
         self.assertEqual(sector, self.objects[0])
-
+'''
 class VoucherRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
     rep = PW_PriceListRepository(conn)
