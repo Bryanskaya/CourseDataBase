@@ -4,6 +4,12 @@ from inject_config import *
 from datetime import *
 
 from pattern_repository.accounts_repository import *
+from pattern_repository.hunter_repository import *
+from pattern_repository.hunting_grounds_repository import *
+from pattern_repository.huntsman_repository import *
+from pattern_repository.price_list_repository import *
+from pattern_repository.sectors_repository import *
+from pattern_repository.voucher_repository import *
 
 class BaseTests(object):
     conn = SqliteDatabase(':memory:')
@@ -100,7 +106,29 @@ class AccountRepositoryTest(BaseTests, unittest.TestCase):
         person = self.rep.get_by_login(self.objects[0].login)
         self.assertEqual(person, self.objects[0])
 
+class HunterRepositoryTest(BaseTests, unittest.TestCase):
+    conn = SqliteDatabase(':memory:')
+    rep = PW_HunterRepository(conn)
+    updated_object = Hunter({'ticket_num': '88888888', 'address': 'Россия', 'login': '01010101'})
 
+    objects = [
+        Hunter({'ticket_num': '99999999', 'address': 'Россия', 'login': '00000000'}),
+        Hunter({'ticket_num': '88888888', 'address': 'Китай', 'login': '00000001'}),
+        Hunter({'ticket_num': '77777777', 'address': 'Украина', 'login': '00000002'}),
+    ]
+
+    @staticmethod
+    def get_sorted(arr):
+        return sorted(arr, key=lambda x: x.ticket_num)
+
+    def setUp(self):
+        self.conn.connect()
+        self.conn.create_tables([HunterModel])
+        super(HunterRepositoryTest, self).setUp()
+
+    def test_get_by_ticket_num(self):
+        person = self.rep.get_by_ticket_num(self.objects[0].ticket_num)
+        self.assertEqual(person, self.objects[0])
 
 if __name__ == '__main__':
     unittest.main()
