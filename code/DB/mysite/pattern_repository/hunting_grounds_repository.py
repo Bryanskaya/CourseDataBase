@@ -38,13 +38,13 @@ class PW_HuntingGroundsRepository(HuntingGroundsRepository):
 
     # def update(self, obj_old: HuntingGrounds, obj_upd: HuntingGrounds):
     #     if self.get_by_id(obj_old.id) is None:
-    #         raise IdHuntGroundNotExists
+    #         raise IdHuntGroundNotExists()
     #
     #     temp = self.model.update(obj_upd.get_dict()).where(HuntingGroundsModel.id == obj_upd.id)
     #     try:
     #         temp.execute()
     #     except:
-    #         raise UpdateHuntGroundErr
+    #         raise UpdateHuntGroundErr()
 
     def get_all(self) -> [HuntingGrounds]:
         temp = HuntingGroundsModel.select()

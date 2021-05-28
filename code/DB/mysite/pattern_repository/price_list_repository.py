@@ -33,7 +33,7 @@ class PW_PriceListRepository(PriceListRepository):
                                   is_relevant=obj.get_is_relevant(),
                                   id_sector=obj.get_id_sector())
         except:
-           return CreateBLObjectPriceListErr
+           raise CreateBLObjectPriceListErr()
 
     def delete(self, obj: PriceList):
         temp = PriceListModel.delete().where(PriceListModel.id == obj.id)
@@ -47,7 +47,7 @@ class PW_PriceListRepository(PriceListRepository):
     #     try:
     #         temp.execute()
     #     except:
-    #         raise UpdatePriceListErr
+    #         raise UpdatePriceListErr()
 
     def get_all(self) -> [PriceList]:
         temp = PriceListModel.select()

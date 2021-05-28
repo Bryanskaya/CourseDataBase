@@ -36,13 +36,13 @@ class PW_HunterRepository(HunterRepository):
 
     # def update(self, obj_old: Hunter, obj_upd: Hunter):
     #     if self.get_by_login(obj_old.login) is None:
-    #         raise LoginHunterNotExists
+    #         raise LoginHunterNotExists()
     #
     #     temp = self.model.update(obj_upd.get_dict()).where(HunterModel.login == obj_upd.login)
     #     try:
     #         temp.execute()
     #     except:
-    #         raise UpdateHunterErr
+    #         raise UpdateHunterErr()
 
     def get_all(self) -> [Hunter]:
         temp = HunterModel.select()

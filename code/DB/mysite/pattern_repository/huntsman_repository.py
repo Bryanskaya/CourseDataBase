@@ -30,7 +30,7 @@ class PW_HuntsmanRepository(HuntsmanRepository):
             HuntsmanModel.create(id=obj.get_id(),
                                  login=obj.get_login())
         except:
-           return CreateBLObjectHuntsmanErr()
+           raise CreateBLObjectHuntsmanErr()
 
     def delete(self, obj: Huntsman):
         temp = HuntsmanModel.delete().where(HuntsmanModel.id == obj.id)
@@ -38,13 +38,13 @@ class PW_HuntsmanRepository(HuntsmanRepository):
 
     # def update(self, obj_old: Huntsman, obj_upd: Huntsman):
     #     if self.get_by_id(obj_old.id) is None:
-    #         raise IdHuntsmanNotExists
+    #         raise IdHuntsmanNotExists()
     #
     #     temp = self.model.update(obj_upd.get_dict()).where(HuntsmanModel.id == obj_upd.id)
     #     try:
     #         temp.execute()
     #     except:
-    #         raise UpdateHuntsmanErr
+    #         raise UpdateHuntsmanErr()
 
     def get_all(self) -> [Huntsman]:
         temp = HuntsmanModel.select()
