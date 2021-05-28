@@ -27,7 +27,7 @@ class PW_PriceListRepository(PriceListRepository):
     def __init__(self, connection):
         self.model = PriceListModel(connection)
 
-    def create(self, obj: PriceListModel):
+    def create(self, obj: PriceList):
         try:
             self.model.insert(id=obj.get_id(),
                               animal=obj.get_animal(),

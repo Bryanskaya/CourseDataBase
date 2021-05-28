@@ -27,7 +27,7 @@ class PW_HuntsmanRepository(HuntsmanRepository):
     def __init__(self, connection):
         self.model = HuntsmanModel(connection)
 
-    def create(self, obj: HuntsmanModel):
+    def create(self, obj: Huntsman):
         try:
             self.model.insert(id=obj.get_id(),
                               login=obj.get_login()).execute()
