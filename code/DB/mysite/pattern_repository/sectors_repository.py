@@ -25,38 +25,43 @@ class SectorsRepository(Repository):
 
 
 class PW_SectorsRepository(SectorsRepository):
+    model = None
+
+    def __init__(self, connection):
+        self.model = SectorModel(connection)
+
     def create(self, obj: Sector):
         try:
-            SectorModel.create(id=obj.get_id(),
-                               id_husbandry=obj.get_id_husbandry())
+            self.model.insert(id=obj.get_id(),
+                               id_husbandry=obj.get_id_husbandry()).execute()
         except:
            raise CreateBLObjectSectorErr()
 
     def delete(self, obj: Sector):
-        temp = SectorModel.delete().where(SectorModel.id == obj.id)
+        temp = self.model.delete().where(SectorModel.id == obj.id)
         temp.execute()
 
-    # def update(self, obj_old: Sector, obj_upd: Sector):
-    #     if self.get_by_id(obj_old.id) is None:
-    #         raise IdSectorNotExists()
-    #
-    #     temp = self.model.update(obj_upd.get_dict()).where(SectorModel.id == obj_upd.id)
-    #     try:
-    #         temp.execute()
-    #     except:
-    #         raise UpdateSectorErr()
+    def update(self, obj_old: Sector, obj_upd: Sector):
+        if self.get_by_id(obj_old.id) is None:
+            raise IdSectorNotExists()
+
+        temp = self.model.update(obj_upd.get_dict()).where(SectorModel.id == obj_upd.id)
+        try:
+            temp.execute()
+        except:
+            raise UpdateSectorErr()
 
     def get_all(self) -> [Sector]:
-        temp = SectorModel.select()
+        temp = self.model.select()
         return transf_to_objs(temp, Sector)
 
     def get_ids(self, id_hunting_ground):
-        temp = SectorModel.select().where(SectorModel.id_husbandry == id_hunting_ground)
+        temp = self.model.select().where(SectorModel.id_husbandry == id_hunting_ground)
         sectors_set = transf_to_objs(temp, Sector)
         return [x.get_id() for x in sectors_set]
 
     def get_by_id(self, id) -> Sector:
-        temp = SectorModel.select().where(SectorModel.id == id)
+        temp = self.model.select().where(SectorModel.id == id)
         sectors_set = transf_to_objs(temp, Sector)
 
         if len(sectors_set):

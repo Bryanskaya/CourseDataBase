@@ -13,6 +13,12 @@ class Sector(object):
         return {'id': self.id,
                 'id_husbandry': self.id_husbandry}
 
+    def __ne__(self, other):
+        return self.get_dict() != other.get_dict()
+
+    def __eq__(self, other):
+        return self.get_dict() == other.get_dict()
+
     def get_id(self):           return self.id
     def get_id_husbandry(self): return self.id_husbandry
 
