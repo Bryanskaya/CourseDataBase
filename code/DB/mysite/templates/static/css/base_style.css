@@ -4,6 +4,29 @@
 	box-sizing: border-box;
 }
 
+a {
+	font-size: 18px;
+	color: black;
+}
+
+a:focus {
+	outline: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #1b3815;
+}
+
+input {
+	outline: none;
+}
+
+input:focus {
+    color: black;
+    font-weight: bold;
+}
+
 body, html {
 	height: 100%; /**/
 }
@@ -33,7 +56,6 @@ body {
    border-radius: 50%;
    margin: 5px 0;
    text-align: center;
-   /*text-shadow: 2px 2px 1px rgba(0, 0, 0, .4);*/
 
    border: solid 1px;
    border-color: black;
@@ -52,15 +74,10 @@ header {
 
    width: 100%;
    box-shadow: 3px 3px 1px rgba(0, 0, 0, .05);
-   padding: 15px;
-   /*margin-bottom: 30px;*/
    position: relative;
-   /*padding-bottom: 50px;*/
 
    border-bottom: solid 2px; /*line bottom logo*/
    border-color: #946e29;
-
-
 }
 
 .user-img {
@@ -80,6 +97,43 @@ header {
     color: black;
     line-height: 2;
 }
+
+.alert {
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 18px;
+    color: black;
+    line-height: 1;
+
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    /*border-radius: 20px;*/
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.alert-info {
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    line-height: 1.2;
+
+    padding: 1.25rem 1.25rem;
+    margin-bottom: 3rem;
+    border: 1px solid transparent;
+
+    background-color: #5ad179;/*#d4edda;*/
+
+    text-align: center;
+    width: 23%;
+}
+
 
 /* Menu */
 .main-menu {
@@ -230,3 +284,51 @@ header {
     top: 0;
     left: 100%;
 }*/
+
+.p-t-150 {
+    padding-top: 150px;
+}
+
+.p-t-178 {
+    padding-top: 178px;
+}
+
+.p-l-55 {
+    padding-left: 55px;
+}
+
+.p-r-5 {
+    padding-right: 5px;
+}
+
+.p-r-25 {
+    padding-right: 25px;
+}
+
+.p-r-55 {
+    padding-right: 55px;
+}
+
+.p-b-3 {
+    padding-bottom: 3px;
+}
+
+.m-b-13 {
+    margin-bottom: 13px;
+}
+
+.m-b-14 {
+    margin-bottom: 14px;
+}
+
+.m-b-16 {
+    margin-bottom: 16px;
+}
+
+.m-r-18 {
+    margin-right: 18px;
+}
+
+.d-f {
+    display: flex;
+}
