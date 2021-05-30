@@ -1,0 +1,1 @@
+class OpenFileErr(BaseException):           pass
