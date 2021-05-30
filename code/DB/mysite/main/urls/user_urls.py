@@ -1,5 +1,5 @@
 from django.urls import path, include
-from main import views
+from main.views import views
 
 app_name = 'users'
 urlpatterns = [
