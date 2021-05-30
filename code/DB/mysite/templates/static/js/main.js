@@ -58,6 +58,27 @@ function Jump(pos) {
         child[pos + 2].focus();
 }
 
+
+function FindNeed() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("find-voucher-ground");
+    filter = input.value;
+    table = document.getElementById("list-table");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        } else {
+        tr[i].style.display = "none";
+        }
+    }       
+    }
+}
+
+
 //function GetSectors() {
 //    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 //

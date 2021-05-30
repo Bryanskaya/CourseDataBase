@@ -1,0 +1,66 @@
+{% extends "static\general_extend.html" %}{% load static %}
+
+{% block title %} Купить путёвку {% endblock %}
+
+{% block head_temp %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '\css\style_buy.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static '\css\img\favicon.ico' %}"/>
+{% endblock %}
+
+{% block content %}
+<div class="buy-voucher">
+    <form class="buy-form p-l-25 p-r-25 p-t-30" method="POST" action="{% url 'hunters:buy' %}">
+        {% csrf_token %}
+
+        <div class="voucher-table">
+            {% if offers %}
+            <input 
+                type="text" 
+                id="find-voucher-ground" 
+                class="find-voucher-ground" 
+                onkeyup="FindNeed()" 
+                pattern="[А-Яа-яЁё\-]*"
+                placeholder="Поиск субъекта ...">
+
+            <table class="list-table" id="list-table">
+                <tr>
+                    <th><b>Субъект</b></th>
+                    <th><b>Сектор</b></th>
+                    <th><b>Животное</b></th>
+                    <th><b>Цена, руб/шт</b></th>
+                    <th><b>Количество</b></th>
+                    <th><b>Выбрать</b></th>
+                </tr>
+
+                {% for offer in offers %}
+                <tr class="items">
+                    <td>{{offer.ground_name}}</td>
+                    <td>{{offer.id_sector}}</td>
+                    <td>{{offer.animal}}</td>
+                    <td>{{offer.price}}</td>
+                    <td class="input-td">
+                        <input
+                            type='text'
+                            maxlength="2"
+                            min="1"
+                            max="99"
+                            class='input-num'
+                            value="1"
+                            pattern="[1-9]*">
+                    </td>
+                    <td> <a href="#">Отправить заявку</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+
+
+            
+            {% else %}
+            <h1> Доступных путёвок на данный момент нет </h1>
+            {% endif %}
+
+        </div>   
+    </form>
+</div>
+{% endblock %}

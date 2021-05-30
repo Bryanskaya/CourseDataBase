@@ -26,12 +26,12 @@
 {% block table %}
     <ul class="main-menu">
         <li class="active">
-            <a href="{% url 'users:account' account.login %}">Обо мне</a>
+            <a href="{% url 'users:about' %}">Обо мне</a>
         </li>
         <li class="menu-children">
             <a href="#url">Путёвки</a>
             <ul>
-                <li><a href="#url">Купить</a></li>
+                <li><a href="{% url 'hunters:buy' %}">Купить</a></li>
                 <li><a href="#url">Просмотреть свои</a></li>
                 <!--<li class="menu-children">
                     <a href="#url">Подразделы</a>
@@ -46,4 +46,6 @@
         <li><a href="#url">Цены</a></li>
         <li><a href="#url">Карта</a></li>
     </ul>
+
+    <script src="{% static '\js\main.js' %}"></script>
 {% endblock %}

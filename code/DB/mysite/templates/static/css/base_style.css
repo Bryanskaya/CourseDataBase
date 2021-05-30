@@ -285,12 +285,103 @@ header {
     left: 100%;
 }*/
 
+
+.find-voucher-ground {
+    background-image: url('img/find.png');
+    background-size: 25px, 25px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat; 
+    
+    font-family: JosefinSans;
+    font-size: 18px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-bottom: 12px;
+    width: 100%;
+}
+
+.list-table {
+    font-family: JosefinSans;
+    font-size: 21px;
+    color: black;
+    line-height: 1;
+    text-align: left;
+
+    border-spacing: 0;
+    border: 1px solid black;
+    width: 100%;
+    background-color: #d1ab81c6;
+
+    border-radius: 20px;
+}
+
+.list-table th {
+    padding: 15px;
+    padding-left: 25px;
+    border-left: 1px solid black;
+    /*border: 1px solid black;/**/
+}
+
+.list-table td {
+    padding: 10px;
+    background-clip: padding;
+    border-collapse: collapse;
+    border-left: 1px solid black;
+    padding-left: 25px;
+    padding-right: 25px;
+    border: 1px solid black;/**/
+}  
+
+.list-table tr {
+    border-bottom: 1px solid black;
+}
+
+.list-table tr:first-child {
+    background-color:#B98853;
+    border-left: 1px solid black;
+}
+
+.list-table tr:first-child th:first-child{
+    border-radius: 20px 0px 0px 0px;
+}
+
+.list-table tr:first-child th:last-child{
+    border-radius: 0px 20px 0px 0px;
+}
+
+.list-table tr:last-child td:first-child{
+    border-radius: 0px 0px 0px 20px;
+}
+
+.list-table tr:last-child td:last-child{
+    border-radius: 0px 0px 20px 0px;
+}
+
+.list-table a {
+    display: block;
+}
+
+.list-table tr.items:hover {
+    background-color: #f1f1f1;
+    /*border: 1px solid black;*/
+}
+
+
+.p-t-30 {
+    padding-top: 30px;
+}
+
 .p-t-150 {
     padding-top: 150px;
 }
 
 .p-t-178 {
     padding-top: 178px;
+}
+
+.p-l-25 {
+    padding-left: 25px;
 }
 
 .p-l-55 {
