@@ -55,9 +55,7 @@ class AccountRules(BaseRules):
 
     def is_exist_login(self, login):
         accounts_set = inject.instance(AccountsRepository)(self.connection)
-        account = accounts_set.get_by_login(login)
-
-        return account
+        return accounts_set.get_by_login(login)
 
     def get_person(self, login):
         accounts_set = inject.instance(AccountsRepository)(self.connection)
@@ -123,16 +121,16 @@ class RoleCheck(BaseAccountCheck):
 
 
 class AllRolesCheck(RoleCheck):
-    roles = ['администратор', 'охотник', 'егерь']
+    roles = ['админ', 'охотник', 'егерь']
 
 
 class HunterRoleCheck(RoleCheck):
-    roles = ['администратор', 'охотник']
+    roles = ['админ', 'охотник']
 
 
 class HuntsmanRoleCheck(RoleCheck):
-    roles = ['администратор', 'егерь']
+    roles = ['админ', 'егерь']
 
 
 class AdminRoleCheck(RoleCheck):
-    roles = ['администратор']
+    roles = ['админ']

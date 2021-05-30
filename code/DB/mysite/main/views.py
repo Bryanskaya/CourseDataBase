@@ -10,6 +10,7 @@ sys.path.append("../")
 from BL_rules.account_rules import *
 from BL_rules.hunter_rules import *
 from BL_rules.huntsman_rules import *
+from BL_rules.sector_rules import *
 
 from read_data import *
 
@@ -58,6 +59,7 @@ def about(request):
         return check
 
     acc_rules = AccountRules(request.session['user']['role_eng'])
+    print(request.session['user']['role_eng'])
     account = acc_rules.get_person(request.session['user']['login'])
 
     return render(request, 'static/about.html', locals())
@@ -191,7 +193,7 @@ def register(request):
 
 
 def get_sectors(request):
+    sect_rules = SectorRules('admin')
     if request.is_ajax and request.method == "POST":
-        sectors_set = inject.instance(SectorsRepository).get_ids(request.POST['id'])
-
+        sectors_set = sect_rules.get_ids(request.POST['id'])
         return JsonResponse({'id': sectors_set}, status=200)

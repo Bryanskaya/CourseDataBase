@@ -1,1 +1,5 @@
-{"db_user": "postgres", "db_password": "bdwdcb8y", "db_host": "localhost", "db_name": "course_work"}
+{
+  "admin_connection": {"db_user": "admin", "db_password": "admin", "db_host": "localhost", "db_name": "course_work"},
+  "huntsman_connection": {"db_user": "huntsman", "db_password": "huntsman", "db_host": "localhost", "db_name": "course_work"},
+  "hunter_connection": {"db_user": "hunter", "db_password": "hunter", "db_host": "localhost", "db_name": "course_work"}
+}

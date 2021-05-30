@@ -18,8 +18,8 @@ class BaseModel(Model):
         self._meta.database = connection
 
     # TODO delete class Meta
-    class Meta:
-        database = inject.instance(CurConnection)
+    # class Meta:
+    #     database = inject.instance(CurConnection)
 
 
 class AccountModel(BaseModel):

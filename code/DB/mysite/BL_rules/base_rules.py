@@ -6,3 +6,10 @@ class BaseRules(object):
 
     def __init__(self, role):
         self.connection = inject.instance(CurConnection) #TODO change to role connection
+
+        if role == 'admin' or role == 'админ':
+            self.connection = inject.instance(AdminConnection)
+        elif role == 'hunter' or role == 'охотник':
+            self.connection = inject.instance(HunterConnection)
+        elif role == 'huntsman' or role == 'егерь':
+            self.connection = inject.instance(HuntsmanConnection)
