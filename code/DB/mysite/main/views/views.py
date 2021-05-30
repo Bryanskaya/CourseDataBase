@@ -102,9 +102,6 @@ def recover_password(request, login):
 
     #TODO send email
 
-    print("++++++", request.session)
-
-
     return render(request, 'static/recover_password.html', locals())
 
 
