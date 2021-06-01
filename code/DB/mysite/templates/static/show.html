@@ -1,0 +1,145 @@
+{% extends "static\general_extend.html" %}{% load static %}
+
+{% block title %} Мои путёвки {% endblock %}
+
+{% block head_temp %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '\css\style_show.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static '\css\img\favicon.ico' %}"/>
+{% endblock %}
+
+{% block name_info %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="show-voucher">
+    <form class="show-form p-l-25 p-r-25 p-t-30" method="POST" action="{% url 'hunters:buy' %}">
+        {% csrf_token %}
+
+        {% if info_message %}
+            <div class="alert-info">
+                <strong>{{ info_message }}</strong>
+            </div>
+        {% endif %}
+
+        {% if error_message %}
+            <div class="alert-danger">
+                <strong>{{ error_message }}</strong>
+            </div>
+        {% endif %}
+
+        <div class="voucher-table" style="padding-bottom: 70px;">
+            <div class="table-label">
+                Одобренные
+            </div>
+
+            {% if vouchers %}
+            <input 
+                type="text" 
+                id="find-voucher-ground" 
+                class="find-voucher-ground" 
+                onkeyup="FindNeed()" 
+                pattern="[А-Яа-яЁё\-]*"
+                placeholder="Поиск субъекта ...">
+
+            <table class="list-table" id="list-table">
+                <tr>
+                    <th><b>Субъект</b></th>
+                    <th><b>Сектор</b></th>
+                    <th><b>Животное</b></th>
+                    <th><b>Количество</b></th>
+                    <th><b>Итоговая сумма</b></th>
+                </tr>
+
+                {% if not vouchers %}
+                <style>
+                    .list-table tr:first-child th:first-child{
+                        border-radius: 20px 0px 0px 20px;
+                    }
+
+                    .list-table tr:first-child th:last-child{
+                        border-radius: 0px 20px 20px 0px;
+                    }
+                </style>
+                {% endif %}
+
+                {% for elem in vouchers %}
+                <tr class="items">
+                    <td>{{elem.ground_name}}</td>
+                    <td>{{elem.id_sector}}</td>
+                    <td>{{elem.animal}}</td>
+                    <td>{{elem.amount_animals}}</td>
+                    <td>{{elem.price}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <div class="alert alert-exist">
+                <strong>Нет путёвок</strong>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="voucher-table">
+            <div class="table-label">
+                Отправленные заявки
+            </div>
+
+            {% if requests %}
+            <input 
+                type="text" 
+                id="find-voucher-ground" 
+                class="find-voucher-ground" 
+                onkeyup="FindNeed()" 
+                pattern="[А-Яа-яЁё\-]*"
+                placeholder="Поиск субъекта ...">
+
+            <table class="list-table" id="list-table">
+                <tr>
+                    <th><b>Субъект</b></th>
+                    <th><b>Сектор</b></th>
+                    <th><b>Животное</b></th>
+                    <th><b>Количество</b></th>
+                    <th><b>Итоговая сумма</b></th>
+                    <th><b>Отозвать</b></th>
+                </tr>
+
+                {% if not requests %}
+                <style>
+                    .list-table tr:first-child th:first-child{
+                        border-radius: 20px 0px 0px 20px;
+                    }
+
+                    .list-table tr:first-child th:last-child{
+                        border-radius: 0px 20px 20px 0px;
+                    }
+                </style>
+                {% endif %}
+
+                {% for elem in requests %}
+                <tr class="items">
+                    <td>{{elem.ground_name}}</td>
+                    <td>{{elem.id_sector}}</td>
+                    <td>{{elem.animal}}</td>
+                    <td>{{elem.amount_animals}}</td>
+                    <td>{{elem.price}}</td>
+                    <td><a href="#" class="btn-del"> ✖ </a></td>
+                </tr>
+                {% endfor %}
+            </table>
+
+
+            
+            {% else %}
+            <div class="alert alert-exist">
+                <strong>Нет заявок</strong>
+            </div>
+            {% endif %}
+
+        </div>  
+    </form>
+</div>
+
+
+{% endblock %}
