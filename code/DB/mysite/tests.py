@@ -24,6 +24,8 @@ class BaseTests(object):
 
     @staticmethod
     def is_equal_len(set1, set2):
+        print("TESTS ", set1)
+        print("TESTS ", set2)
         return len(set1) == len(set2)
 
     def is_equal_data(self, set1, set2):
@@ -218,16 +220,16 @@ class SectorRepositoryTest(BaseTests, unittest.TestCase):
 class VoucherRepositoryTest(BaseTests, unittest.TestCase):
     conn = SqliteDatabase(':memory:')
     rep = PW_VoucherRepository(conn)
-    updated_object = Voucher({'id': 1000001, 'duration_days': 30, 'amount_animals': 10,
-                             'price': 7500, 'id_hunter': '99999999', 'id_pricelist': 111})
+    updated_object = Voucher({'id': 1, 'amount_animals': 10, 'price': 7500,
+                              'id_hunter': '99999999', 'id_pricelist': 111, 'status': True})
 
     objects = [
-        Voucher({'id': 1000001, 'duration_days': 5, 'amount_animals': 3,
-                 'price': 5000, 'id_hunter': '99999999', 'id_pricelist': 1}),
-        Voucher({'id': 1000002, 'duration_days': 14, 'amount_animals': 1,
-                 'price': 3700, 'id_hunter': '99999999', 'id_pricelist': 1}),
-        Voucher({'id': 1000003, 'duration_days': 60, 'amount_animals': 15,
-                 'price': 6800, 'id_hunter': '77777777', 'id_pricelist': 11}),
+        Voucher({'id': 1, 'amount_animals': 3, 'price': 5000,
+                 'id_hunter': '99999999', 'id_pricelist': 1, 'status': False}),
+        Voucher({'id': 2, 'amount_animals': 1, 'price': 3700,
+                 'id_hunter': '99999999', 'id_pricelist': 1, 'status': True}),
+        Voucher({'id': 3, 'amount_animals': 15, 'price': 6800,
+                 'id_hunter': '77777777', 'id_pricelist': 11, 'status': True}),
     ]
 
     @staticmethod
