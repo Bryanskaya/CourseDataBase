@@ -15,3 +15,7 @@ class HunterRules(BaseRules):
             obj = None
 
         return obj
+
+    def get_by_login(self, login):
+        hunters_set = inject.instance(HunterRepository)(self.connection)
+        return hunters_set.get_by_login(login)
