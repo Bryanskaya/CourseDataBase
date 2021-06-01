@@ -32,3 +32,19 @@
     justify-content: center;
     
 }
+
+.alert-info, .alert-danger {
+    padding: 1rem 1rem;
+    margin-bottom: 2rem;
+
+    text-align: left;
+    width: 100%;
+}
+
+.alert-danger {
+    font-family: JosefinSans;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    line-height: 1.2;
+}

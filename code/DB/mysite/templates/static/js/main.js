@@ -39,7 +39,6 @@ function HiddenFields(){
 
 function RecoverPassword() {
     var elem = document.getElementById("login").value;
-    console.log(elem);
 
     if (elem === '') {
         document.getElementById("btn-in").click();
@@ -70,12 +69,24 @@ function FindNeed() {
     if (td) {
         txtValue = td.textContent || td.innerText;
         if (txtValue.indexOf(filter) > -1) {
-        tr[i].style.display = "";
-        } else {
-        tr[i].style.display = "none";
+            tr[i].style.display = "";
+        } 
+        else {
+            tr[i].style.display = "none";
         }
     }       
     }
+}
+
+function RequestVoucher(id) {
+    let num = document.getElementById(id).value;
+
+    if (!(0 < num && num < 100 )) {
+        num = 0;
+    }
+    
+    console.log('/buy/' + id + '&' + num);
+    window.location.href = '/buy/' + id + '&' + num;
 }
 
 

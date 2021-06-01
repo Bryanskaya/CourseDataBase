@@ -13,6 +13,18 @@
     <form class="buy-form p-l-25 p-r-25 p-t-30" method="POST" action="{% url 'hunters:buy' %}">
         {% csrf_token %}
 
+        {% if info_message %}
+            <div class="alert-info">
+                <strong>{{ info_message }}</strong>
+            </div>
+        {% endif %}
+
+        {% if error_message %}
+            <div class="alert-danger">
+                <strong>{{ error_message }}</strong>
+            </div>
+        {% endif %}
+
         <div class="voucher-table">
             {% if offers %}
             <input 
@@ -46,10 +58,13 @@
                             min="1"
                             max="99"
                             class='input-num'
+                            id={{offer.id}}
                             value="1"
-                            pattern="[1-9]*">
+                            pattern="[0-9]{1,2}">
                     </td>
-                    <td> <a href="#">Отправить заявку</a></td>
+                    <td> <a href="#" onclick="RequestVoucher({{offer.id}})">
+                        Отправить заявку
+                    </a></td>
                 </tr>
                 {% endfor %}
             </table>

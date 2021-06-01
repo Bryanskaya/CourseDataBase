@@ -128,12 +128,11 @@ header {
     margin-bottom: 3rem;
     border: 1px solid transparent;
 
-    background-color: #5ad179;/*#d4edda;*/
+    background-color: #5ad17aa9;/*#d4edda;*/
 
     text-align: center;
     width: 23%;
 }
-
 
 /* Menu */
 .main-menu {
@@ -285,7 +284,6 @@ header {
     left: 100%;
 }*/
 
-
 .find-voucher-ground {
     background-image: url('img/find.png');
     background-size: 25px, 25px;
@@ -343,11 +341,11 @@ header {
 }
 
 .list-table tr:first-child th:first-child{
-    border-radius: 20px 0px 0px 0px;
+    border-radius: 20px 0px 0px 0px; /*20 0 0 0*/
 }
 
 .list-table tr:first-child th:last-child{
-    border-radius: 0px 20px 0px 0px;
+    border-radius: 0px 20px 0px 0px; /* 0 20 0 0 */
 }
 
 .list-table tr:last-child td:first-child{

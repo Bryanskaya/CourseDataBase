@@ -13,7 +13,7 @@
     <div class="exit-img">
         <p>
             <a href="{% url 'start:exit_from'%}">
-                <img src="{% static '\css\img\exit.png' %}" alt="Выход" width="33">
+                <img src="{% static '\css\img\exit.png' %}" alt="Выход" width="33" style="margin-right: 20px; margin-top: 10px;">
             </a>
         </p>
     </div>
@@ -32,7 +32,7 @@
             <a href="#url">Путёвки</a>
             <ul>
                 <li><a href="{% url 'hunters:buy' %}">Купить</a></li>
-                <li><a href="#url">Просмотреть свои</a></li>
+                <li><a href="{% url 'hunters:show' %}">Просмотреть свои</a></li>
                 <!--<li class="menu-children">
                     <a href="#url">Подразделы</a>
                     <ul>
@@ -44,7 +44,6 @@
         </li>
         <li><a href="#url">Контакты егерей</a></li>
         <li><a href="#url">Цены</a></li>
-        <li><a href="#url">Карта</a></li>
     </ul>
 
     <script src="{% static '\js\main.js' %}"></script>
