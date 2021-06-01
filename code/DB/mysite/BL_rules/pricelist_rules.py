@@ -38,6 +38,9 @@ class PriceListRules(BaseRules):
 
         return pos
 
+    def get_by_id(self, id) -> PriceList:
+        pricelist_rep = inject.instance(PriceListRepository)(self.connection)
+        return pricelist_rep.get_by_id(id).get_dict()
 
 
 
