@@ -7,7 +7,6 @@ CREATE TYPE table_vouchers AS
 	id_voucher		INTEGER,
 	animal			TEXT,
 	amount_animals 	INTEGER,
-	duration_days 	INTEGER,
 	id_sector		INTEGER,
 	price 			NUMERIC
 );
@@ -22,7 +21,6 @@ BEGIN
 		SELECT vouchers.id,
 			   price_list.animal,
 			   vouchers.amount_animals,
-			   vouchers.duration_days,
 			   price_list.id_sector,
 			   vouchers.price
 		FROM vouchers JOIN price_list ON vouchers.id_pricelist = price_list.id
@@ -337,3 +335,8 @@ LANGUAGE PLpgSql;
 
 
 /*SELECT * FROM ShowHuntersByIdSct(10);*/
+
+
+select *
+from price_list join sectors on price_list.id_sector = sectors.id
+	join hunting_grounds on sectors.id_husbandry = hunting_grounds.id

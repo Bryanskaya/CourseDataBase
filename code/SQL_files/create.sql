@@ -6,6 +6,7 @@ DROP TABLE hunters CASCADE;
 DROP TABLE price_list CASCADE;
 DROP TABLE vouchers CASCADE;
 
+
 CREATE TABLE IF NOT EXISTS hunting_grounds(
 	id SERIAL PRIMARY KEY,
 	ground_name TEXT UNIQUE NOT NULL
@@ -58,11 +59,11 @@ CREATE TABLE IF NOT EXISTS price_list(
 
 CREATE TABLE IF NOT EXISTS vouchers(
 	id SERIAL PRIMARY KEY,
-	duration_days INTEGER CONSTRAINT valid_days CHECK (duration_days > 0),
 	amount_animals INTEGER CONSTRAINT valid_animals CHECK (amount_animals > 0),
 	price NUMERIC,
-	id_hunter INTEGER REFERENCES hunters,
-	id_pricelist INTEGER REFERENCES price_list
+	id_hunter TEXT REFERENCES hunters,
+	id_pricelist INTEGER REFERENCES price_list,
+	status BOOLEAN NOT NULL
 );
 
 
