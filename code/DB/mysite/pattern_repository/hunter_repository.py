@@ -17,7 +17,10 @@ class HunterRepository(Repository):
     def get_all(self) -> [Hunter]:
         raise NotImplementedError
 
-    def get_by_ticket_num(self, login) -> Hunter:
+    def get_by_ticket_num(self, ticket_num) -> Hunter:
+        raise NotImplementedError
+
+    def get_by_login(self, login) -> Hunter:
         raise NotImplementedError
 
 
@@ -60,3 +63,13 @@ class PW_HunterRepository(HunterRepository):
         if len(hunters_set):
             return hunters_set[0]
         return None
+
+    def get_by_login(self, login) -> Hunter:
+        temp = self.model.select().where(HunterModel.login == login)
+        hunters_set = transf_to_objs(temp, Hunter)
+
+        if len(hunters_set):
+            return hunters_set[0]
+        return None
+
+
