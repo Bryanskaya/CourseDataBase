@@ -29,14 +29,13 @@ class PW_VoucherRepository(VoucherRepository):
 
     def create(self, obj: Voucher):
         try:
-            self.model.insert(id=obj.get_id(),
-                                duration_days=obj.get_duration_days(),
-                                amount_animals=obj.get_amount_animals(),
+            self.model.insert(amount_animals=obj.get_amount_animals(),
                                 price=obj.get_price(),
                                 id_hunter=obj.get_id_hunter(),
-                                id_pricelist=obj.get_id_pricelist()).execute()
+                                id_pricelist=obj.get_id_pricelist(),
+                                status=obj.get_status()).execute()
         except:
-           raise CreateBLObjectVoucherErr()
+            raise CreateBLObjectVoucherErr()
 
     def delete(self, obj: Voucher):
         temp = self.model.delete().where(VoucherModel.id == obj.id)
@@ -62,4 +61,12 @@ class PW_VoucherRepository(VoucherRepository):
 
         if len(vouchers_set):
             return vouchers_set[0]
+        return None
+
+    def get_by_id_hunter(self, id_hunter) -> Voucher:
+        temp = self.model.select().where(VoucherModel.id_hunter == id_hunter)
+        vouchers_set = transf_to_objs(temp, Voucher)
+
+        if len(vouchers_set):
+            return vouchers_set
         return None

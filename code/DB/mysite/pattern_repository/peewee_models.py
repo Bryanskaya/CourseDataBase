@@ -83,12 +83,12 @@ class PriceListModel(BaseModel):
 
 
 class VoucherModel(BaseModel):
-    id = IntegerField(column_name='id', primary_key=True)
-    duration_days = IntegerField(column_name='duration_days')
+    id = AutoField(column_name='id', primary_key=True)
     amount_animals = IntegerField(column_name='amount_animals')
     price = FloatField(column_name='price')
     id_hunter = ForeignKeyField(HunterModel, column_name='id_hunter')
     id_pricelist = ForeignKeyField(PriceListModel, column_name='id_pricelist')
+    status = BooleanField(column_name='status')
 
     class Meta:
         table_name = 'vouchers'
