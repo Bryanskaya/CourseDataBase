@@ -85,10 +85,12 @@ function RequestVoucher(id) {
         num = 0;
     }
     
-    console.log('/buy/' + id + '&' + num);
     window.location.href = '/buy/' + id + '&' + num;
 }
 
+function DelRequest(id) {
+    window.location.href = '/show/' + id;
+}
 
 //function GetSectors() {
 //    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;

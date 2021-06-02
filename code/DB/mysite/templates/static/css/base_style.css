@@ -311,7 +311,7 @@ header {
     width: 100%;
     background-color: #d1ab81c6;
 
-    border-radius: 20px;
+    border-radius: 20px 20px 0px 0px;
 }
 
 .list-table th {
@@ -349,11 +349,11 @@ header {
 }
 
 .list-table tr:last-child td:first-child{
-    border-radius: 0px 0px 0px 20px;
+    border-radius: 0px 0px 0px 0px;
 }
 
 .list-table tr:last-child td:last-child{
-    border-radius: 0px 0px 20px 0px;
+    border-radius: 0px 0px 0px 0px;
 }
 
 .list-table a {

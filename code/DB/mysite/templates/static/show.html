@@ -52,18 +52,6 @@
                     <th><b>Итоговая сумма</b></th>
                 </tr>
 
-                {% if not vouchers %}
-                <style>
-                    .list-table tr:first-child th:first-child{
-                        border-radius: 20px 0px 0px 20px;
-                    }
-
-                    .list-table tr:first-child th:last-child{
-                        border-radius: 0px 20px 20px 0px;
-                    }
-                </style>
-                {% endif %}
-
                 {% for elem in vouchers %}
                 <tr class="items">
                     <td>{{elem.ground_name}}</td>
@@ -105,18 +93,6 @@
                     <th><b>Отозвать</b></th>
                 </tr>
 
-                {% if not requests %}
-                <style>
-                    .list-table tr:first-child th:first-child{
-                        border-radius: 20px 0px 0px 20px;
-                    }
-
-                    .list-table tr:first-child th:last-child{
-                        border-radius: 0px 20px 20px 0px;
-                    }
-                </style>
-                {% endif %}
-
                 {% for elem in requests %}
                 <tr class="items">
                     <td>{{elem.ground_name}}</td>
@@ -124,7 +100,7 @@
                     <td>{{elem.animal}}</td>
                     <td>{{elem.amount_animals}}</td>
                     <td>{{elem.price}}</td>
-                    <td><a href="#" class="btn-del"> ✖ </a></td>
+                    <td><a href="#" class="btn-del" onclick="DelRequest({{elem.id}})"> ✖ </a></td>
                 </tr>
                 {% endfor %}
             </table>

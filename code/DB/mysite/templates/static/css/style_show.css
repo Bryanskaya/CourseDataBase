@@ -53,6 +53,8 @@
 }
 
 .btn-del {
+    font-size: 22px;
+    font-weight: bold;
     height: 40px;
     display: block;
     padding-top: 10px;
