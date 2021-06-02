@@ -2,6 +2,7 @@ from testBL_views.price_list import *
 from testBL_views.voucher import *
 from testBL_views.account import *
 from testBL_views.hunting_grounds import *
+from testBL_views.huntsman_views import *
 
 def pricelist_all():
     print('\n' + PriceListView.get_all())
@@ -24,6 +25,9 @@ def about(login):
 def hunting_grounds_all():
     print(HuntingGroundView.get_all())
 
+def huntsman_all():
+    print(HuntsmanView.get_all())
+
 
 def main():
     while True:
@@ -34,7 +38,7 @@ def main():
               "4 - Просмотреть все аккаунты\n"
               "5 - Проверить, существует ли пользователь с данным логином и паролем\n"
               "6 - Информация о пользователе\n"
-              "7 - "
+              "7 - Получить информацию о егерях\n"
               "Остальные - Выход\n")
 
         choice = input("Ваш выбор: ")
@@ -55,6 +59,8 @@ def main():
         elif choice == '6':
             login = input("Введите логин: ")
             about(login)
+        elif choice == '7':
+            huntsman_all()
         else:
             return
 
