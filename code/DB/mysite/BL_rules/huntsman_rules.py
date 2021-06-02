@@ -13,3 +13,7 @@ class HuntsmanRules(BaseRules):
             obj = None
 
         return obj
+
+    def get_by_login(self, login):
+        huntsman_set = inject.instance(HuntsmanRepository)(self.connection)
+        return huntsman_set.get_by_login(login)

@@ -2,7 +2,7 @@
    display: flex;
    /*flex-direction: row;*/
    /*justify-content: space-start;*/
-   margin: 70px;
+   margin: 100px;
 }
 
 .user-photo {
@@ -16,10 +16,9 @@
 table {
     font-family: JosefinSans;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 19px;
     color: black;
     line-height: 1.5;
-
     text-align: left;
 }
 
@@ -27,42 +26,46 @@ th, td {
   padding: 15px 15px;
 }
 
-thead {
-  background: linear-gradient(#B98853, #d1ab81);
-  color: black;
-  font-size: 20px;
-  text-transform: uppercase;
-}
-
-th:first-child {
-  border-top-left-radius: 5px;
-}
-
-th:last-child {
-  border-top-right-radius: 5px;
-}
-
-tbody tr:nth-child(even) {
-  background: #f0f0f2c1;
-}
-
-tbody tr:nth-child(odd) {
-  background: #d1ab81c6;
-}
-
 td {
   border: 1px solid black;
 }
-td:first-child {
-  border-left: 1px solid black;
+
+tr:first-child td:first-child {
+  border-radius: 20px 0px 0px 0px;
 }
 
-.item {
-    width: 30%;
-    font-size: 21px;
-    text-decoration: underline;
+tr:first-child td:last-child {
+  border-radius: 0px 20px 0px 0px;
 }
 
-.mean {
-    width: 70%;
+tr:last-child td:first-child {
+  border-radius: 0px 0px 0px 20px;
+}
+
+tr:last-child td:last-child {
+  border-radius: 0px 0px 20px 0px;
+}
+
+.profile-table {
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid black;
+  border-radius: 20px 20px 20px 20px;
+}
+
+.profile-table td {
+  text-align: left;
+  padding: 15px;
+  background-color: #d1ab81c6;
+}
+
+
+.profile-table tr {
+  border: 1px solid black;
+}
+
+.profile-table td:first-child {
+  background: linear-gradient(#b37f47, #d1a777);
+  width: 25%;
+  text-transform: uppercase;
 }

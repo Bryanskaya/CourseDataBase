@@ -18,7 +18,7 @@
         </div>
 
         <div class="user-table">
-            <div>
+            <!--<div>
                 <table>
                     <thead>
                         <tr>    <th colspan="2">Личные данные</th> </tr>
@@ -40,7 +40,43 @@
                         <tr>    <td class="item">Статус</td>             <td class="mean">{{account.type_role}}</td> </tr>
                     </tbody>
                 </table>
+            </div>-->
+
+
+            <div>
+                <table class="profile-table">
+                    <tr>    <td><b>Фамилия</b></td>                     <td>{{account.surname}}</td> </tr>
+                    <tr>    <td><b>Имя</b></td>                         <td>{{account.firstname}}</td> </tr>
+                    <tr>    <td><b>Отчество</b></td>                    <td>{{account.patronymic}}</td> </tr>
+                    <tr>    <td><b>Статус</b></td>                      <td>{{account.type_role}}</td> </tr>
+                    <tr>    <td><b>Логин</b></td>                       <td>{{account.login}}</td> </tr>
+                    
+                    {% if account.sex == "м" %}
+                    <tr>    <td><b>Пол</b></td>                         <td>мужской</td> </tr>
+                    {% else %}
+                    <tr>    <td><b>Пол</b></td>                         <td>женский</td> </tr>
+                    {% endif %}
+                    
+                    <tr>    <td><b>Дата рождения</b></td>               <td>{{account.date_of_birth}}</td> </tr>
+                    <tr>    <td><b>Телефон</b></td>                     <td>{{account.mobile_phone}}</td> </tr>
+                    <tr>    <td><b>Электронная почта</b></td>           <td>{{account.email}}</td> </tr>
+                    
+                    {% if account.type_role == "охотник" %}
+                    <tr>    <td><b>Номер охотничьего билета</b></td>    <td>{{account.ticket_num}}</td> </tr>
+                    <tr>    <td><b>Адрес прописки</b></td>              <td>{{account.residence}}</td> </tr>
+                    {% elif account.type_role == "егерь" %}
+                    <tr>    <td><b>Номер сектора</b></td>               <td>{{account.id_sector}}</td> </tr>
+                    <tr>    <td><b>Субъект</b></td>                     <td>{{account.ground_name}}</td> </tr>
+                    {% endif %}
+                </table>
             </div>
+
+
+
+
+
+
+
         </div>
     </div>
 

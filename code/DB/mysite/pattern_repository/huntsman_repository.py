@@ -20,6 +20,9 @@ class HuntsmanRepository(Repository):
     def get_by_id(self, id) -> Huntsman:
         raise NotImplementedError
 
+    def get_by_login(self, login) -> Huntsman:
+        raise NotImplementedError
+
 
 class PW_HuntsmanRepository(HuntsmanRepository):
     model = None
@@ -54,6 +57,14 @@ class PW_HuntsmanRepository(HuntsmanRepository):
 
     def get_by_id(self, id) -> Huntsman:
         temp = self.model.select().where(HuntsmanModel.id == id)
+        huntsman_set = transf_to_objs(temp, Huntsman)
+
+        if len(huntsman_set):
+            return huntsman_set[0]
+        return None
+
+    def get_by_login(self, login) -> Huntsman:
+        temp = self.model.select().where(HuntsmanModel.login == login)
         huntsman_set = transf_to_objs(temp, Huntsman)
 
         if len(huntsman_set):

@@ -50,3 +50,18 @@ def show_cur_vouchers(request):
         error_message = 'Ошибка логина'
 
     return render(request, 'static/show.html', locals())
+
+
+def del_request(request, id):
+    voucher_rules = VoucherRules(request.session['user']['role_eng'])
+
+    try:
+        voucher_rules.delete(id)
+    except DeleteVoucherErr:
+        error_message = 'Не удалось выполнить действие'
+        return render(request, 'static/show.html', locals())
+
+    vouchers, requests = voucher_rules.get_by_login(request.session['user']['login'])
+    info_message = 'Заявка успешно отозвана'
+
+    return render(request, 'static/show.html', locals())

@@ -11,6 +11,7 @@ from BL_rules.account_rules import *
 from BL_rules.hunter_rules import *
 from BL_rules.huntsman_rules import *
 from BL_rules.sector_rules import *
+from BL_rules.huntinggrounds_rules import *
 
 from read_data import *
 
@@ -53,6 +54,38 @@ def authorise(request):
         })
 
 
+def add_info(request, account: Account):
+    account = account.get_dict()
+    acc_rules = AccountRules(request.session['user']['role_eng'])
+
+    role = acc_rules.get_role_eng(account['type_role'])
+    login = account['login']
+
+    if role == 'hunter':
+        hunter_rules = HunterRules(request.session['user']['role_eng'])
+
+        hunter = hunter_rules.get_by_login(login).get_dict()
+        print("views ", hunter)
+        account['residence'] = hunter['residence']
+        account['ticket_num'] = hunter['ticket_num']
+    elif role == 'huntsman' or role == 'егерь':
+        huntsmen_rules = HuntsmanRules(request.session['user']['role_eng'])
+        sectors_rules = SectorRules(request.session['user']['role_eng'])
+        grounds_rules = HuntingGroundsRules(request.session['user']['role_eng'])
+
+        huntsman = huntsmen_rules.get_by_login(login)
+        id_sector = huntsman['id']
+        sector = sectors_rules.get_by_id(huntsman['id'])
+        id_ground = sector['id_husbandry']
+        ground = grounds_rules.get_by_id(sector['id_husbandry'])
+
+        account['id_sector'] = id_sector
+        account['ground_name'] = ground['ground_name']
+
+    print(account)
+
+    return account
+
 def about(request):
     check = prove_account(request, AllRolesCheck())
     if check:
@@ -60,6 +93,7 @@ def about(request):
 
     acc_rules = AccountRules(request.session['user']['role_eng'])
     account = acc_rules.get_person(request.session['user']['login'])
+    account = add_info(request, account)
 
     return render(request, 'static/about.html', locals())
 

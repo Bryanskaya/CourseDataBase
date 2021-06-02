@@ -11,6 +11,9 @@ class VoucherRepository(Repository):
     def delete(self, obj: Voucher):
         raise NotImplementedError
 
+    def delete_by_id(self, id):
+        raise NotImplementedError
+
     def update(self, obj_old: Voucher, obj_upd: Voucher):
         raise NotImplementedError
 
@@ -39,6 +42,10 @@ class PW_VoucherRepository(VoucherRepository):
 
     def delete(self, obj: Voucher):
         temp = self.model.delete().where(VoucherModel.id == obj.id)
+        temp.execute()
+
+    def delete_by_id(self, id):
+        temp = self.model.delete().where(VoucherModel.id == id)
         temp.execute()
 
     def update(self, obj_old: Voucher, obj_upd: Voucher):

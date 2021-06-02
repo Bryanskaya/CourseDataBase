@@ -241,9 +241,9 @@ header {
     background-color: #B98853;
     position: absolute;
     z-index: 20;
-    min-width: 220px;
+    min-width: 100%;
     top: 100%;
-    left: -30px;
+    left: -27px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(2px);
@@ -336,7 +336,7 @@ header {
 }
 
 .list-table tr:first-child {
-    background-color:#B98853;
+    background: linear-gradient(#b37f47, #d1a777);
     border-left: 1px solid black;
 }
 

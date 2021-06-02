@@ -41,6 +41,14 @@ class VoucherRules(BaseRules):
 
         return obj
 
+    def delete(self, id):
+        vouchers_set = inject.instance(VoucherRepository)(self.connection)
+        try:
+            vouchers_set.delete_by_id(id)
+        except:
+            raise DeleteVoucherErr()
+
+
     def get_sorted(self, data):
         return sorted(data, key=lambda x: (x['ground_name'], x['id_sector'],
                                            x['animal'], x['amount_animals']))
