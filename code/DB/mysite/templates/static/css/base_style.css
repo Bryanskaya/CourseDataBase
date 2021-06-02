@@ -179,7 +179,6 @@ header {
     text-align: center;
 }
 
-/* Надпись на пунктах меню */
 .main-menu > li > a:hover {
     text-decoration: none;
     color: white;
@@ -251,7 +250,6 @@ header {
     border: solid 2px;
     border-color: black;
     text-align: left;
-    /*transition: all 200ms cubic-bezier(0.43, 0.59, 0.16, 1.25);*/
 }
 .main-menu ul li {
     display: block;
@@ -278,11 +276,6 @@ header {
     background: #d1ab81;
     text-decoration: none;
 }
-
-/*.main-menu ul ul {
-    top: 0;
-    left: 100%;
-}*/
 
 .find-voucher-ground {
     background-image: url('img/find.png');
@@ -318,7 +311,6 @@ header {
     padding: 15px;
     padding-left: 25px;
     border-left: 1px solid black;
-    /*border: 1px solid black;/**/
 }
 
 .list-table td {

@@ -11,38 +11,13 @@
     <div class="personal-info">
         <div class="user-photo">
         {% if account.sex == "м" %}
-            <p><img src="{% static '\css\img\male.png' %}" alt="фото" width="450" height="450"></p>
+            <p><img src="{% static '\css\img\man.svg' %}" alt="фото" width="450" height="450"></p>
         {% else %}
-            <p><img src="{% static '\css\img\female.png' %}" alt="фото" width="450" height="450"></p>
+            <p><img src="{% static '\css\img\woman.svg' %}" alt="фото" width="470" height="470"></p>
         {% endif %}
         </div>
 
         <div class="user-table">
-            <!--<div>
-                <table>
-                    <thead>
-                        <tr>    <th colspan="2">Личные данные</th> </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>    <td class="item">Фамилия</td>            <td class="mean">{{account.surname}}</td> </tr>
-                        <tr>    <td class="item">Имя</td>                <td class="mean">{{account.firstname}}</td> </tr>
-                        <tr>    <td class="item">Отчество</td>           <td class="mean">{{account.patronymic}}</td> </tr>
-                        <tr>    <td class="item">Логин</td>              <td class="mean">{{account.login}}</td> </tr>
-                        <tr>    <td class="item">Дата рождения</td>      <td class="mean">{{account.date_of_birth}}</td> </tr>
-                        {% if account.sex == "м" %}
-                            <tr>    <td class="item">Пол</td>                <td class="mean">мужской</td> </tr>
-                        {% else %}
-                            <tr>    <td class="item">Пол</td>                <td class="mean">женский</td> </tr>
-                        {% endif %}
-                        <tr>    <td class="item">Мобильный телефон</td>  <td class="mean">{{account.mobile_phone}}</td> </tr>
-                        <tr>    <td class="item">Электронная почта</td>  <td class="mean">{{account.email}}</td> </tr>
-                        <tr>    <td class="item">Статус</td>             <td class="mean">{{account.type_role}}</td> </tr>
-                    </tbody>
-                </table>
-            </div>-->
-
-
             <div>
                 <table class="profile-table">
                     <tr>    <td><b>Фамилия</b></td>                     <td>{{account.surname}}</td> </tr>
