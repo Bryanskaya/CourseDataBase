@@ -43,6 +43,10 @@ def request_voucher(request, id, num):
 def show_cur_vouchers(request):
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
 
-    vouchers, requests = voucher_rules.get_by_login(request.session['user']['login'])
+    try:
+        vouchers, requests = voucher_rules.get_by_login(request.session['user']['login'])
+    except LoginNotExists:
+        vouchers, requests = [], []
+        error_message = 'Ошибка логина'
 
     return render(request, 'static/show.html', locals())

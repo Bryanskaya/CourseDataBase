@@ -120,10 +120,9 @@ def calculate_age(born):
     today = date.today()
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
+
 def register(request):
     data = dict(request.POST.copy())
-    print(data)
-
     acc_rules = AccountRules('admin')
     roles = acc_rules.get_roles()
     hunting_grounds = csv_dict_reader()
