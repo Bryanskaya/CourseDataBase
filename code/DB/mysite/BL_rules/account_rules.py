@@ -39,7 +39,7 @@ class AccountRules(BaseRules):
     def is_relevant_password(account, password):
         salt = account.get_salt()
         hashed_password = AccountRules.make_password_hashed(password, salt)
-        print("PASSWORD: \n", hashed_password, account.get_hashed_password())
+        #print("PASSWORD: \n", hashed_password, account.get_hashed_password())
         return hashed_password == account.get_hashed_password()
 
     def is_log_in(self, login, password):
@@ -97,7 +97,21 @@ class AccountRules(BaseRules):
         accounts_set = inject.instance(AccountsRepository)(self.connection)
         accounts_set.delete(obj)
 
+    def get_sorted(self, arr: [Account]):
+        return sorted(arr, key=lambda x: (x['login'], x['surname'],
+                                           x['firstname'], x['patronymic'],
+                                          x['date_of_birth']))
 
+    def get_all(self):
+        acc_rep = inject.instance(AccountsRepository)(self.connection)
+        accounts = acc_rep.get_all()
+
+        for i in range(len(accounts)):
+            accounts[i] = accounts[i].get_dict()
+
+        accounts = self.get_sorted(accounts)
+
+        return accounts
 
 
 

@@ -4,6 +4,7 @@ from BL_rules.base_rules import *
 from BL_rules.pricelist_rules import *
 from BL_rules.hunter_rules import *
 from errors.err_voucher import *
+from errors.err_general import *
 
 
 class VoucherRules(BaseRules):
@@ -48,8 +49,15 @@ class VoucherRules(BaseRules):
         hunter_rules = HunterRules('', connection=self.connection)
         vouchers_set = inject.instance(VoucherRepository)(self.connection)
 
-        hunter = hunter_rules.get_by_login(login).get_dict()
+        try:
+            hunter = hunter_rules.get_by_login(login).get_dict()
+        except:
+            raise LoginNotExists()
+
         vouchers = vouchers_set.get_by_id_hunter(hunter['ticket_num'])
+
+        if vouchers is None:
+            return vouchers, None
 
         res_true = []
         res_false = []
