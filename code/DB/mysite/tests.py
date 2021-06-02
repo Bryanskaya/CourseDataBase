@@ -24,8 +24,6 @@ class BaseTests(object):
 
     @staticmethod
     def is_equal_len(set1, set2):
-        print("TESTS ", set1)
-        print("TESTS ", set2)
         return len(set1) == len(set2)
 
     def is_equal_data(self, set1, set2):
