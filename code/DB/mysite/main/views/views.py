@@ -65,7 +65,6 @@ def add_info(request, account: Account):
         hunter_rules = HunterRules(request.session['user']['role_eng'])
 
         hunter = hunter_rules.get_by_login(login).get_dict()
-        print("views ", hunter)
         account['residence'] = hunter['residence']
         account['ticket_num'] = hunter['ticket_num']
     elif role == 'huntsman' or role == 'егерь':
@@ -81,8 +80,6 @@ def add_info(request, account: Account):
 
         account['id_sector'] = id_sector
         account['ground_name'] = ground['ground_name']
-
-    print(account)
 
     return account
 
