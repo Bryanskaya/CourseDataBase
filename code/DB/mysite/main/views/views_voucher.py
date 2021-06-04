@@ -29,8 +29,9 @@ def accept(request, id):
 
 def reject(request, id):
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
+
     voucher_rules.delete(id)
-    requests = voucher_rules.get_requests_by_login(request.session['user']['login'])
+    requests = voucher_rules.get_vouchers(request.session['user']['login'])
 
     return render(request, 'static/requests.html', locals())
 
@@ -44,3 +45,18 @@ def create_voucher(request):
     offers = pricelist_rules.get_by_login(request.session['user']['login'])
 
     return render(request, 'static/new_voucher.html', locals())
+
+def create_by_huntsman(request):
+    voucher_rules = VoucherRules(request.session['user']['role_eng'])
+    pricelist_rules = PriceListRules(request.session['user']['role_eng'])
+
+    offers = pricelist_rules.get_by_login(request.session['user']['login'])
+
+    try:
+        voucher = voucher_rules.create_by_params(request.POST)
+    except TicketHunterNotExists:
+        error_message = "Охотника с таким билетом нет в базе"
+        return render(request, 'static/new_voucher.html', locals())
+
+    return HttpResponseRedirect(reverse('vouchers:huntsman_vouchers'))
+
