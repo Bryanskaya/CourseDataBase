@@ -9,3 +9,7 @@ GRANT SELECT ON hunting_grounds TO huntsman;
 GRANT UPDATE ON vouchers TO huntsman;
 
 GRANT DELETE ON vouchers TO huntsman;
+
+GRANT INSERT ON vouchers TO huntsman;
+
+GRANT ALL PRIVILEGES ON SEQUENCE vouchers_id_seq TO huntsman;
