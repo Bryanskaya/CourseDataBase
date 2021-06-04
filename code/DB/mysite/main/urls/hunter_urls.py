@@ -7,5 +7,6 @@ urlpatterns = [
     path('buy/<int:id>&<int:num>', views_hunter.request_voucher, name='request_voucher'),
     path('show/', views_hunter.show_cur_vouchers, name='show'),
     path('show/<int:id>', views_hunter.del_request, name='del_request'),
-
+    path('all/', views_hunter.find_all, name='show_all'),
+    path('find/', views_hunter.find, name='find'),
 ]
