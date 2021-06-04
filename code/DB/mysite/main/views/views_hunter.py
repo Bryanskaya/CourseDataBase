@@ -65,3 +65,28 @@ def del_request(request, id):
     info_message = 'Заявка успешно отозвана'
 
     return render(request, 'static/show.html', locals())
+
+
+def show_all(request):
+    return HttpResponseRedirect(reverse('hunters:all'))
+
+
+def find_all(request):
+    hunters_rules = HunterRules(request.session['user']['role_eng'])
+    hunters = hunters_rules.get_all_detailed()
+
+    return render(request, 'static/all.html', locals())
+
+
+def find(request):
+    hunters_rules = HunterRules(request.session['user']['role_eng'])
+
+    data = {}
+    data['surname'] = request.POST['surname']
+    data['name'] = request.POST['firstname']
+    data['patronymic'] = request.POST['patronymic']
+    data['ticket_num'] = request.POST['ticket_num']
+    hunters = hunters_rules.get_by_params(data)
+
+    return render(request, 'static/all.html', locals())
+

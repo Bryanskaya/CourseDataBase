@@ -72,13 +72,11 @@ def add_info(request, account: Account):
         sectors_rules = SectorRules(request.session['user']['role_eng'])
         grounds_rules = HuntingGroundsRules(request.session['user']['role_eng'])
 
-        huntsman = huntsmen_rules.get_by_login(login)
-        id_sector = huntsman['id']
-        sector = sectors_rules.get_by_id(huntsman['id'])
-        id_ground = sector['id_husbandry']
+        huntsman = huntsmen_rules.get_by_login(login).get_dict()
+        sector = sectors_rules.get_by_id(huntsman['id']).get_dict()
         ground = grounds_rules.get_by_id(sector['id_husbandry'])
 
-        account['id_sector'] = id_sector
+        account['id_sector'] = huntsman['id']
         account['ground_name'] = ground['ground_name']
 
     return account
