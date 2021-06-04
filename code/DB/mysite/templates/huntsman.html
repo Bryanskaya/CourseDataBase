@@ -12,7 +12,7 @@
     <div class="exit-img">
         <p>
             <a href="{% url 'start:exit_from'%}">
-                <img src="{% static '\css\img\exit.png' %}" alt="Выход" width="33">
+                <img src="{% static '\css\img\exit.png' %}" alt="Выход" width="33" style="margin-right: 20px; margin-top: 10px;">
             </a>
         </p>
     </div>
@@ -25,19 +25,19 @@
 {% block table %}
     <ul class="main-menu">
         <li class="active">
-            <a href="{% url 'users:account' account.login %}">Обо мне</a>
+            <a href="{% url 'users:about' %}">Обо мне</a>
         </li>
         <li class="menu-children">
             <a href="#url">Путёвки</a>
             <ul>
                 <li><a href="#url">Поиск</a></li>
-                <li><a href="#url">Заявки</a></li>
-                <li><a href="#url">Выдать новую</a></li>
-                <li><a href="#url">Путёвки моего сектора</a></li>
+                <li><a href="{% url 'vouchers:requests' %}">Заявки</a></li>
+                <li><a href="{% url 'vouchers:create_voucher' %}">Выдать новую</a></li>
+                <li><a href="{% url 'vouchers:huntsman_vouchers' %}">Путёвки моего сектора</a></li>
                 <li><a href="#url">Сводная по секторам</a></li>
             </ul>
         </li>
-        <li><a href="#url">Контакты егерей</a></li>
-        <li><a href="#url">Охотники</a></li>
+        <li><a href="{% url 'huntsmen:contacts' %}">Контакты егерей</a></li>
+        <li><a href="{% url 'hunters:show_all' %}">Охотники</a></li>
     </ul>
 {% endblock %}
