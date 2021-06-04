@@ -1,0 +1,215 @@
+{% extends "static\general_extend.html" %}{% load static %}
+
+{% block title %} Регистрация {% endblock %}
+
+{% block head_temp %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '\css\style_register.css' %}"/>
+    <link rel="stylesheet" href="{% static '\css\style_new_voucher.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static '\css\img\reg.ico' %}"/>
+{% endblock %}
+
+{% block name_info %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="limiter">
+        <div class="container-register">
+            <div class="wrap-register">
+                <form class="register-form p-l-55 p-r-55 p-t-150" method="POST" action="{% url 'start:register' %}">
+                    {% csrf_token %}
+                    <span class="register-form-title">
+                        Путёвка
+                    </span>
+
+                    {% if data.error_message %}
+                        <div class="alert alert-danger">
+                            <strong>{{ data.error_message }}</strong>
+                        </div>
+                    {% endif %}
+
+                    {% if data.info_message %}
+                        <div class="alert alert-danger">
+                            <strong>{{ data.info_message }}</strong>
+                        </div>
+                    {% endif %}
+
+                    <div class="full-name">
+                        <div class="input-surname m-b-30">
+                            <label><strong>ФИО</strong></label>
+                            <input class="input1 m-b-14"
+                                    type="text"
+                                    placeholder="Фамилия"
+                                    maxlength="30"
+                                    name="surname"
+                                    value="{{ data.surname }}"
+                                    title="Используйте только кириллицу и дефис"
+                                    pattern="[А-Яа-яЁё\-]{1,30}"
+                                    required />
+                        </div>
+
+                        <div class="input-firstname">
+                            <label></label>
+                            <input class="input1 m-b-14"
+                                   type="text"
+                                   placeholder="Имя"
+                                   maxlength="30"
+                                   name="firstname"
+                                   value="{{ data.firstname }}"
+                                   title="Используйте только кириллицу и дефис"
+                                   pattern="[А-Яа-яЁё\-]{1,30}"
+                                   required />
+                        </div>
+
+                        <div class="input-patronymic">
+                            <label></label>
+                            <input
+                                    class="input1 m-b-14"
+                                    type="text"
+                                    placeholder="Отчество"
+                                    maxlength="30"
+                                    name="patronymic"
+                                    value="{{ data.patronymic }}"
+                                    pattern="[А-Яа-яЁё\-]{1,30}"
+                                    title="Используйте только кириллицу и дефис">
+                        </div>
+                    </div>
+
+
+                    <div class="container-btn">
+                        <a class="btn" id="btn-param" style="background-color: #caaa868f;"> 
+                          Параметры
+                        </a>
+                    </div>
+                
+                    <div id="modal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="close">&times;  </span>
+                                <h3>Укажите необходимые параметры</h3>
+                            </div>
+                  
+                            <div style="display: flex; justify-content: center;">
+                                <div class="voucher-table" style="padding-top: 40px;">
+                                    {% if offers %}
+                                    <input 
+                                        type="text" 
+                                        id="find-voucher-ground" 
+                                        class="find-voucher-ground" 
+                                        onkeyup="FindNeedInput()" 
+                                        pattern="[А-Яа-яЁё\-]*"
+                                        placeholder="Поиск животного ...">
+                        
+                                    <div style="overflow: auto; height: 650px;">
+                                        <table class="list-table" id="list-table">
+                                            <tr>
+                                                <th><b>Животное</b></th>
+                                                <th><b>Цена, руб/шт</b></th>
+                                                <th><b>Количество</b></th>
+                                                <th><b>Выбрать</b></th>
+                                            </tr>
+                            
+                                            {% for offer in offers %}
+                                            <tr class="items">
+                                                <td id="animal{{offer.id}}">{{offer.animal}}</td>
+                                                <td id="price{{offer.id}}">{{offer.price}}</td>
+                                                <td class="input-td" style="padding: 0px;">
+                                                    <input
+                                                        type='text'
+                                                        maxlength="2"
+                                                        min="1"
+                                                        max="99"
+                                                        class='input-num'
+                                                        id={{offer.id}}
+                                                        value="1"
+                                                        pattern="[0-9]{1,2}">
+                                                </td>
+                                                <td> <a onclick="Chosen({{offer.id}})">Выбрать</a></td>
+                                            </tr>
+                                            {% endfor %}
+                                        </table>
+                                    </div>
+                                    {% else %}
+                                    <h2> Доступных путёвок на данный момент нет </h2><br>
+                                    {% endif %}
+                                </div>  
+                            </div> 
+                        </div>
+                    </div>
+                    
+                    <script>
+                        var modal = document.getElementById("modal");
+                        var btn = document.getElementById("btn-param");
+                        var span = document.getElementsByClassName("close")[0];
+                    
+                        btn.onclick = function () {
+                            modal.style.display = "block";
+                        }
+                    
+                        span.onclick = function () {
+                            modal.style.display = "none";
+                        }
+
+                        function Chosen(id) {
+                            var animal = document.getElementById('animal' + id).textContent;
+                            var price = document.getElementById('animal' + id).textContent;
+                            var animal_field = document.getElementById("field-animal");
+
+                            animal_field.setAttribute("value", animal);
+                            
+                           
+
+
+                            console.log(animal)
+                        }
+                    
+                        window.onclick = function (event) {
+                          if (event.target == modal) {
+                            modal.style.display = "none";
+                          }
+                        }
+                    </script>
+
+                    <div class="param-data">
+                        <div class="input-animal m-b-30">
+                            <label><strong>Животное</strong></label>
+                            <input class="input1 m-b-14"
+                                    type="text"
+                                    name="animal"
+                                    id="field-animal"
+                                    placeholder="Укажите параметр"
+                                    readonly/>
+                        </div>
+
+                        <div class="input-num-animals">
+                            <label><strong>Количество</strong></label>
+                            <input class="input1 m-b-14"
+                                type="text"
+                                name="animal_num"
+                                placeholder="Укажите параметр"
+                                readonly/>
+                        </div>
+
+                        <div class="input-sum">
+                            <label><strong>Итого, Руб</strong></label>
+                            <input class="input1 m-b-14"
+                                    type="text"
+                                    name="sum"
+                                    placeholder="Укажите параметр"
+                                    readonly>
+                        </div>
+                    </div>
+
+                    <div class="container-btn m-b-16">
+                        <button class="btn btn-reg" type="submit">
+                            Оформить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
