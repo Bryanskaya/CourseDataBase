@@ -18,9 +18,7 @@ def do_log(f, request, **kwargs):
                      login,
                      request.META['PATH_INFO'])
 
-    # try:
-    #     return f(request, **kwargs)
-    # except BaseException as e:
-    #     logging.exception(">>>ERROR: in %s (situated in) - %s", f.__name__, e.__class__, str(e))
-
-    return f(request, **kwargs)
+    try:
+        return f(request, **kwargs)
+    except BaseException as e:
+        logging.exception(">>>ERROR: in %s (situated in) - %s", f.__name__, e.__class__, str(e))
