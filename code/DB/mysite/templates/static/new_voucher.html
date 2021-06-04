@@ -16,68 +16,38 @@
 {% block content %}
     <div class="limiter">
         <div class="container-register">
-            <div class="wrap-register">
-                <form class="register-form p-l-55 p-r-55 p-t-150" method="POST" action="{% url 'start:register' %}">
+            <div class="wrap-register" >
+                <form class="register-form p-l-55 p-r-55 p-t-150" method="POST" action="{% url 'vouchers:create_by_huntsman' %}">
                     {% csrf_token %}
                     <span class="register-form-title">
                         Путёвка
                     </span>
 
-                    {% if data.error_message %}
+                    {% if error_message %}
                         <div class="alert alert-danger">
-                            <strong>{{ data.error_message }}</strong>
+                            <strong>{{ error_message }}</strong>
                         </div>
                     {% endif %}
 
-                    {% if data.info_message %}
+                    {% if info_message %}
                         <div class="alert alert-danger">
-                            <strong>{{ data.info_message }}</strong>
+                            <strong>{{ info_message }}</strong>
                         </div>
                     {% endif %}
 
-                    <div class="full-name">
-                        <div class="input-surname m-b-30">
-                            <label><strong>ФИО</strong></label>
-                            <input class="input1 m-b-14"
-                                    type="text"
-                                    placeholder="Фамилия"
-                                    maxlength="30"
-                                    name="surname"
-                                    value="{{ data.surname }}"
-                                    title="Используйте только кириллицу и дефис"
-                                    pattern="[А-Яа-яЁё\-]{1,30}"
-                                    required />
-                        </div>
-
-                        <div class="input-firstname">
-                            <label></label>
-                            <input class="input1 m-b-14"
-                                   type="text"
-                                   placeholder="Имя"
-                                   maxlength="30"
-                                   name="firstname"
-                                   value="{{ data.firstname }}"
-                                   title="Используйте только кириллицу и дефис"
-                                   pattern="[А-Яа-яЁё\-]{1,30}"
-                                   required />
-                        </div>
-
-                        <div class="input-patronymic">
-                            <label></label>
-                            <input
-                                    class="input1 m-b-14"
-                                    type="text"
-                                    placeholder="Отчество"
-                                    maxlength="30"
-                                    name="patronymic"
-                                    value="{{ data.patronymic }}"
-                                    pattern="[А-Яа-яЁё\-]{1,30}"
-                                    title="Используйте только кириллицу и дефис">
-                        </div>
+                    <div class="input-ticket m-b-30 p-b-3">
+                        <input type="text"
+                                name="ticket_num"
+                                placeholder="Номер охотничьего билета"
+                                id="ticket_num"
+                                class="input1"
+                                maxlength="20"
+                                title="Используйте только цифры."
+                                pattern="[0-9]*"
+                                required/>
                     </div>
 
-
-                    <div class="container-btn">
+                    <div class="container-btn m-b-30">
                         <a class="btn" id="btn-param" style="background-color: #caaa868f;"> 
                           Параметры
                         </a>
@@ -91,8 +61,12 @@
                             </div>
                   
                             <div style="display: flex; justify-content: center;">
-                                <div class="voucher-table" style="padding-top: 40px;">
+                                <div class="voucher-table" style="padding-top: 30px;">
                                     {% if offers %}
+                                    <div class="test1 alert alert-danger" style="display: none;">
+                                        <strong>Неверное количество животных</strong>
+                                    </div>
+
                                     <input 
                                         type="text" 
                                         id="find-voucher-ground" 
@@ -101,7 +75,7 @@
                                         pattern="[А-Яа-яЁё\-]*"
                                         placeholder="Поиск животного ...">
                         
-                                    <div style="overflow: auto; height: 650px;">
+                                    <div style="overflow: auto; height: 600px;">
                                         <table class="list-table" id="list-table">
                                             <tr>
                                                 <th><b>Животное</b></th>
@@ -142,9 +116,12 @@
                         var modal = document.getElementById("modal");
                         var btn = document.getElementById("btn-param");
                         var span = document.getElementsByClassName("close")[0];
+                        var msg = document.getElementsByClassName("test1")[0];
+                        console.log(msg)
                     
                         btn.onclick = function () {
                             modal.style.display = "block";
+                            msg.style.display = "none";
                         }
                     
                         span.onclick = function () {
@@ -153,15 +130,25 @@
 
                         function Chosen(id) {
                             var animal = document.getElementById('animal' + id).textContent;
-                            var price = document.getElementById('animal' + id).textContent;
-                            var animal_field = document.getElementById("field-animal");
-
-                            animal_field.setAttribute("value", animal);
+                            var num = document.getElementById(id).value;
+                            var price = document.getElementById('price' + id).textContent;
                             
-                           
+                            var animal_field = document.getElementById("field-animal");
+                            var num_field = document.getElementById("field-num");
+                            var price_field = document.getElementById("field-price");
+                            var res_id = document.getElementById("valuable-id");
 
-
-                            console.log(animal)
+                            if (!(0 < Number(num) && Number(num) < 100 )) {
+                                msg.style.display = "block";
+                                return;
+                            }
+                            
+                            animal_field.setAttribute("value", animal);
+                            num_field.setAttribute("value", num);
+                            price_field.setAttribute("value", parseFloat(price)*Number(num));
+                            res_id.setAttribute("value", id);
+                            
+                            modal.style.display = "none";
                         }
                     
                         window.onclick = function (event) {
@@ -171,35 +158,36 @@
                         }
                     </script>
 
-                    <div class="param-data">
+                    
                         <div class="input-animal m-b-30">
-                            <label><strong>Животное</strong></label>
                             <input class="input1 m-b-14"
                                     type="text"
                                     name="animal"
                                     id="field-animal"
-                                    placeholder="Укажите параметр"
+                                    placeholder="Животное"
                                     readonly/>
                         </div>
 
-                        <div class="input-num-animals">
-                            <label><strong>Количество</strong></label>
+                        <div class="input-num-animals m-b-30">
                             <input class="input1 m-b-14"
                                 type="text"
-                                name="animal_num"
-                                placeholder="Укажите параметр"
+                                name="amount_animals"
+                                id="field-num"
+                                placeholder="Количество"
                                 readonly/>
                         </div>
 
-                        <div class="input-sum">
-                            <label><strong>Итого, Руб</strong></label>
+                        <div class="input-sum m-b-30">
                             <input class="input1 m-b-14"
                                     type="text"
-                                    name="sum"
-                                    placeholder="Укажите параметр"
+                                    name="price"
+                                    id="field-price"
+                                    placeholder="Итого, Руб"
                                     readonly>
                         </div>
-                    </div>
+
+                        <input id="valuable-id" type="hidden" name="id_pricelist">
+                    
 
                     <div class="container-btn m-b-16">
                         <button class="btn btn-reg" type="submit">

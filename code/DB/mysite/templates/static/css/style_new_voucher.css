@@ -100,15 +100,13 @@
   justify-content: center;
 }
 
-.param-data {
-  display: flex;
-  justify-content: space-between;
-}
-
-.input-animal, .input-num-animals, .input-sum {
-  width: 400px;
+.input-animal, .input-num-animals, .input-sum, .input-ticket {
   background-color: #fff;
 
   border-radius: 20px;
   position: relative;
+}
+
+.wrap-register {
+  width: 27%;
 }
