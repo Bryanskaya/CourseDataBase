@@ -1,0 +1,190 @@
+.show-find-params {
+  display: flex;
+  justify-content: center;
+}
+
+.find-form
+{
+    width: 87%;
+    position: relative;
+}
+
+.container-btn {
+  width: 100%;
+  display: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn {
+  width: 100%;
+  height: 50px;
+  border-radius: 20px;
+
+  font-family: JosefinSans;
+  font-weight: bold;
+  font-size: 22px;
+  color: black;
+  line-height: 2;
+  margin-bottom: 16px;
+
+  text-decoration: none;
+
+  border: solid 2px;
+  border-radius: 20px;
+  border-color: black;
+}
+
+.btn:hover {
+  background: #814B38;
+  cursor: pointer;
+}
+
+.btn-find {
+  background: linear-gradient(#bd895569, #caaa868f);
+  margin-bottom: 20px;
+  transition: all 0.4s;
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 2px solid black;
+  border-radius: 25px;
+  width: 25%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+.close {
+  color: white;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  font-family: JosefinSans;
+  font-weight: bold;
+  font-size: 22px;
+  color: black;
+  line-height: 2;
+  text-align: center;
+
+  /*padding: 2px 16px;*/
+  background-color: #c78b4c;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+}
+
+.input-surname, .input-firstname, .input-patronymic {
+  width: 100%;
+  background-color: #fff;
+
+  border-radius: 20px;
+  position: relative;
+
+  z-index: 1;
+}
+
+.input1 {
+	font-family: JosefinSans;
+	font-size: 20px;
+	color: black;
+	font-weight: bold;
+	line-height: 1.2;
+
+	position: relative;
+	display: block;/**/
+	width: 100%;
+	height: 50px;
+	border-radius: 20px;
+	padding: 0px 15px 0 15px;/**/
+}
+
+.input1::placeholder {
+  font-family: JosefinSans;
+  font-size: 20px;
+  line-height: 1.2;
+  color: #ABAAAA;
+}
+
+
+
+.find-hunter {
+  background-image: url('img/find.png');
+  background-size: 25px, 25px;
+  background-position: 10px 10px;
+  background-repeat: no-repeat; 
+
+  font-family: JosefinSans;
+  font-size: 18px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid black;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  width: 100%;
+}
+
+.alert-info, .alert-danger {
+  padding: 1rem 1rem;
+  margin-bottom: 2rem;
+
+  text-align: left;
+  width: 100%;
+}
+
+.alert-danger, .alert-exist {
+  font-family: JosefinSans;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+  line-height: 1.2;
+
+  background-color: #c53b4981;
+}
+
+.alert-exist {
+  background-color: #ffffffc2;
+}
