@@ -17,3 +17,10 @@ class BaseRules(object):
             self.connection = inject.instance(HunterConnection)
         elif role == 'huntsman' or role == 'егерь':
             self.connection = inject.instance(HuntsmanConnection)
+
+    def to_dict(self, data):
+        res = {}
+        for key in data.keys():
+            res[key] = data[key]
+
+        return res

@@ -6,6 +6,7 @@ from BL_rules.hunter_rules import *
 from BL_rules.account_rules import *
 from errors.err_voucher import *
 from errors.err_general import *
+from errors.err_hunter import *
 
 
 class VoucherRules(BaseRules):
@@ -20,6 +21,28 @@ class VoucherRules(BaseRules):
             voucher = None
 
         return voucher
+
+    def create_by_params(self, data):
+        data = self.to_dict(data)
+        hunter_rules = HunterRules('', connection=self.connection)
+        vouchers_set = inject.instance(VoucherRepository)(self.connection)
+
+        hunter = hunter_rules.get_by_ticket_num(data['ticket_num'])
+
+        if hunter is None:
+            raise TicketHunterNotExists()
+
+        data['id_hunter'] = data['ticket_num']
+        data['status'] = True
+
+        voucher = Voucher(data)
+        try:
+            vouchers_set.create(voucher)
+        except CreateBLObjectVoucherErr:
+            voucher = None
+
+        return voucher
+
 
     def accept(self, id):
         vouchers_set = inject.instance(VoucherRepository)(self.connection)
