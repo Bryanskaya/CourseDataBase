@@ -1,11 +1,13 @@
-from django.urls import path, include
+from django.urls import path
 from main.views import views_voucher
+
+from logging_act import *
 
 app_name = 'vouchers'
 urlpatterns = [
-    path('requests/', views_voucher.requests, name='requests'),
-    path('requests/reject/<int:id>', views_voucher.reject, name='reject'),
-    path('requests/accept/<int:id>', views_voucher.accept, name='accept'),
-    path('vouchers/', views_voucher.huntsman_vouchers, name='huntsman_vouchers'),
-    path('new_voucher/', views_voucher.create_voucher, name='create_voucher'),
+    path('requests/', lambda req, **kwargs: do_log(views_voucher.requests, req, **kwargs), name='requests'),
+    path('requests/reject/<int:id>', lambda req, **kwargs: do_log(views_voucher.reject, req, **kwargs), name='reject'),
+    path('requests/accept/<int:id>', lambda req, **kwargs: do_log(views_voucher.accept, req, **kwargs), name='accept'),
+    path('vouchers/', lambda req, **kwargs: do_log(views_voucher.huntsman_vouchers, req, **kwargs), name='huntsman_vouchers'),
+    path('new_voucher/', lambda req, **kwargs: do_log(views_voucher.create_voucher, req, **kwargs), name='create_voucher'),
 ]
