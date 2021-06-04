@@ -8,6 +8,9 @@ class VoucherRepository(Repository):
     def create(self, obj: VoucherModel):
         raise NotImplementedError
 
+    def set_accept(self, id: int):
+        raise NotImplementedError
+
     def delete(self, obj: Voucher):
         raise NotImplementedError
 
@@ -23,12 +26,17 @@ class VoucherRepository(Repository):
     def get_by_id(self, id) -> Voucher:
         raise NotImplementedError
 
+    def get_requests(self, id_sector) -> [Voucher]:
+        raise NotImplementedError
+
 
 class PW_VoucherRepository(VoucherRepository):
     model = None
+    connection = None
 
     def __init__(self, connection):
         self.model = VoucherModel(connection)
+        self.connection = connection
 
     def create(self, obj: Voucher):
         try:
@@ -39,6 +47,12 @@ class PW_VoucherRepository(VoucherRepository):
                                 status=obj.get_status()).execute()
         except:
             raise CreateBLObjectVoucherErr()
+
+    def accept(self, id: int):
+        try:
+            self.model.update(status=True).where(VoucherModel.id == id).execute()
+        except:
+            raise AcceptVoucherErr()
 
     def delete(self, obj: Voucher):
         temp = self.model.delete().where(VoucherModel.id == obj.id)
@@ -72,6 +86,32 @@ class PW_VoucherRepository(VoucherRepository):
 
     def get_by_id_hunter(self, id_hunter) -> Voucher:
         temp = self.model.select().where(VoucherModel.id_hunter == id_hunter)
+        vouchers_set = transf_to_objs(temp, Voucher)
+
+        if len(vouchers_set):
+            return vouchers_set
+        return None
+
+    def get_requests(self, id_sector) -> [Voucher]:
+        temp = self.model.select(VoucherModel)\
+            .join(PriceListModel, on=(VoucherModel.id_pricelist == PriceListModel.id))\
+            .switch(self.model)\
+            .where((VoucherModel.status == False) &
+                   (PriceListModel.id_sector == id_sector))
+
+        vouchers_set = transf_to_objs(temp, Voucher)
+
+        if len(vouchers_set):
+            return vouchers_set
+        return None
+
+    def get_vouchers(self, id_sector) -> [Voucher]:
+        temp = self.model.select(VoucherModel) \
+            .join(PriceListModel, on=(VoucherModel.id_pricelist == PriceListModel.id)) \
+            .switch(self.model) \
+            .where((VoucherModel.status == True) &
+                   (PriceListModel.id_sector == id_sector))
+
         vouchers_set = transf_to_objs(temp, Voucher)
 
         if len(vouchers_set):

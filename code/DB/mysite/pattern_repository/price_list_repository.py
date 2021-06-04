@@ -62,3 +62,9 @@ class PW_PriceListRepository(PriceListRepository):
         if len(list_set):
             return list_set[0]
         return None
+
+    def get_by_sector(self, id_sector) -> [PriceList]:
+        temp = self.model.select().where(PriceListModel.id_sector == id_sector)
+        list_set = transf_to_objs(temp, PriceList)
+
+        return list_set
