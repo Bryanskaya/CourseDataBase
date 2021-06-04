@@ -49,13 +49,15 @@
                 </tr>
 
                 {% for elem in huntsmen %}
-                <tr class="items">
-                    <td>{{elem.ground_name}}</td>
-                    <td>{{elem.id_sector}}</td>
-                    <td>{{elem.full_name}}</td>
-                    <td>{{elem.mobile_phone}}</td>
-                    <td>{{elem.email}}</td>
-                </tr>
+                    {% if elem.type_role == "егерь" %}
+                        <tr class="items">
+                            <td>{{elem.ground_name}}</td>
+                            <td>{{elem.id_sector}}</td>
+                            <td>{{elem.full_name}}</td>
+                            <td>{{elem.mobile_phone}}</td>
+                            <td>{{elem.email}}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </table>
             {% else %}
