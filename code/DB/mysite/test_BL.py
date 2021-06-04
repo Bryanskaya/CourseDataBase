@@ -28,6 +28,8 @@ def hunting_grounds_all():
 def huntsman_all():
     print(HuntsmanView.get_all())
 
+def huntsman_vouchers(login):
+    print(VoucherView.huntsman_vouchers(login))
 
 def main():
     while True:
@@ -39,6 +41,7 @@ def main():
               "5 - Проверить, существует ли пользователь с данным логином и паролем\n"
               "6 - Информация о пользователе\n"
               "7 - Получить информацию о егерях\n"
+              "8 - Просмотреть все путёвки, которые выдал указанный егерь\n"
               "Остальные - Выход\n")
 
         choice = input("Ваш выбор: ")
@@ -61,6 +64,9 @@ def main():
             about(login)
         elif choice == '7':
             huntsman_all()
+        elif choice == '8':
+            login = input("Введите логин: ")
+            huntsman_vouchers(login)
         else:
             return
 

@@ -15,3 +15,12 @@ class VoucherView(BaseView):
             return "Путёвок нет", ""
 
         return cls.set_to_str(vouchers), cls.set_to_str(requests)
+
+    @classmethod
+    def huntsman_vouchers(cls, login):
+        huntsman_rules = VoucherRules('admin')
+        res = huntsman_rules.get_vouchers(login)
+
+        if res is not None:
+            return cls.set_to_str(res)
+        return None
