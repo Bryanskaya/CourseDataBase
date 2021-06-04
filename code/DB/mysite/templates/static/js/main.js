@@ -65,11 +65,32 @@ function FindNeed() {
     table = document.getElementById("list-table");
     tr = table.getElementsByTagName("tr");
     for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } 
+            else {
+                tr[i].style.display = "none";
+            }
+        }       
+    }
+}
+
+function FindNeedInput() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("find-voucher-ground");
+    filter = input.value;
+    table = document.getElementById("list-table");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[0];
     if (td) {
         txtValue = td.textContent || td.innerText;
         if (txtValue.indexOf(filter) > -1) {
             tr[i].style.display = "";
+            console.log(td.text)
         } 
         else {
             tr[i].style.display = "none";
@@ -91,48 +112,3 @@ function RequestVoucher(id) {
 function DelRequest(id) {
     window.location.href = '/show/' + id;
 }
-
-//function GetSectors() {
-//    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-//
-//    var elem = document.getElementById("hunting_grounds").value;
-//    console.log(elem);
-//
-//    const request = new XMLHttpRequest();
-//    const url = "get_sectors/";
-//    const params = "id=" + elem;
-//
-//    request.responseType =	"json";
-//    request.open("POST", url, true);
-//    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//    request.setRequestHeader("X-CSRFToken", csrftoken);
-//
-//    request.addEventListener("readystatechange", () => {
-//
-//    if (request.readyState === 4 && request.status === 200) {
-//        let obj = request.response;
-//
-//        console.log(obj.id);
-//
-//        var docfrag = document.createDocumentFragment();
-//
-//        for (var i = 0; i < obj.id.length; i++)
-//        {
-//             docfrag.appendChild(new Option(obj.id[i], obj.id[i]));
-//        }
-//
-//        var select = document.getElementById("sectors");
-//        select.innerHTML = "";
-//
-//        if (obj.id.length === 0) {
-//            select.appendChild(new Option("Нет доступных", null));
-//        }
-//        else {
-//            select.appendChild(docfrag);
-//        }
-//	}
-//});
-//    console.log(document.getElementById("sectors"));
-//    request.send(params);
-//}
-
