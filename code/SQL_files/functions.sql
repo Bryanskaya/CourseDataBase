@@ -119,7 +119,7 @@ FROM ShowPriceListByIdSct(89);*/
 DROP TYPE table_genprices CASCADE;
 CREATE TYPE table_genprices AS
 (
-	ground_name		VARCHAR(30),
+	ground_name		TEXT,
 	id_sector		INTEGER,
 	animal			TEXT,
 	num				BIGINT,

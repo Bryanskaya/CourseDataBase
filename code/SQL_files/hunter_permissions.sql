@@ -9,5 +9,8 @@ GRANT INSERT ON vouchers TO hunter;
 GRANT DELETE ON vouchers TO hunter;
 GRANT INSERT VALUES('id', 'amount_animals', 'price', 'id_hunter', 'id_pricelist', 'status') INTO vouchers TO hunter;
 
+GRANT SELECT ON huntsmen TO hunter;
 
-INSERT INTO vouchers(amount_animals, price, id_hunter, id_pricelist, status) VALUES('44', '44', '22222222', 20, null)
+
+UPDATE accounts SET surname = 'Я' WHERE login = '11111111';
+DELETE FROM accounts WHERE login='5555555555'
