@@ -3,6 +3,7 @@ from BL_objects.vouchers import *
 from BL_rules.base_rules import *
 from BL_rules.pricelist_rules import *
 from BL_rules.hunter_rules import *
+from BL_rules.account_rules import *
 from errors.err_voucher import *
 from errors.err_general import *
 
@@ -19,6 +20,11 @@ class VoucherRules(BaseRules):
             voucher = None
 
         return voucher
+
+    def accept(self, id):
+        vouchers_set = inject.instance(VoucherRepository)(self.connection)
+        vouchers_set.accept(id)
+
 
     def build_obj(self, data):
         list_rules = PriceListRules('', connection=self.connection)
@@ -99,4 +105,68 @@ class VoucherRules(BaseRules):
 
         return data
 
+    def get_requests_by_login(self, login):
+        huntsmen_set = inject.instance(HuntsmanRepository)(self.connection)
+        vouchers_set = inject.instance(VoucherRepository)(self.connection)
 
+        huntsman = huntsmen_set.get_by_login(login).get_dict()
+        id_sector = huntsman['id']
+
+        requests = vouchers_set.get_requests(id_sector)
+
+        if requests is None:
+            return None
+
+        for i in range(len(requests)):
+            requests[i] = self.build_request(requests[i])
+
+        return sorted(requests, key=lambda x: (x['surname'], x['name'],
+                                               x['patronymic'], x['id_voucher'],
+                                               x['animal']))
+
+    def get_vouchers(self, login):
+        huntsmen_set = inject.instance(HuntsmanRepository)(self.connection)
+        vouchers_set = inject.instance(VoucherRepository)(self.connection)
+
+        try:
+            huntsman = huntsmen_set.get_by_login(login).get_dict()
+        except:
+            return None
+
+        id_sector = huntsman['id']
+
+        requests = vouchers_set.get_vouchers(id_sector)
+
+        if requests is None:
+            return None
+
+        for i in range(len(requests)):
+            requests[i] = self.build_request(requests[i])
+
+        return sorted(requests, key=lambda x: (x['surname'], x['name'],
+                                               x['patronymic'], x['id_voucher'],
+                                               x['animal']))
+
+    def build_request(self, data: Voucher):
+        hunter_rules = HunterRules('', connection=self.connection)
+        list_rules = PriceListRules('', connection=self.connection)
+        account_rules = AccountRules('', connection=self.connection)
+
+        data = data.get_dict()
+        data['id_voucher'] = data['id']
+
+        hunter = hunter_rules.get_by_ticket_num(data['id_hunter']).get_dict()
+        account = account_rules.get_person(hunter['login']).get_dict()
+
+        data['surname'] = account['surname']
+        data['name'] = account['firstname']
+        data['patronymic'] = account['patronymic']
+        data['full_name'] = data['surname'] + ' ' + data['name'] + \
+            ' ' + data['patronymic']
+        data['mobile_phone'] = account['mobile_phone']
+        data['email'] = account['email']
+
+        item = list_rules.get_by_id(data['id_pricelist'])
+        data['animal'] = item['animal']
+
+        return data

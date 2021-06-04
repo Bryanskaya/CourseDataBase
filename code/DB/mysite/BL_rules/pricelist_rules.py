@@ -3,6 +3,7 @@ from BL_objects.price_list import *
 from BL_rules.base_rules import *
 from BL_rules.sector_rules import *
 from BL_rules.huntinggrounds_rules import *
+from BL_rules.huntsman_rules import *
 
 
 class PriceListRules(BaseRules):
@@ -41,6 +42,20 @@ class PriceListRules(BaseRules):
     def get_by_id(self, id) -> PriceList:
         pricelist_rep = inject.instance(PriceListRepository)(self.connection)
         return pricelist_rep.get_by_id(id).get_dict()
+
+    def get_by_login(self, login) -> dict:
+        huntsmen_rep = inject.instance(HuntsmanRepository)(self.connection)
+        pricelist_rep = inject.instance(PriceListRepository)(self.connection)
+
+        huntsman = huntsmen_rep.get_by_login(login)
+        price_set = pricelist_rep.get_by_sector(huntsman.get_id())
+
+        if price_set is None:
+            return None
+
+        return price_set
+
+
 
 
 
