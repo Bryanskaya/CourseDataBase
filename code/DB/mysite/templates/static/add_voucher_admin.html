@@ -1,0 +1,296 @@
+{% extends "static\general_extend.html" %}{% load static %}
+
+{% block title %} Выдать новую {% endblock %}
+
+{% block head_temp %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '\css\style_register.css' %}"/>
+    <link rel="stylesheet" href="{% static '\css\style_new_voucher.css' %}"/>
+    <link rel="stylesheet" href="{% static '\css\style_add_voucher_admin.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static '\css\img\reg.ico' %}"/>
+{% endblock %}
+
+{% block name_info %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <div class="limiter">
+        <div class="container-register">
+            <div class="wrap-register" >
+                <form class="register-form p-l-55 p-r-55 p-t-150" method="POST" action="{% url 'vouchers:add_by_admin' %}">
+                    {% csrf_token %}
+                    <span class="register-form-title">
+                        Путёвка
+                    </span>
+
+                    {% if error_message %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error_message }}</strong>
+                        </div>
+                    {% endif %}
+
+                    {% if info_message %}
+                        <div class="alert alert-danger">
+                            <strong>{{ info_message }}</strong>
+                        </div>
+                    {% endif %}
+
+                    <div class="alert alert-danger" id="no-pricelist" style="display: none;">
+                        <strong>Выберите субъект и сектор</strong>
+                    </div>
+
+                    <div class="input-ticket m-b-16">
+                        <input type="text"
+                                name="ticket_num"
+                                placeholder="Номер охотничьего билета"
+                                id="ticket_num"
+                                class="input1"
+                                maxlength="20"
+                                title="Используйте только цифры."
+                                pattern="[0-9]*"
+                                required/>
+                    </div>
+
+                    <div class="input-ground m-b-16">
+                        <p><select name="hunting_grounds" id="hunting_grounds" onchange="GetSectors()" style="outline: none;">
+                            <option disabled value="" selected>Выберите субъект</option>
+                            {% for key, value in hunting_grounds.items %}
+                                <option value="{{value}}"> {{key}} </option>
+                            {% endfor %}
+                        </select></p>
+                    </div>
+
+                    <div class="input-sector m-b-16" style="outline: none;">
+                        <p><select name="sectors" id="sectors">
+                            <option disabled value="" selected>Выберите сектор</option>
+                        </select></p>
+                    </div>
+
+                    <script>
+                        function GetSectors() {
+                            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                            var elem = document.getElementById("hunting_grounds").value;
+
+                            const request = new XMLHttpRequest();
+                            const url = "{% url 'start:get_sectors' %}";
+                            const params = "id=" + elem;
+
+                            request.responseType =	"json";
+                            request.open("POST", url, true);
+                            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            request.setRequestHeader("X-CSRFToken", csrftoken);
+
+                            request.addEventListener("readystatechange", () => {
+
+                            if (request.readyState === 4 && request.status === 200) {
+                                let obj = request.response;
+
+                                var docfrag = document.createDocumentFragment();
+
+                                for (var i = 0; i < obj.id.length; i++)
+                                {
+                                     docfrag.appendChild(new Option(obj.id[i], obj.id[i]));
+                                }
+
+                                var select = document.getElementById("sectors");
+                                select.innerHTML = "";
+
+                                if (obj.id.length === 0) {
+                                    select.appendChild(new Option("Нет доступных", null));
+                                }
+                                else {
+                                    select.appendChild(docfrag);
+                                }
+                            }
+                        });
+                            request.send(params);
+                        }
+
+                        function GetPriceList() {
+                            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+                            var id_sector = document.getElementById("sectors").value;
+
+                            if (id_sector == ''){
+                                var span = document.getElementsByClassName("close")[0];
+
+                                document.getElementById("no-pricelist").style.display = "block";
+                                return -1;
+                            }
+
+                            const request = new XMLHttpRequest();
+                            const url = "{% url 'vouchers:get_cur_vouchers' %}";
+                            const params = "id_sector=" + id_sector;
+
+                            request.responseType =	"json";
+                            request.open("POST", url, true);
+                            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                            request.setRequestHeader("X-CSRFToken", csrftoken);
+
+                            request.addEventListener("readystatechange", () => {
+
+                            if (request.readyState === 4 && request.status === 200) {
+                                let obj = request.response;
+
+                                var tbody = document.getElementById('list-table')
+                                tbody.innerHTML = '';
+                                tbody.innerHTML = "<tr>\
+                                                <th><b>Животное</b></th>\
+                                                <th><b>Цена, руб/шт</b></th>\
+                                                <th><b>Количество</b></th>\
+                                                <th><b>Выбрать</b></th>\
+                                            </tr>";
+                                var temp_input_1 = "<td class='input-td' style='padding: 0px;'>\
+                                                        <input\
+                                                        type='text'\
+                                                        maxlength='2'\
+                                                        min='1'\
+                                                        max='99'\
+                                                        class='input-num'";
+                                var temp_input_2 = " value='1'\
+                                                    pattern='[0-9]{1,2}'></td>";
+                                                        
+                                for (var i = 0; i < obj.pricelist.length; i++) {
+                                    var tr = document.createElement('tr');
+                                    
+                                    tr.innerHTML = `<td id='animal${obj.pricelist[i].id}'>${obj.pricelist[i].animal}</td>
+                                                <td id='price${obj.pricelist[i].id}'>${obj.pricelist[i].price}</td>` +
+                                        temp_input_1 + " id=" + obj.pricelist[i].id + temp_input_2 + 
+                                        `<td> <a onclick="Chosen(${obj.pricelist[i].id})">Выбрать</a></td>`;
+                                    tbody.appendChild(tr);
+                                }
+                            }
+                        });
+                            request.send(params);
+                        }
+                    </script>
+
+                    <div class="container-btn m-b-16">
+                        <a class="btn" id="btn-param" style="background-color: #caaa868f;"> 
+                          Выбрать путёвку
+                        </a>
+                    </div>
+                
+                    <div id="modal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <span class="close">&times;  </span>
+                                <h3>Укажите необходимые параметры</h3>
+                            </div>
+                  
+                            <div style="display: flex; justify-content: center;">
+                                <div class="voucher-table" style="padding-top: 30px;">
+                                    <div class="test1 alert alert-danger" style="display: none;">
+                                        <strong>Неверное количество животных</strong>
+                                    </div>
+
+                                    <input 
+                                        type="text" 
+                                        id="find-voucher-ground" 
+                                        class="find-voucher-ground" 
+                                        onkeyup="FindNeedInput()" 
+                                        pattern="[А-Яа-яЁё\-]*"
+                                        placeholder="Поиск животного ...">
+                        
+                                    <div style="overflow: auto; height: 600px;">
+                                        <table class="list-table" id="list-table">
+                                        </table>
+                                    </div>
+                                </div>  
+                            </div> 
+                        </div>
+                    </div>
+                    
+                    <script>
+                        var modal = document.getElementById("modal");
+                        var btn = document.getElementById("btn-param");
+                        var span = document.getElementsByClassName("close")[0];
+                        var msg = document.getElementsByClassName("test1")[0];
+                        console.log(msg)
+                    
+                        btn.onclick = function () {
+                            if (!GetPriceList()){
+                                modal.style.display = "block";
+                                msg.style.display = "none";
+                            }
+                        }
+                    
+                        span.onclick = function () {
+                            modal.style.display = "none";
+                        }
+
+                        function Chosen(id) {
+                            var animal = document.getElementById('animal' + id).textContent;
+                            var num = document.getElementById(id).value;
+                            var price = document.getElementById('price' + id).textContent;
+                            
+                            var animal_field = document.getElementById("field-animal");
+                            var num_field = document.getElementById("field-num");
+                            var price_field = document.getElementById("field-price");
+                            var res_id = document.getElementById("valuable-id");
+
+                            if (!(0 < Number(num) && Number(num) < 100 )) {
+                                msg.style.display = "block";
+                                return;
+                            }
+                            
+                            animal_field.setAttribute("value", animal);
+                            num_field.setAttribute("value", num);
+                            price_field.setAttribute("value", parseFloat(price)*Number(num));
+                            res_id.setAttribute("value", id);
+                            
+                            modal.style.display = "none";
+                        }
+                    
+                        window.onclick = function (event) {
+                          if (event.target == modal) {
+                            modal.style.display = "none";
+                          }
+                        }
+                    </script>
+
+                    
+                        <div class="input-animal m-b-16">
+                            <input class="input1 m-b-14"
+                                    type="text"
+                                    name="animal"
+                                    id="field-animal"
+                                    placeholder="Животное"
+                                    readonly/>
+                        </div>
+
+                        <div class="input-num-animals m-b-16">
+                            <input class="input1 m-b-14"
+                                type="text"
+                                name="amount_animals"
+                                id="field-num"
+                                placeholder="Количество"
+                                readonly/>
+                        </div>
+
+                        <div class="input-sum m-b-30">
+                            <input class="input1 m-b-14"
+                                    type="text"
+                                    name="price"
+                                    id="field-price"
+                                    placeholder="Итого, Руб"
+                                    readonly>
+                        </div>
+
+                        <input id="valuable-id" type="hidden" name="id_pricelist">
+                    
+
+                    <div class="container-btn m-b-16">
+                        <button class="btn btn-reg" type="submit">
+                            Оформить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

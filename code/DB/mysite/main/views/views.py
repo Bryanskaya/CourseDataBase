@@ -222,6 +222,7 @@ def get_sectors(request):
     if request.is_ajax and request.method == "POST":
         sectors_set = sect_rules.get_ids(request.POST['id'])
         return JsonResponse({'id': sectors_set}, status=200)
+    return JsonResponse({}, status=200)
 
 def requests_to_log(request):
     return render(request, 'static/log_requests.html', locals())

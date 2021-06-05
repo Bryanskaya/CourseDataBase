@@ -55,6 +55,19 @@ class PriceListRules(BaseRules):
 
         return price_set
 
+    def get_by_sector(self, id_sector):
+        pricelist_rep = inject.instance(PriceListRepository)(self.connection)
+        price_set = pricelist_rep.get_by_sector(id_sector)
+
+        if price_set is None:
+            return None
+
+        for i in range(len(price_set)):
+            price_set[i] = price_set[i].get_dict()
+
+        return price_set
+
+
 
 
 

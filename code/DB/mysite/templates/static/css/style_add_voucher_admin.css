@@ -1,0 +1,15 @@
+.input-ground, .input-sector {
+    width: 100%;
+}
+
+/*select:not(:checked) {
+    color: #ABAAAA;
+}*/
+
+select {
+    font-family: JosefinSans;
+	font-size: 20px;
+    font-weight: bold;
+	line-height: 1.2;
+    background: white;
+}

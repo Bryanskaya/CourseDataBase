@@ -39,7 +39,7 @@
             <a href="#">Путёвки</a>
             <ul>
                 <li><a href="{% url 'vouchers:requests_all' %}">Заявки</a></li>
-                <li><a href="#">Выдать новую</a></li>
+                <li><a href="{% url 'vouchers:create_by_admin' %}">Выдать новую</a></li>
                 <li><a href="#">Выданные путёвки</a></li>
             </ul>
         </li>
