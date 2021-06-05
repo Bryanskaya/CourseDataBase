@@ -56,16 +56,49 @@ class HuntsmanRules(BaseRules):
             pers['patronymic'] = account['patronymic']
             pers['mobile_phone'] = account['mobile_phone']
             pers['email'] = account['email']
+            pers['date_of_birth'] = account['date_of_birth']
             pers['type_role'] = account['type_role']
 
             sector = sectors_set.get_by_id(pers['id_sector']).get_dict()
             ground = grounds_set.get_by_id(sector['id_husbandry']).get_dict()
 
+            pers['id_husbandry'] = sector['id_husbandry']
             pers['ground_name'] = ground['ground_name']
 
             huntsmen[i] = pers
 
         huntsmen = self.get_sorted(huntsmen)
+
+        return huntsmen
+
+    def get_by_params(self, data):
+        huntsmen = self.get_all_detailed()
+        print("+++++ ", huntsmen)
+        print("***** ", data)
+
+        i = 0
+
+        while i < len(huntsmen):
+            if data['surname'] != '' and huntsmen[i]['surname'] != data['surname']:
+                print("> ", huntsmen[i]['surname'])
+                huntsmen.pop(i)
+                continue
+            if data['name'] != '' and huntsmen[i]['name'] != data['name']:
+                print(">> ", huntsmen[i]['surname'])
+                huntsmen.pop(i)
+                continue
+            if data['patronymic'] != '' and huntsmen[i]['patronymic'] != data['patronymic']:
+                print(">>> ", huntsmen[i]['surname'])
+                huntsmen.pop(i)
+                continue
+            if data['id_husbandry'] != '' and huntsmen[i]['id_husbandry'] != data['id_husbandry']:
+                print(">>>> ", huntsmen[i]['surname'])
+                huntsmen.pop(i)
+                continue
+
+            i += 1
+
+        print("+++++ ", huntsmen)
 
         return huntsmen
 

@@ -1,0 +1,218 @@
+{% extends "static\general_extend.html" %}{% load static %}
+
+{% block title %} Заявки {% endblock %}
+
+{% block head_temp %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '\css\style_show.css' %}"/>
+    <link rel="stylesheet" href="{% static '\css\style_log_requests.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static '\css\img\favicon.ico' %}"/>
+{% endblock %}
+
+{% block name_info %}
+    {{ block.super }}
+{% endblock %}
+
+{% block content %}
+<div class="show-voucher">
+    <div class="show-form p-l-25 p-r-25 p-t-30">
+        {% csrf_token %}
+
+        {% if info_message %}
+            <div class="alert-info">
+                <strong>{{ info_message }}</strong>
+            </div>
+        {% endif %}
+
+        {% if error_message %}
+            <div class="alert-danger">
+                <strong>{{ error_message }}</strong>
+            </div>
+        {% endif %}
+
+        <div class="container-btn">
+            <button class="btn btn-find" id="btn-find">
+              Указать параметры поиска
+            </button>
+    
+            <div class="exit m-b-60">
+                <a href="#">
+                    Сбросить фильтр
+                </a>
+            </div>
+    
+        </div>
+    
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;  </span>
+                    <h3>Укажите параметры поиска</h3>
+                </div>
+    
+                <form class="modal-body" method="POST" action="#">
+                    {% csrf_token %}
+                    <div class="full-name">
+                        <div class="input-surname m-b-16 m-t-40">
+                            <input
+                                class="input1 m-b-14"
+                                type="text"
+                                placeholder="Фамилия"
+                                maxlength="30"
+                                name="surname"
+                                title="Используйте только кириллицу и дефис"
+                                pattern="[А-Яа-яЁё\-]{1,30}"/>
+                        </div>
+    
+                        <div class="input-firstname m-t-30">
+                            <input class="input1 m-b-14"
+                                type="text"
+                                placeholder="Имя"
+                                maxlength="30"
+                                name="firstname"
+                                title="Используйте только кириллицу и дефис"
+                                pattern="[А-Яа-яЁё\-]{1,30}"/>
+                        </div>
+    
+                        <div class="input-patronymic m-b-16 m-t-30">
+                            <input
+                                class="input1 m-b-14"
+                                type="text"
+                                placeholder="Отчество"
+                                maxlength="30"
+                                name="patronymic"
+                                pattern="[А-Яа-яЁё\-]{1,30}"
+                                title="Используйте только кириллицу и дефис">
+                        </div>
+    
+                        <div class="container-btn m-b-16 m-t-40">
+                            <button class="btn btn-find" type="submit">
+                                Найти
+                            </button>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+        <script>
+            var modal = document.getElementById("modal");
+            var btn = document.getElementById("btn-find");
+            var span = document.getElementsByClassName("close")[0];
+        
+            btn.onclick = function () {
+              modal.style.display = "block";
+            }
+        
+            span.onclick = function () {
+              modal.style.display = "none";
+            }
+        
+            window.onclick = function (event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+        </script>
+
+        <div class="voucher-table" style="padding-bottom: 70px;">
+            <div class="table-label" style="text-align: center;">
+                Администраторы
+            </div>
+
+            {% if admins %}
+            <table class="list-table" id="list-table">
+                <tr>
+                    <th><b>ФИО</b></th>
+                    <th><b>Дата рождения</b></th>
+                    <th><b>Телефон</b></th>
+                    <th><b>Электронная почта</b></th>
+                </tr>
+
+                {% for elem in admins %}
+                <tr class="items">
+                    <td>{{elem.full_name}}</td>
+                    <td>{{elem.data_of_birth}}</td>
+                    <td>{{elem.mobile_phone}}</td>
+                    <td>{{elem.email}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <div class="alert alert-exist">
+                <strong>Нет заявок</strong>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="voucher-table" style="padding-bottom: 70px; padding-top: 15px;">
+            <div class="table-label" style="text-align: center;">
+                Егери
+            </div>
+
+            {% if huntsmen %}
+            <table class="list-table" id="list-table">
+                <tr>
+                    <th><b>ФИО</b></th>
+                    <th><b>Дата рождения</b></th>
+                    <th><b>Телефон</b></th>
+                    <th><b>Электронная почта</b></th>
+                    <th><b>Заявленный субъект</b></th>
+                    <th><b>Заявленный сектор</b></th>
+                </tr>
+
+                {% for elem in huntsmen %}
+                <tr class="items">
+                    <td>{{elem.full_name}}</td>
+                    <td>{{elem.data_of_birth}}</td>
+                    <td>{{elem.mobile_phone}}</td>
+                    <td>{{elem.email}}</td>
+                    <td>{{elem.ground_name}}</td>
+                    <td>{{elem.id_sector}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <div class="alert alert-exist">
+                <strong>Нет заявок</strong>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="voucher-table">
+            <div class="table-label" style="text-align: center; padding-top: 15px;">
+                Охотники
+            </div>
+
+            {% if hunters %}
+            <table class="list-table" id="list-table">
+                <tr>
+                    <th><b>ФИО</b></th>
+                    <th><b>Дата рождения</b></th>
+                    <th><b>Номер охотничьего билета</b></th>
+                    <th><b>Телефон</b></th>
+                    <th><b>Электронная почта</b></th>
+                </tr>
+
+                {% for elem in hunters %}
+                <tr class="items">
+                    <td>{{elem.ground_name}}</td>
+                    <td>{{elem.id_sector}}</td>
+                    <td>{{elem.animal}}</td>
+                    <td>{{elem.amount_animals}}</td>
+                    <td>{{elem.price}}</td>
+                    <td><a href="#" class="btn-del" onclick="DelRequest({{elem.id}})"> ✖ </a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <div class="alert alert-exist">
+                <strong>Нет заявок</strong>
+            </div>
+            {% endif %}
+        </div>  
+    </div>
+</div>
+
+
+{% endblock %}

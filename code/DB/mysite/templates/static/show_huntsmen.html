@@ -1,6 +1,6 @@
 {% extends "static\general_extend.html" %}{% load static %}
 
-{% block title %} Охотники {% endblock %}
+{% block title %} Егеря {% endblock %}
 
 {% block head_temp %}
   {{ block.super }}
@@ -30,7 +30,7 @@
         </button>
 
         <div class="exit m-b-13">
-          <a href="{% url 'hunters:show_all'%}">
+          <a href="{% url 'huntsmen:show_huntsmen' %}">
             Сбросить фильтр
           </a>
       </div>
@@ -44,10 +44,19 @@
               <h3>Укажите параметры поиска</h3>
             </div>
   
-            <form class="modal-body" method="POST" action="{% url 'hunters:find' %}">
+            <form class="modal-body" method="POST" action="{% url 'huntsmen:find' %}">
               {% csrf_token %}
               <div class="full-name">
-                <div class="input-surname m-b-16 m-t-40">
+                <div class="input-ground m-b-16 m-t-40">
+                    <p><select name="id_husbandry" id="hunting_grounds">
+                        <option disabled value="" selected>Субъект</option>
+                        {% for key, value in hunting_grounds.items %}
+                            <option value="{{value}}"> {{key}} </option>
+                        {% endfor %}
+                    </select></p>
+                </div>
+
+                <div class="input-surname m-t-30">
                   <input
                           class="input1 m-b-14"
                           type="text"
@@ -77,18 +86,6 @@
                           name="patronymic"
                           pattern="[А-Яа-яЁё\-]{1,30}"
                           title="Используйте только кириллицу и дефис">
-                </div>
-
-                <div class="input-ticket-num m-b-16 m-t-30">
-                  <input type="text"
-                        name="ticket_num"
-                        placeholder="Номер охотничьего билета"
-                        id="ticket_num"
-                        class="input1"
-                        maxlength="20"
-                        title="Используйте только цифры."
-                        pattern="[0-9]*"
-                        />
                 </div>
 
                 <div class="container-btn m-b-16 m-t-40">
@@ -123,43 +120,43 @@
 
 
       <div class="p-t-30">
-        {% if hunters %}
+        {% if huntsmen %}
         <div class="hunter-table">
-          <input 
-            type="text" 
-            id="find-voucher-ground" 
-            class="find-hunter" 
-            onkeyup="FindNeed()"
-            pattern="[А-Яа-яЁё\-]*" 
-            placeholder="Поиск по ФИО ...">
+            <input 
+                type="text" 
+                id="find-voucher-ground" 
+                class="find-voucher-ground" 
+                onkeyup="FindNeed()" 
+                pattern="[А-Яа-яЁё\-]*"
+                placeholder="Поиск субъекта ...">
         </div>
 
         <table class="list-table" id="list-table">
           <tr>
-              <th><b>ФИО</b></th>
-              <th><b>Дата рождения</b></th>
-              <th><b>Телефон</b></th>
-              <th><b>Электронная почта</b></th>
-              <th><b>Номер охотничьего билета</b></th>
-              <th><b>Адрес прописки</b></th>
+            <th><b>Субъект</b></th>
+            <th><b>Сектор</b></th>
+            <th><b>ФИО</b></th>
+            <th><b>Дата рождения</b></th>
+            <th><b>Телефон</b></th>
+            <th><b>Электронная почта</b></th>
           </tr>
 
-          {% for elem in hunters %}
-            {% if elem.type_role == "охотник" %}
+          {% for elem in huntsmen %}
+            {% if elem.type_role == "егерь" %}
               <tr class="items">
-                  <td>{{elem.full_name}}</td>
-                  <td>{{elem.date_of_birth}}</td>
-                  <td>{{elem.mobile_phone}}</td>
-                  <td>{{elem.email}}</td>
-                  <td>{{elem.ticket_num}}</td>
-                  <td>{{elem.residence}}</td>
+                <td>{{elem.ground_name}}</td>
+                <td>{{elem.id_sector}}</td>
+                <td>{{elem.full_name}}</td>
+                <td>{{elem.date_of_birth}}</td>
+                <td>{{elem.mobile_phone}}</td>
+                <td>{{elem.email}}</td>
               </tr>
             {% endif %}
           {% endfor %}
       </table>
       {% else %}
       <div class="alert alert-exist">
-          <strong>Охотников нет</strong>
+          <strong>Егерей нет</strong>
       </div>
       {% endif %}
 
@@ -167,12 +164,5 @@
       
     </div>
 </div>
-
-
-
-
-
-
-
 
 {% endblock %}

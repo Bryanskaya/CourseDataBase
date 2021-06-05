@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 
 from datetime import datetime, date
@@ -150,7 +150,7 @@ def calculate_age(born):
     return today.year - born.year - ((today.month, today.day) < (born.month, born.day))
 
 
-def register(request):
+def register(request, proved):
     data = dict(request.POST.copy())
     acc_rules = AccountRules('admin')
     roles = acc_rules.get_roles()
@@ -189,6 +189,9 @@ def register(request):
                                     data['sex'], data['phone'],
                                     data['email'], data['role'])
 
+    if proved:
+        account.set_type_role(data['role'][1:])
+
     if account is None:
         data['error_message'] = 'Текущий логин уже используется'
         data['login'] = ''
@@ -202,11 +205,9 @@ def register(request):
         user = hunter_rules.register(user)
     elif cur_role == 'huntsman':
         huntsman_rules = HuntsmanRules('admin')
-        data['id'] = data['sectors'] #todo check it
+        data['id'] = data['sectors']
         user = Huntsman(data)
         user = huntsman_rules.register(user)
-    elif cur_role == 'admin':
-        pass
 
     if user is None:
         acc_rules.delete_account(account)
@@ -221,3 +222,6 @@ def get_sectors(request):
     if request.is_ajax and request.method == "POST":
         sectors_set = sect_rules.get_ids(request.POST['id'])
         return JsonResponse({'id': sectors_set}, status=200)
+
+def requests_to_log(request):
+    return render(request, 'static/log_requests.html', locals())

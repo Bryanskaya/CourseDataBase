@@ -1,32 +1,48 @@
-.register-form-title {
-    background: linear-gradient(#b37f47, #d1a777);
-    border: 2px solid black;
-    padding-top: 8px;
-    padding-bottom: 9px;
-    font-size: 28px;
+@import url("base_style.css");
+@import url("style_all.css");
+
+.show-form
+{
+    width: 87%;
+    position: relative;
 }
 
-.register-form {
-    padding-top: 90px;
+.btn:hover {
+    background: #814B38;
+    cursor: pointer;
 }
-
-.bnt {
-    background-color: linear-gradient(#bd895569, #caaa868f);
+  
+.btn-find {
+    background: linear-gradient(#bd895569, #caaa868f);
     margin-bottom: 20px;
     transition: all 0.4s;
 }
 
-.input-num {
-    height: 40px;
-    text-align: center;
+.btn {
+    width: 100%;
+    height: 50px;
+    border-radius: 20px;
+  
     font-family: JosefinSans;
-    font-size: 20px;
-    background: #d1ab81c6;
-    border: none;
+    font-weight: bold;
+    font-size: 22px;
+    color: black;
+    line-height: 2;
+    margin-bottom: 16px;
+  
+    text-decoration: none;
+  
+    border: solid 2px;
+    border-radius: 20px;
+    border-color: black;
 }
-
-.list_table {
-    display: inline-block; overflow: auto;
+  
+.container-btn {
+    width: 100%;
+    display: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
 }
 
 .modal {
@@ -50,7 +66,7 @@
   padding: 0;
   border: 2px solid black;
   border-radius: 25px;
-  width: 50%;
+  width: 25%;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
@@ -90,6 +106,7 @@
   line-height: 2;
   text-align: center;
 
+  /*padding: 2px 16px;*/
   background-color: #c78b4c;
   border-radius: 20px 20px 0px 0px;
 }
@@ -98,14 +115,4 @@
   display: flex;
   justify-content: center;
 }
-
-.input-animal, .input-num-animals, .input-sum, .input-ticket {
-  background-color: #fff;
-
-  border-radius: 20px;
-  position: relative;
-}
-
-.wrap-register {
-  width: 27%;
-}
+  

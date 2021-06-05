@@ -1,0 +1,56 @@
+{% extends "static\base.html" %}{% load static %}
+
+{% block title %} Личный кабинет админ {% endblock %}
+
+{% block head_temp %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static '\css\style_admin.css' %}"/>
+    <link rel="icon" type="image/png" href="{% static '\css\img\huntsman.ico' %}"/>
+{% endblock %}
+
+{% block name_info %}
+    <div class="exit-img">
+        <p>
+            <a href="{% url 'start:exit_from'%}">
+                <img src="{% static '\css\img\exit.png' %}" alt="Выход" width="33" style="margin-right: 20px; margin-top: 10px;">
+            </a>
+        </p>
+    </div>
+
+    <div class="user-name">
+        {{ account.surname }} {{ account.firstname }} {{ account.patronymic}}
+    </div>
+{% endblock %}
+
+{% block table %}
+    <ul class="main-menu">
+        <li class="active">
+            <a href="{% url 'users:about' %}">Обо мне</a>
+        </li>
+        <li class="menu-children">
+            <a href="#">Пользователи</a>
+            <ul>
+                <li><a href="#">Администраторы</a></li>
+                <li><a href="{% url 'hunters:show_all' %}">Охотники</a></li>
+                <li><a href="{% url 'huntsmen:show_huntsmen' %}">Егеря</a></li>
+            </ul>
+        </li>
+        <li class="menu-children">
+            <a href="#">Путёвки</a>
+            <ul>
+                <li><a href="#">Заявки</a></li>
+                <li><a href="#">Выдать новую</a></li>
+                <li><a href="#">Выданные путёвки</a></li>
+            </ul>
+        </li>
+        <li class="menu-children">
+            <a href="#">Заявки на регистрацию</a>
+            <ul>
+                <li><a href="#">Администраторы</a></li>
+                <li><a href="#">Охотники</a></li>
+                <li><a href="#">Егеря</a></li>
+            </ul>
+        </li>        
+        
+    </ul>
+{% endblock %}

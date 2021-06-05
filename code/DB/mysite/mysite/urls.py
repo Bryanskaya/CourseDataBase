@@ -20,7 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls.account_urls', namespace='start'), name='start'),
     path('', include('main.urls.user_urls', namespace='users'), name='users'),
-    path('', include('main.urls.hunter_urls', namespace='hunters'), name='hunters'),
-    path('', include('main.urls.huntsman_urls', namespace='huntsmen'), name='huntsmen'),
+    path('hunters/', include('main.urls.hunter_urls', namespace='hunters'), name='hunters'),
+    path('huntsmen/', include('main.urls.huntsman_urls', namespace='huntsmen'), name='huntsmen'),
     path('', include('main.urls.voucher_urls', namespace='vouchers'), name='vouchers'),
 ]
