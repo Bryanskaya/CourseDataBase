@@ -12,5 +12,5 @@ GRANT INSERT VALUES('id', 'amount_animals', 'price', 'id_hunter', 'id_pricelist'
 GRANT SELECT ON huntsmen TO hunter;
 
 
-UPDATE accounts SET surname = 'Я' WHERE login = '11111111';
+UPDATE accounts SET type_role = 'админ' WHERE login = '12121212';
 DELETE FROM accounts WHERE login='5555555555'
