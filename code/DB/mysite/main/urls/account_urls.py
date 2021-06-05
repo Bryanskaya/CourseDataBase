@@ -14,4 +14,7 @@ urlpatterns = [
     path('recover_password/<str:login>', views.recover_password, name='recover_password'),
     path('check_code/', views.check_code, name='check_code'),
     path('log_requests/', views.requests_to_log, name='requests'),
+    path('show_admins/', views.show_admins, name='show_admins'),
+    path('find/', lambda req, **kwargs: do_log(views.find, req, **kwargs), name='find'),
+
 ]

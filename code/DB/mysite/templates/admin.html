@@ -30,7 +30,7 @@
         <li class="menu-children">
             <a href="#">Пользователи</a>
             <ul>
-                <li><a href="#">Администраторы</a></li>
+                <li><a href="{% url 'start:show_admins' %}">Администраторы</a></li>
                 <li><a href="{% url 'hunters:show_all' %}">Охотники</a></li>
                 <li><a href="{% url 'huntsmen:show_huntsmen' %}">Егеря</a></li>
             </ul>

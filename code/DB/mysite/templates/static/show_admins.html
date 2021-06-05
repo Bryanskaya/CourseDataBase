@@ -1,6 +1,6 @@
 {% extends "static\general_extend.html" %}{% load static %}
 
-{% block title %} Егеря {% endblock %}
+{% block title %} Администраторы {% endblock %}
 
 {% block head_temp %}
   {{ block.super }}
@@ -30,7 +30,7 @@
         </button>
 
         <div class="exit m-b-13">
-          <a href="{% url 'huntsmen:show_huntsmen' %}">
+          <a href="{% url 'start:show_admins'%}">
             Сбросить фильтр
           </a>
       </div>
@@ -44,19 +44,10 @@
               <h3>Укажите параметры поиска</h3>
             </div>
   
-            <form class="modal-body" method="POST" action="{% url 'huntsmen:find' %}">
+            <form class="modal-body" method="POST" action="{% url 'start:find' %}">
               {% csrf_token %}
               <div class="full-name">
-                <div class="input-ground m-b-16 m-t-40">
-                    <p><select name="id_husbandry" id="hunting_grounds">
-                        <option disabled value="" selected>Субъект</option>
-                        {% for key, value in hunting_grounds.items %}
-                            <option value="{{value}}"> {{key}} </option>
-                        {% endfor %}
-                    </select></p>
-                </div>
-
-                <div class="input-surname m-t-30">
+                <div class="input-surname m-b-16 m-t-40">
                   <input
                           class="input1 m-b-14"
                           type="text"
@@ -120,43 +111,39 @@
 
 
       <div class="p-t-30">
-        {% if huntsmen %}
+        {% if admins %}
         <div class="hunter-table">
-            <input 
-                type="text" 
-                id="find-voucher-ground" 
-                class="find-voucher-ground" 
-                onkeyup="FindNeed()" 
-                pattern="[А-Яа-яЁё\-]*"
-                placeholder="Поиск субъекта ...">
+          <input 
+            type="text" 
+            id="find-voucher-ground" 
+            class="find-hunter" 
+            onkeyup="FindNeed()"
+            pattern="[А-Яа-яЁё\-]*" 
+            placeholder="Поиск по ФИО ...">
         </div>
 
         <table class="list-table" id="list-table">
           <tr>
-            <th><b>ФИО</b></th>
-            <th><b>Дата рождения</b></th>
-            <th><b>Телефон</b></th>
-            <th><b>Электронная почта</b></th>
-            <th><b>Субъект</b></th>
-            <th><b>Сектор</b></th>
+              <th><b>ФИО</b></th>
+              <th><b>Дата рождения</b></th>
+              <th><b>Телефон</b></th>
+              <th><b>Электронная почта</b></th>
           </tr>
 
-          {% for elem in huntsmen %}
-            {% if elem.type_role == "егерь" %}
+          {% for elem in admins %}
+            {% if elem.type_role == "админ" %}
               <tr class="items">
-                <td>{{elem.full_name}}</td>
-                <td>{{elem.date_of_birth}}</td>
-                <td>{{elem.mobile_phone}}</td>
-                <td>{{elem.email}}</td>
-                <td>{{elem.ground_name}}</td>
-                <td>{{elem.id_sector}}</td>
+                  <td>{{elem.full_name}}</td>
+                  <td>{{elem.date_of_birth}}</td>
+                  <td>{{elem.mobile_phone}}</td>
+                  <td>{{elem.email}}</td>
               </tr>
             {% endif %}
           {% endfor %}
       </table>
       {% else %}
       <div class="alert alert-exist">
-          <strong>Егерей нет</strong>
+          <strong>Администраторов нет</strong>
       </div>
       {% endif %}
 
@@ -164,5 +151,12 @@
       
     </div>
 </div>
+
+
+
+
+
+
+
 
 {% endblock %}

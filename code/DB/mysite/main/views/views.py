@@ -225,3 +225,28 @@ def get_sectors(request):
 
 def requests_to_log(request):
     return render(request, 'static/log_requests.html', locals())
+
+def show_admins(request):
+    acc_rules = AccountRules('admin')
+    admins = acc_rules.get_all()
+
+    for i in range(len(admins)):
+        admins[i]['full_name'] = admins[i]['surname'] + ' ' + admins[i]['firstname'] + ' ' + \
+                               admins[i]['patronymic']
+
+    return render(request, 'static/show_admins.html', locals())
+
+def find(request):
+    acc_rules = AccountRules('admin')
+
+    data = {}
+    data['surname'] = request.POST['surname']
+    data['name'] = request.POST['firstname']
+    data['patronymic'] = request.POST['patronymic']
+
+    admins = acc_rules.get_by_params(data)
+    for i in range(len(admins)):
+        admins[i]['full_name'] = admins[i]['surname'] + ' ' + admins[i]['firstname'] + ' ' + \
+                               admins[i]['patronymic']
+
+    return render(request, 'static/show_admins.html', locals())

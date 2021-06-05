@@ -113,6 +113,26 @@ class AccountRules(BaseRules):
 
         return accounts
 
+    def get_by_params(self, data):
+        accounts = self.get_all()
+
+        i = 0
+
+        while i < len(accounts):
+            if data['surname'] != '' and accounts[i]['surname'] != data['surname']:
+                accounts.pop(i)
+                continue
+            if data['name'] != '' and accounts[i]['firstname'] != data['name']:
+                accounts.pop(i)
+                continue
+            if data['patronymic'] != '' and accounts[i]['patronymic'] != data['patronymic']:
+                accounts.pop(i)
+                continue
+
+            i += 1
+
+        return accounts
+
 
 
 

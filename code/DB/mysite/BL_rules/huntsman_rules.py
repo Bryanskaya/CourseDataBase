@@ -44,6 +44,7 @@ class HuntsmanRules(BaseRules):
 
         for i in range(len(huntsmen)):
             pers = huntsmen[i].get_dict()
+            print("PERS ", pers)
 
             account = accounts_set.get_by_login(pers['login']).get_dict()
 
@@ -73,32 +74,24 @@ class HuntsmanRules(BaseRules):
 
     def get_by_params(self, data):
         huntsmen = self.get_all_detailed()
-        print("+++++ ", huntsmen)
-        print("***** ", data)
 
         i = 0
 
         while i < len(huntsmen):
             if data['surname'] != '' and huntsmen[i]['surname'] != data['surname']:
-                print("> ", huntsmen[i]['surname'])
                 huntsmen.pop(i)
                 continue
             if data['name'] != '' and huntsmen[i]['name'] != data['name']:
-                print(">> ", huntsmen[i]['surname'])
                 huntsmen.pop(i)
                 continue
             if data['patronymic'] != '' and huntsmen[i]['patronymic'] != data['patronymic']:
-                print(">>> ", huntsmen[i]['surname'])
                 huntsmen.pop(i)
                 continue
             if data['id_husbandry'] != '' and huntsmen[i]['id_husbandry'] != data['id_husbandry']:
-                print(">>>> ", huntsmen[i]['surname'])
                 huntsmen.pop(i)
                 continue
 
             i += 1
-
-        print("+++++ ", huntsmen)
 
         return huntsmen
 
