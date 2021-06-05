@@ -44,7 +44,6 @@ class HuntsmanRules(BaseRules):
 
         for i in range(len(huntsmen)):
             pers = huntsmen[i].get_dict()
-            print("PERS ", pers)
 
             account = accounts_set.get_by_login(pers['login']).get_dict()
 

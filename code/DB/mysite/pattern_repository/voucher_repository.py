@@ -105,6 +105,18 @@ class PW_VoucherRepository(VoucherRepository):
             return vouchers_set
         return None
 
+    def get_requests_all(self) -> [Voucher]:
+        temp = self.model.select(VoucherModel)\
+            .join(PriceListModel, on=(VoucherModel.id_pricelist == PriceListModel.id))\
+            .switch(self.model)\
+            .where(VoucherModel.status == False)
+
+        vouchers_set = transf_to_objs(temp, Voucher)
+
+        if len(vouchers_set):
+            return vouchers_set
+        return None
+
     def get_vouchers(self, id_sector) -> [Voucher]:
         temp = self.model.select(VoucherModel) \
             .join(PriceListModel, on=(VoucherModel.id_pricelist == PriceListModel.id)) \

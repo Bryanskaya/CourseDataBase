@@ -20,12 +20,26 @@ def requests(request):
 
     return render(request, 'static/requests.html', locals())
 
+def requests_all(request):
+    voucher_rules = VoucherRules(request.session['user']['role_eng'])
+    requests = voucher_rules.get_requests_all()
+
+    return render(request, 'static/requests_all.html', locals())
+
+
 def accept(request, id):
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
     voucher_rules.accept(id)
     requests = voucher_rules.get_requests_by_login(request.session['user']['login'])
 
     return render(request, 'static/requests.html', locals())
+
+def accept_by_admin(request, id):
+    voucher_rules = VoucherRules(request.session['user']['role_eng'])
+    voucher_rules.accept(id)
+    requests = voucher_rules.get_requests_all()
+
+    return render(request, 'static/requests_all.html', locals())
 
 def reject(request, id):
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
@@ -34,6 +48,14 @@ def reject(request, id):
     requests = voucher_rules.get_vouchers(request.session['user']['login'])
 
     return render(request, 'static/requests.html', locals())
+
+def reject_by_admin(request, id):
+    voucher_rules = VoucherRules(request.session['user']['role_eng'])
+
+    voucher_rules.delete(id)
+    requests = voucher_rules.get_requests_all()
+
+    return render(request, 'static/requests_all.html', locals())
 
 def huntsman_vouchers(request):
     voucher_rules = VoucherRules(request.session['user']['role_eng'])

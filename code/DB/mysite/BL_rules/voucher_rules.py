@@ -4,6 +4,7 @@ from BL_rules.base_rules import *
 from BL_rules.pricelist_rules import *
 from BL_rules.hunter_rules import *
 from BL_rules.account_rules import *
+from pattern_repository.detailed_voucher import *
 from errors.err_voucher import *
 from errors.err_general import *
 from errors.err_hunter import *
@@ -193,3 +194,15 @@ class VoucherRules(BaseRules):
         data['animal'] = item['animal']
 
         return data
+
+    def get_requests_all(self):
+        vouchers_set = inject.instance(DetailedVoucherRepository)(self.connection)
+        vouchers = vouchers_set.get_all()
+
+        for i in range(len(vouchers)):
+            temp = vouchers[i].get_dict()
+            temp['full_name'] = temp['surname'] + ' ' + temp['firstname'] + ' ' + temp['patronymic']
+            vouchers[i] = temp
+        return vouchers
+
+

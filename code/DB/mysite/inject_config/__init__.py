@@ -28,6 +28,7 @@ from pattern_repository.accounts_repository import *
 from pattern_repository.huntsman_repository import *
 from pattern_repository.price_list_repository import *
 from pattern_repository.voucher_repository import *
+from pattern_repository.detailed_voucher import *
 
 
 
@@ -41,6 +42,7 @@ def injector(bnd):
     bnd.bind(HuntsmanRepository, PW_HuntsmanRepository)
     bnd.bind(PriceListRepository, PW_PriceListRepository)
     bnd.bind(VoucherRepository, PW_VoucherRepository)
+    bnd.bind(DetailedVoucherRepository, PW_DetailedRepository)
 
 
 inject.clear_and_configure(injector)

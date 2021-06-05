@@ -227,7 +227,7 @@ def requests_to_log(request):
     return render(request, 'static/log_requests.html', locals())
 
 def show_admins(request):
-    acc_rules = AccountRules('admin')
+    acc_rules = AccountRules(request.session['user']['role_eng'])
     admins = acc_rules.get_all()
 
     for i in range(len(admins)):
@@ -237,7 +237,7 @@ def show_admins(request):
     return render(request, 'static/show_admins.html', locals())
 
 def find(request):
-    acc_rules = AccountRules('admin')
+    acc_rules = AccountRules(request.session['user']['role_eng'])
 
     data = {}
     data['surname'] = request.POST['surname']

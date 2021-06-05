@@ -106,9 +106,9 @@ function RequestVoucher(id) {
         num = 0;
     }
     
-    window.location.href = '/buy/' + id + '&' + num;
+    window.location.href = id + '&' + num;
 }
 
 function DelRequest(id) {
-    window.location.href = '/show/' + id;
+    window.location.href = id;
 }
