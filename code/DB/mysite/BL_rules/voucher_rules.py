@@ -78,6 +78,13 @@ class VoucherRules(BaseRules):
         except:
             raise DeleteVoucherErr()
 
+    def delete_by_huntsman(self, id_hunter):
+        vouchers_set = inject.instance(VoucherRepository)(self.connection)
+        try:
+            vouchers_set.delete_by_huntsman(id_hunter)
+        except:
+            raise DeleteVoucherErr()
+
 
     def get_sorted(self, data):
         return sorted(data, key=lambda x: (x['ground_name'], x['id_sector'],
@@ -171,6 +178,19 @@ class VoucherRules(BaseRules):
                                                x['patronymic'], x['id_voucher'],
                                                x['animal']))
 
+    def get_vouchers_all(self):
+        vouchers_set = inject.instance(DetailedVoucherRepository)(self.connection)
+        vouchers = vouchers_set.get_vouchers_all()
+
+        for i in range(len(vouchers)):
+            temp = vouchers[i].get_dict()
+            temp['full_name'] = temp['surname'] + ' ' + temp['firstname'] + ' ' + temp['patronymic']
+            vouchers[i] = temp
+
+        return sorted(vouchers, key=lambda x: (x['surname'], x['firstname'],
+                                               x['patronymic'], x['id_voucher'],
+                                               x['animal']))
+
     def build_request(self, data: Voucher):
         hunter_rules = HunterRules('', connection=self.connection)
         list_rules = PriceListRules('', connection=self.connection)
@@ -197,7 +217,7 @@ class VoucherRules(BaseRules):
 
     def get_requests_all(self):
         vouchers_set = inject.instance(DetailedVoucherRepository)(self.connection)
-        vouchers = vouchers_set.get_all()
+        vouchers = vouchers_set.get_requests_all()
 
         for i in range(len(vouchers)):
             temp = vouchers[i].get_dict()

@@ -2,10 +2,6 @@
     width: 100%;
 }
 
-/*select:not(:checked) {
-    color: #ABAAAA;
-}*/
-
 select {
     font-family: JosefinSans;
 	font-size: 20px;
@@ -13,3 +9,8 @@ select {
 	line-height: 1.2;
     background: white;
 }
+
+select option[value]:checked {
+    color: black;
+}
+

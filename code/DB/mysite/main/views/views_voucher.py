@@ -59,6 +59,12 @@ def reject_by_admin(request, id):
 
     return render(request, 'static/requests_all.html', locals())
 
+def rejectv_by_admin(request, id):
+    voucher_rules = VoucherRules(request.session['user']['role_eng'])
+    voucher_rules.delete(id)
+
+    return HttpResponseRedirect(reverse('vouchers:admin_vouchers'))
+
 def huntsman_vouchers(request):
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
     vouchers = voucher_rules.get_vouchers(request.session['user']['login'])
@@ -101,22 +107,13 @@ def add_by_admin(request):
     offers = pricelist_rules.get_all
     hunting_grounds = csv_dict_reader()
 
-    print("***** ", request.POST)
-
-    '''self.id = data['id']
-        self.amount_animals = data['amount_animals']
-        self.price = data['price']
-        self.id_hunter = data['id_hunter']
-        self.id_pricelist = data['id_pricelist']
-        self.status = data['status']'''
-
     try:
         voucher = voucher_rules.create_by_params(request.POST)
     except TicketHunterNotExists:
         error_message = "Охотника с таким билетом нет в базе"
         return render(request, 'static/add_voucher_admin.html', locals())
 
-    return HttpResponseRedirect(reverse('users:about'))
+    return HttpResponseRedirect(reverse('vouchers:admin_vouchers'))
 
 def get_cur_vouchers(request):
     pricelist_rules = PriceListRules(request.session['user']['role_eng'])
@@ -125,5 +122,11 @@ def get_cur_vouchers(request):
         pricelist_set = pricelist_rules.get_by_sector(request.POST['id_sector'])
         return JsonResponse({'pricelist': pricelist_set}, status=200)
     return JsonResponse({}, status=200)
+
+def admin_vouchers(request):
+    voucher_rules = VoucherRules(request.session['user']['role_eng'])
+    vouchers = voucher_rules.get_vouchers_all()
+
+    return render(request, 'static/vouchers_admin.html', locals())
 
 
