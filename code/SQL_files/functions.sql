@@ -384,7 +384,36 @@ END;
 $$
 LANGUAGE PLpgSql;
 
-
 SELECT * FROM ShowAllRequests();
 
+DROP FUNCTION ShowAllVouchers();
+CREATE OR REPLACE FUNCTION ShowAllVouchers()
+RETURNS SETOF table_requests
+AS $$
+BEGIN
+	RETURN QUERY
+	(
+		SELECT id_voucher,
+			   surname, firstname, patronymic,
+			   mobile_phone,
+			   animal,
+			   amount_animals,
+			   ground_name,
+			   id_sector
+		FROM (
+			SELECT ID AS id_voucher, amount_animals, id_hunter, id_pricelist
+			FROM vouchers
+			WHERE status = true
+		) AS temp1 
+		JOIN price_list ON temp1.id_pricelist = price_list.id
+		JOIN hunters ON hunters.ticket_num = temp1.id_hunter
+		JOIN accounts ON accounts.login = hunters.login
+		JOIN sectors ON sectors.id = price_list.id_sector
+		JOIN hunting_grounds ON hunting_grounds.id = sectors.id_husbandry
+	);
+END;
+$$
+LANGUAGE PLpgSql;
+
+SELECT * FROM ShowAllVouchers();
 	
