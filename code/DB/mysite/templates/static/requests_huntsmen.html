@@ -1,0 +1,78 @@
+{% extends "static\general_extend.html" %}{% load static %}
+
+{% block title %} Егеря {% endblock %}
+
+{% block head_temp %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static '\css\style_all.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="show-find-params">
+  {% csrf_token %}
+  <div class="find-form p-l-25 p-r-25 p-t-30">
+
+      {% if info_message %}
+          <div class="alert-info">
+              <strong>{{ info_message }}</strong>
+          </div>
+      {% endif %}
+
+      {% if error_message %}
+          <div class="alert-danger">
+              <strong>{{ error_message }}</strong>
+          </div>
+      {% endif %}
+
+      <div class="p-t-30">
+        {% if requests %}
+        <div class="hunter-table">
+            <input 
+                type="text" 
+                id="find-voucher-ground" 
+                class="find-voucher-ground" 
+                onkeyup="FindNeed()" 
+                pattern="[А-Яа-яЁё\-]*"
+                placeholder="Поиск субъекта ...">
+        </div>
+
+        <table class="list-table" id="list-table">
+          <tr>
+            <th><b>ФИО</b></th>
+            <th><b>Дата рождения</b></th>
+            <th><b>Телефон</b></th>
+            <th><b>Электронная почта</b></th>
+            <th><b>Субъект</b></th>
+            <th><b>Сектор</b></th>
+            <th><b>Решение</b></th>
+          </tr>
+
+          {% for elem in requests %}
+              <tr class="items">
+                <td>{{elem.full_name}}</td>
+                <td>{{elem.date_of_birth}}</td>
+                <td>{{elem.mobile_phone}}</td>
+                <td>{{elem.email}}</td>
+                <td>{{elem.ground_name}}</td>
+                <td>{{elem.id_sector}}</td>
+                <td>
+                    <div style="display: flex; justify-content: center;">
+                        <a href="{% url 'start:accept_reg_huntsmen' elem.login %}" class="btn-del"> ✔ </a>
+                        <a href="{% url 'start:reject_reg_huntsmen' elem.login %}" class="btn-del"> ✖ </a>
+                    </div>
+                </td>
+              </tr>
+          {% endfor %}
+      </table>
+      {% else %}
+      <div class="alert alert-exist">
+        <strong>Нет заявок</strong>
+      </div>
+      {% endif %}
+
+      </div>
+      
+    </div>
+</div>
+
+{% endblock %}

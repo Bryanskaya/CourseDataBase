@@ -11,6 +11,9 @@ class HuntsmanRepository(Repository):
     def delete(self, obj: Huntsman):
         raise NotImplementedError
 
+    def reject(self, login):
+        raise NotImplementedError
+
     def update(self, obj_old: Huntsman, obj_upd: Huntsman):
         raise NotImplementedError
 
@@ -50,6 +53,13 @@ class PW_HuntsmanRepository(HuntsmanRepository):
             temp.execute()
         except:
             raise UpdateHuntsmanErr()
+
+    def reject(self, login):
+        try:
+            self.model.delete().where(HuntsmanModel.login == login).execute()
+        except:
+            raise DeleteHuntsmanErr()
+
 
     def get_all(self) -> [Huntsman]:
         temp = self.model.select()

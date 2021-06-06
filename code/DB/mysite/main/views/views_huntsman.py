@@ -24,9 +24,20 @@ def contacts(request):
 def show_huntsmen(request):
     huntsmen_rules = HuntsmanRules(request.session['user']['role_eng'])
     huntsmen = huntsmen_rules.get_all_detailed()
+    huntsmen = get_acc(huntsmen)
     hunting_grounds = csv_dict_reader()
 
     return render(request, 'static/show_huntsmen.html', locals())
+
+def get_acc(huntsmen: [dict]):
+    i = 0
+    while i < len(huntsmen):
+        if huntsmen[i]['type_role'] != 'егерь':
+            huntsmen.pop(i)
+            continue
+        i += 1
+
+    return huntsmen
 
 
 def find(request):
@@ -44,3 +55,9 @@ def find(request):
     hunting_grounds = csv_dict_reader()
 
     return render(request, 'static/show_huntsmen.html', locals())
+
+def reject_reg(request, login):
+    account_rules = AccountRules(request.session['user']['role_eng'])
+    account_rules.reject_huntsman(login)
+
+    return HttpResponseRedirect(reverse('huntsmen:show_huntsmen'))
