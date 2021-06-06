@@ -73,7 +73,8 @@ def show_all(request):
 
 def find_all(request):
     hunters_rules = HunterRules(request.session['user']['role_eng'])
-    hunters = hunters_rules.get_all_detailed()
+    #hunters = hunters_rules.get_all_detailed()
+    hunters = hunters_rules.get_acc_hunters()
 
     return render(request, 'static/all.html', locals())
 
@@ -89,4 +90,14 @@ def find(request):
     hunters = hunters_rules.get_by_params(data)
 
     return render(request, 'static/all.html', locals())
+
+
+def reject_reg(request, login):
+    account_rules = AccountRules(request.session['user']['role_eng'])
+    account_rules.reject_hunter(login)
+
+    return HttpResponseRedirect(reverse('hunters:show_all'))
+
+
+
 

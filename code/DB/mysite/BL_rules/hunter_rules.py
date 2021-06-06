@@ -20,6 +20,10 @@ class HunterRules(BaseRules):
 
         return obj
 
+    def delete_by_huntsman(self, ticket_num):
+        hunters_set = inject.instance(HunterRepository)(self.connection)
+        hunters_set.delete_by_huntsman(ticket_num)
+
     def get_by_login(self, login):
         hunters_set = inject.instance(HunterRepository)(self.connection)
         return hunters_set.get_by_login(login)
@@ -45,9 +49,14 @@ class HunterRules(BaseRules):
 
         hunters = hunters_set.get_all()
 
-        for i in range(len(hunters)):
+        i = 0
+        while i < len(hunters):
             pers = hunters[i].get_dict()
             account = accounts_set.get_by_login(pers['login']).get_dict()
+
+            if account['type_role'] != 'охотник':
+                hunters.pop(i)
+                continue
 
             pers['full_name'] = account['surname'] + ' ' + account['firstname'] + \
                 ' ' + account['patronymic']
@@ -60,6 +69,77 @@ class HunterRules(BaseRules):
             pers['type_role'] = account['type_role']
 
             hunters[i] = pers
+
+            i += 1
+
+        hunters = self.get_sorted(hunters)
+
+        return hunters
+
+    def get_req_hunters(self):
+        hunters_set = inject.instance(HunterRepository)(self.connection)
+        accounts_set = inject.instance(AccountsRepository)(self.connection)
+
+        hunters = hunters_set.get_all()
+
+        i = 0
+        while i < len(hunters):
+            pers = hunters[i].get_dict()
+            account = accounts_set.get_by_login(pers['login']).get_dict()
+
+            if account['type_role'] != '#охотник':
+                hunters.pop(i)
+                continue
+
+            pers['full_name'] = account['surname'] + ' ' + account['firstname'] + \
+                ' ' + account['patronymic']
+            pers['surname'] = account['surname']
+            pers['name'] = account['firstname']
+            pers['patronymic'] = account['patronymic']
+            pers['mobile_phone'] = account['mobile_phone']
+            pers['email'] = account['email']
+            pers['date_of_birth'] = account['date_of_birth']
+            pers['type_role'] = account['type_role']
+
+            hunters[i] = pers
+
+            i += 1
+
+        hunters = self.get_sorted(hunters)
+
+        return hunters
+
+    def get_acc_hunters(self):
+        hunters_set = inject.instance(HunterRepository)(self.connection)
+        accounts_set = inject.instance(AccountsRepository)(self.connection)
+
+        hunters = hunters_set.get_all()
+
+        if hunters is None:
+            return None
+
+        i = 0
+        while i < len(hunters):
+            pers = hunters[i].get_dict()
+            account = accounts_set.get_by_login(pers['login']).get_dict()
+
+            if account['type_role'] != 'охотник':
+                hunters.pop(i)
+                continue
+
+            pers['full_name'] = account['surname'] + ' ' + account['firstname'] + \
+                                ' ' + account['patronymic']
+            pers['surname'] = account['surname']
+            pers['name'] = account['firstname']
+            pers['patronymic'] = account['patronymic']
+            pers['mobile_phone'] = account['mobile_phone']
+            pers['email'] = account['email']
+            pers['date_of_birth'] = account['date_of_birth']
+            pers['type_role'] = account['type_role']
+
+            hunters[i] = pers
+
+            i += 1
 
         hunters = self.get_sorted(hunters)
 
