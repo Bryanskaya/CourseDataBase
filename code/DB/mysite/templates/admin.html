@@ -40,15 +40,15 @@
             <ul>
                 <li><a href="{% url 'vouchers:requests_all' %}">Заявки</a></li>
                 <li><a href="{% url 'vouchers:create_by_admin' %}">Выдать новую</a></li>
-                <li><a href="#">Выданные путёвки</a></li>
+                <li><a href="{% url 'vouchers:admin_vouchers' %}">Выданные путёвки</a></li>
             </ul>
         </li>
         <li class="menu-children">
             <a href="#">Заявки на регистрацию</a>
             <ul>
-                <li><a href="#">Администраторы</a></li>
-                <li><a href="#">Охотники</a></li>
-                <li><a href="#">Егеря</a></li>
+                <li><a href="{% url 'start:show_req_admins' %}">Администраторы</a></li>
+                <li><a href="{% url 'start:show_req_hunters' %}">Охотники</a></li>
+                <li><a href="{% url 'start:show_req_huntsmen' %}">Егеря</a></li>
             </ul>
         </li>        
         

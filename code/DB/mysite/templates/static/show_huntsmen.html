@@ -139,10 +139,10 @@
             <th><b>Электронная почта</b></th>
             <th><b>Субъект</b></th>
             <th><b>Сектор</b></th>
+            <th><b>Удалить аккаунт</b></th>
           </tr>
 
           {% for elem in huntsmen %}
-            {% if elem.type_role == "егерь" %}
               <tr class="items">
                 <td>{{elem.full_name}}</td>
                 <td>{{elem.date_of_birth}}</td>
@@ -150,8 +150,8 @@
                 <td>{{elem.email}}</td>
                 <td>{{elem.ground_name}}</td>
                 <td>{{elem.id_sector}}</td>
+                <td><a href="{% url 'huntsmen:reject_reg' elem.login %}" class="btn-del"> ✖ </a></td>
               </tr>
-            {% endif %}
           {% endfor %}
       </table>
       {% else %}

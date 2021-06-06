@@ -142,19 +142,19 @@
               <th><b>Электронная почта</b></th>
               <th><b>Номер охотничьего билета</b></th>
               <th><b>Адрес прописки</b></th>
+              <th><b>Удалить аккаунт</b></th>
           </tr>
 
           {% for elem in hunters %}
-            {% if elem.type_role == "охотник" %}
-              <tr class="items">
-                  <td>{{elem.full_name}}</td>
-                  <td>{{elem.date_of_birth}}</td>
-                  <td>{{elem.mobile_phone}}</td>
-                  <td>{{elem.email}}</td>
-                  <td>{{elem.ticket_num}}</td>
-                  <td>{{elem.residence}}</td>
-              </tr>
-            {% endif %}
+            <tr class="items">
+                <td>{{elem.full_name}}</td>
+                <td>{{elem.date_of_birth}}</td>
+                <td>{{elem.mobile_phone}}</td>
+                <td>{{elem.email}}</td>
+                <td>{{elem.ticket_num}}</td>
+                <td>{{elem.residence}}</td>
+                <td><a href="{% url 'hunters:reject_reg' elem.login %}" class="btn-del"> ✖ </a></td>
+            </tr>
           {% endfor %}
       </table>
       {% else %}

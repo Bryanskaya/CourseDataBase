@@ -229,7 +229,11 @@ def requests_to_log(request):
 
 def show_admins(request):
     acc_rules = AccountRules(request.session['user']['role_eng'])
-    admins = acc_rules.get_all()
+    if 'error_message' in request.session.keys():
+        error_message = request.session['error_message']
+        del request.session['error_message']
+
+    admins = acc_rules.get_acc_admins()
 
     for i in range(len(admins)):
         admins[i]['full_name'] = admins[i]['surname'] + ' ' + admins[i]['firstname'] + ' ' + \
@@ -251,3 +255,84 @@ def find(request):
                                admins[i]['patronymic']
 
     return render(request, 'static/show_admins.html', locals())
+
+def show_req_admins(request):
+    acc_rules = AccountRules(request.session['user']['role_eng'])
+    admins = acc_rules.get_req_admins()
+
+    for i in range(len(admins)):
+        admins[i]['full_name'] = admins[i]['surname'] + ' ' + admins[i]['firstname'] + ' ' + \
+                                 admins[i]['patronymic']
+
+    return render(request, 'static/requests_admins.html', locals())
+
+def show_req_hunters(request):
+    hunters_rules = HunterRules(request.session['user']['role_eng'])
+    requests = hunters_rules.get_req_hunters()
+
+    for i in range(len(requests)):
+        requests[i]['full_name'] = requests[i]['surname'] + ' ' + requests[i]['name'] + ' ' + \
+                                 requests[i]['patronymic']
+
+    return render(request, 'static/requests_all.html', locals())
+
+def show_req_huntsmen(request):
+    huntsmen_rules = HuntsmanRules(request.session['user']['role_eng'])
+    requests = huntsmen_rules.get_req_huntsmen()
+
+    for i in range(len(requests)):
+        requests[i]['full_name'] = requests[i]['surname'] + ' ' + requests[i]['name'] + ' ' + \
+                                   requests[i]['patronymic']
+
+    return render(request, 'static/requests_huntsmen.html', locals())
+
+def accept_reg_admins(request, login):
+    acc_rules = AccountRules(request.session['user']['role_eng'])
+    acc_rules.accept(login)
+
+    return HttpResponseRedirect(reverse('start:show_req_admins'))
+
+def accept_reg_hunters(request, login):
+    acc_rules = AccountRules(request.session['user']['role_eng'])
+    acc_rules.accept(login)
+
+    return HttpResponseRedirect(reverse('start:show_req_hunters'))
+
+def accept_reg_huntsmen(request, login):
+    acc_rules = AccountRules(request.session['user']['role_eng'])
+    acc_rules.accept(login)
+
+    return HttpResponseRedirect(reverse('start:show_req_huntsmen'))
+
+def reject_reg_admins(request, login):
+    acc_rules = AccountRules(request.session['user']['role_eng'])
+    if login == request.session['user']['login']:
+        request.session['error_message'] = 'Отказано: попытка удалить свой аккаунт'
+        return HttpResponseRedirect(reverse('start:show_admins'))
+
+    acc_rules.reject_admin(login)
+
+    return HttpResponseRedirect(reverse('start:show_req_admins'))
+
+def reject_reg_hunters(request, login):
+    account_rules = AccountRules(request.session['user']['role_eng'])
+    account_rules.reject_hunter(login)
+
+    return HttpResponseRedirect(reverse('start:show_req_hunters'))
+
+def reject_reg_huntsmen(request, login):
+    account_rules = AccountRules(request.session['user']['role_eng'])
+    account_rules.reject_huntsman(login)
+
+    return HttpResponseRedirect(reverse('start:show_req_huntsmen'))
+
+def reject_acc_admins(request, login):
+    acc_rules = AccountRules(request.session['user']['role_eng'])
+    if login == request.session['user']['login']:
+        request.session['error_message'] = 'Отказано: попытка удалить свой аккаунт'
+        return HttpResponseRedirect(reverse('start:show_admins'))
+
+    acc_rules.reject_admin(login)
+
+    return HttpResponseRedirect(reverse('start:show_admins'))
+

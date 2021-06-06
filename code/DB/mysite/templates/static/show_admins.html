@@ -128,17 +128,17 @@
               <th><b>Дата рождения</b></th>
               <th><b>Телефон</b></th>
               <th><b>Электронная почта</b></th>
+              <th><b>Удалить аккаунт</b></th>
           </tr>
 
           {% for elem in admins %}
-            {% if elem.type_role == "админ" %}
               <tr class="items">
                   <td>{{elem.full_name}}</td>
                   <td>{{elem.date_of_birth}}</td>
                   <td>{{elem.mobile_phone}}</td>
                   <td>{{elem.email}}</td>
+                  <td><a href="{% url 'start:reject_acc_admins' elem.login %}" class="btn-del"> ✖ </a></td>
               </tr>
-            {% endif %}
           {% endfor %}
       </table>
       {% else %}

@@ -42,6 +42,10 @@ class PW_HunterRepository(HunterRepository):
         temp = self.model.delete().where(HunterModel.ticket_num == obj.ticket_num)
         temp.execute()
 
+    def delete_by_huntsman(self, ticket_num):
+        temp = self.model.delete().where(HunterModel.ticket_num == ticket_num)
+        temp.execute()
+
     def update(self, obj_old: Hunter, obj_upd: Hunter):
         if self.get_by_ticket_num(obj_old.ticket_num) is None:
             raise LoginHunterNotExists()

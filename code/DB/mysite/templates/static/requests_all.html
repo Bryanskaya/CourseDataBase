@@ -14,7 +14,7 @@
 
 {% block content %}
 <div class="show-voucher">
-    <form class="show-form p-l-25 p-r-25 p-t-30" method="POST" action="{% url 'hunters:buy' %}">
+    <form class="show-form p-l-25 p-r-25 p-t-30">
         {% csrf_token %}
 
         {% if info_message %}
@@ -29,7 +29,7 @@
             </div>
         {% endif %}
         
-        <div class="voucher-table">
+        <div class="voucher-table p-t-30">
             {% if requests %}
             <input 
                 type="text" 
@@ -42,26 +42,26 @@
             <table class="list-table" id="list-table">
                 <tr>
                     <th><b>ФИО</b></th>
+                    <th><b>Дата рождения</b></th>
                     <th><b>Телефон</b></th>
-                    <th><b>Животное</b></th>
-                    <th><b>Количество</b></th>
-                    <th><b>Субъект</b></th>
-                    <th><b>Сектор</b></th>
+                    <th><b>Электронная почта</b></th>
+                    <th><b>Номер охотничьего билета</b></th>
+                    <th><b>Адрес прописки</b></th>
                     <th><b>Решение</b></th>
                 </tr>
 
                 {% for elem in requests %}
                 <tr class="items">
                     <td>{{elem.full_name}}</td>
+                    <td>{{elem.date_of_birth}}</td>
                     <td>{{elem.mobile_phone}}</td>
-                    <td>{{elem.animal}}</td> 
-                    <td>{{elem.amount_animals}}</td>
-                    <td>{{elem.ground_name}}</td>
-                    <td>{{elem.id_sector}}</td>
+                    <td>{{elem.email}}</td>
+                    <td>{{elem.ticket_num}}</td>
+                    <td>{{elem.residence}}</td>
                     <td>
                         <div style="display: flex; justify-content: center;">
-                            <a href="{% url 'vouchers:accept_by_admin' elem.id_voucher %}" class="btn-del"> ✔ </a>
-                            <a href="{% url 'vouchers:reject_by_admin' elem.id_voucher %}" class="btn-del"> ✖ </a>
+                            <a href="{% url 'start:accept_reg_hunters' elem.login %}" class="btn-del"> ✔ </a>
+                            <a href="{% url 'start:reject_reg_hunters' elem.login %}" class="btn-del"> ✖ </a>
                         </div>
                     </td>
 
