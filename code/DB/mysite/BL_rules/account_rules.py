@@ -6,6 +6,8 @@ sys.path.append("..")
 from inject_config import *
 from BL_rules.base_rules import *
 from errors.err_account import *
+from BL_rules.huntsman_rules import *
+from BL_rules.voucher_rules import *
 
 
 class AccountRules(BaseRules):
@@ -93,6 +95,33 @@ class AccountRules(BaseRules):
 
         return account
 
+    def accept(self, login):
+        acc_rep = inject.instance(AccountsRepository)(self.connection)
+        acc_rep.accept(login)
+
+    def reject(self, login):
+        accounts_set = inject.instance(AccountsRepository)(self.connection)
+        accounts_set.reject(login)
+
+    def reject_admin(self, login):
+        self.reject(login)
+
+    def reject_hunter(self, login):
+        vouchers_rules = VoucherRules('', self.connection)
+        hunters_rules = HunterRules('', self.connection)
+
+        hunter = hunters_rules.get_by_login(login).get_dict()
+
+        vouchers_rules.delete_by_huntsman(hunter['ticket_num'])
+        hunters_rules.delete_by_huntsman(hunter['ticket_num'])
+        self.reject(login)
+
+    def reject_huntsman(self, login):
+        huntsman_rules = HuntsmanRules('', self.connection)
+
+        huntsman_rules.reject(login)
+        self.reject(login)
+
     def delete_account(self, obj: Account):
         accounts_set = inject.instance(AccountsRepository)(self.connection)
         accounts_set.delete(obj)
@@ -112,6 +141,39 @@ class AccountRules(BaseRules):
         accounts = self.get_sorted(accounts)
 
         return accounts
+
+    def get_req_admins(self):
+        acc_rep = inject.instance(AccountsRepository)(self.connection)
+        accounts = acc_rep.get_all()
+
+        for i in range(len(accounts)):
+            accounts[i] = accounts[i].get_dict()
+
+        i = 0
+        while i < len(accounts):
+            if accounts[i]['type_role'] != '#админ':
+                accounts.pop(i)
+                continue
+            i += 1
+
+        return accounts
+
+    def get_acc_admins(self):
+        acc_rep = inject.instance(AccountsRepository)(self.connection)
+        accounts = acc_rep.get_all()
+
+        for i in range(len(accounts)):
+            accounts[i] = accounts[i].get_dict()
+
+        i = 0
+        while i < len(accounts):
+            if accounts[i]['type_role'] != 'админ':
+                accounts.pop(i)
+                continue
+            i += 1
+
+        return accounts
+
 
     def get_by_params(self, data):
         accounts = self.get_all()

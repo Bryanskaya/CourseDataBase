@@ -11,6 +11,9 @@ class AccountsRepository(Repository):
     def delete(self, obj: Account):
         raise NotImplementedError
 
+    def accept(self, login: str):
+        raise NotImplementedError
+
     def update(self, obj_old: Account, obj_upd: Account):
         raise NotImplementedError
 
@@ -50,6 +53,19 @@ class PW_AccountsRepository(AccountsRepository):
         temp = self.model.delete().where(AccountModel.login == obj.login)
         temp.execute()
 
+    def accept(self, login: str):
+        try:
+            pers = self.get_by_login(login)
+            self.model.update(type_role=pers.type_role[1:]).where(AccountModel.login == login).execute()
+        except:
+            raise AcceptAccountErr()
+
+    def reject(self, login: str):
+        try:
+            self.model.delete().where(AccountModel.login == login).execute()
+        except:
+            raise DeleteAccountErr()
+
     def update(self, obj_old: Account, obj_upd: Account):
         if self.get_by_login(obj_old.login) is None:
             raise LoginAccountNotExists()
@@ -62,6 +78,10 @@ class PW_AccountsRepository(AccountsRepository):
 
     def get_all(self) -> [Account]:
         temp = self.model.select()
+        return transf_to_objs(temp, Account)
+
+    def get_acc_admins(self) -> [Account]:
+        temp = self.model.select().where(AccountModel.type_role == "админ")
         return transf_to_objs(temp, Account)
 
     def get_by_login(self, login: str) -> Account:
