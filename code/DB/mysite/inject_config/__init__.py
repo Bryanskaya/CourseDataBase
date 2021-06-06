@@ -3,20 +3,23 @@ import peewee
 from pattern_repository.db_config import *
 from pattern_repository.repository import * #for CurConnection
 from load_config_file import *
+from mail.send_email import *
 
 
 def init_injector(bnd):
     bnd.bind(peewee.Database, peewee.PostgresqlDatabase)
-    bnd.bind_to_constructor(load_config, lambda: load_config('config.json'))
+    bnd.bind_to_constructor(DBConfig, lambda: load_config('config.json'))
+    bnd.bind_to_constructor(EmailConfig, lambda: EmailConfig('mail/config_email.json'))
     bnd.bind_to_constructor(CurConnection, lambda: get_config_params(inject.instance(peewee.Database),
-                                                                     inject.instance(load_config).get_item('admin_connection')))
+                                                                     inject.instance(DBConfig).get_item('admin_connection')))
 
     bnd.bind_to_constructor(AdminConnection, lambda: get_config_params(inject.instance(peewee.Database),
-                                                                       inject.instance(load_config).get_item('admin_connection')))
+                                                                       inject.instance(DBConfig).get_item('admin_connection')))
     bnd.bind_to_constructor(HunterConnection, lambda: get_config_params(inject.instance(peewee.Database),
-                                                                        inject.instance(load_config).get_item('hunter_connection')))
+                                                                        inject.instance(DBConfig).get_item('hunter_connection')))
     bnd.bind_to_constructor(HuntsmanConnection, lambda: get_config_params(inject.instance(peewee.Database),
-                                                                          inject.instance(load_config).get_item('huntsman_connection')))
+                                                                          inject.instance(DBConfig).get_item('huntsman_connection')))
+    bnd.bind_to_constructor(MailManager, lambda: MailManager(inject.instance(EmailConfig)))
 
 
 inject.clear_and_configure(init_injector)

@@ -8,6 +8,7 @@ from BL_rules.base_rules import *
 from errors.err_account import *
 from BL_rules.huntsman_rules import *
 from BL_rules.voucher_rules import *
+from mail.send_email import *
 
 
 class AccountRules(BaseRules):
@@ -174,7 +175,6 @@ class AccountRules(BaseRules):
 
         return accounts
 
-
     def get_by_params(self, data):
         accounts = self.get_all()
 
@@ -194,6 +194,29 @@ class AccountRules(BaseRules):
             i += 1
 
         return accounts
+
+    def send_recover(self, obj: Account):
+        email = obj.get_email()
+        inject.instance(MailManager).generate_mail(email)
+
+    def check_recover(self, data: dict):
+        cur_code = data['num1'] + data['num2'] + \
+                   data['num3'] + data['num4']
+
+        cnt_code = inject.instance(MailManager).get_code(data['email'])
+        if cnt_code != cur_code:
+            raise WrongCode()
+
+        if data['password'] != data['repeated_password']:
+            raise DifferPasswords()
+
+        acc_rep = inject.instance(AccountsRepository)(self.connection)
+        account = acc_rep.get_by_login(data['login'])
+
+        hashed_pwd = self.make_password_hashed(data['password'], account.get_salt())
+        acc_rep.update_password(data['login'], hashed_pwd)
+
+
 
 
 

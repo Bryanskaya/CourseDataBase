@@ -127,22 +127,32 @@ def recover_password(request, login):
             'error_message': 'Ваша заявка рассматривается',
         })
 
-    email = account.get_email()
-
-    #TODO send email
+    acc_rules.send_recover(account)
 
     return render(request, 'static/recover_password.html', locals())
 
 
 def check_code(request):
-    cur_code = request.POST['num1'] + request.POST['num2'] + \
-               request.POST['num3'] + request.POST['num4']
-    #if cur_code == code:
-    return render(request, 'static/new_password.html')
-    #else
-    # return render(request, 'static/recover_password.html', {
-    #     'error_message': 'Неверный код',
-    # })
+    acc_rules = AccountRules('admin')
+
+    data = dict(request.POST)
+    for key in data.keys():
+        data[key] = data[key][0]
+
+    try:
+        acc_rules.check_recover(data)
+    except WrongCode:
+        return render(request, 'static/start_page.html', {
+            'error_message': 'Неверный код восстановления',
+        })
+    except DifferPasswords:
+        return render(request, 'static/start_page.html', {
+            'error_message': 'Введённые пароли не совпадают',
+        })
+
+    return render(request, 'static/start_page.html', {
+            'info_message': 'Пароль успешно изменён',
+        })
 
 
 def calculate_age(born):
@@ -211,7 +221,8 @@ def register(request, proved):
 
     if user is None:
         acc_rules.delete_account(account)
-        data['error_message'] = 'Ошибка регистрации данных'
+        data['error_message'] = 'Ошибка регистрации данных (проверьте уникальные поля, возможно они уже используются ' \
+                                'другим пользователем)'
         return render(request, 'static/register_page.html', locals())
 
     return render(request, 'static/start_page.html', locals())
@@ -250,9 +261,15 @@ def find(request):
     data['patronymic'] = request.POST['patronymic']
 
     admins = acc_rules.get_by_params(data)
-    for i in range(len(admins)):
+    i = 0
+    while i < len(admins):
+        if admins[i]['type_role'] != request.session['user']['role']:
+            admins.pop(i)
+            continue
+
         admins[i]['full_name'] = admins[i]['surname'] + ' ' + admins[i]['firstname'] + ' ' + \
                                admins[i]['patronymic']
+        i += 1
 
     return render(request, 'static/show_admins.html', locals())
 

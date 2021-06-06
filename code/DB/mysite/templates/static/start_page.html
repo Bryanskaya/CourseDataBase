@@ -15,6 +15,11 @@
                     <strong>{{ data.info_message }}</strong>
                 </div>
             {% endif %}
+            {% if info_message %}
+                <div class="alert-info">
+                    <strong>{{ info_message }}</strong>
+                </div>
+            {% endif %}
             <div class="wrap-login">
                 <form class="login-form p-l-55 p-r-55 p-t-178" method="POST" action="{% url 'start:authorise' %}">
                     {% csrf_token %}

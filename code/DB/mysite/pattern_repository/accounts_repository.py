@@ -17,6 +17,9 @@ class AccountsRepository(Repository):
     def update(self, obj_old: Account, obj_upd: Account):
         raise NotImplementedError
 
+    def update_password(self, login, password):
+        raise NotImplementedError
+
     def get_all(self) -> [Account]:
         raise NotImplementedError
 
@@ -71,6 +74,16 @@ class PW_AccountsRepository(AccountsRepository):
             raise LoginAccountNotExists()
 
         temp = self.model.update(obj_upd.get_dict()).where(AccountModel.login == obj_upd.login)
+        try:
+            temp.execute()
+        except:
+            raise UpdateAccountErr()
+
+    def update_password(self, login, password):
+        if self.get_by_login(login) is None:
+            raise LoginAccountNotExists()
+
+        temp = self.model.update(hashed_password=password).where(AccountModel.login == login)
         try:
             temp.execute()
         except:
