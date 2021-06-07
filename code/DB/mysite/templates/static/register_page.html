@@ -222,6 +222,10 @@
 
 
                         <script>
+                            window.onload = function() {
+                                HiddenFields();
+                            }
+
                             function GetSectors() {
                                 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 

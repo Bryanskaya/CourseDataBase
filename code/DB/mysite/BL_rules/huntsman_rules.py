@@ -1,7 +1,7 @@
 from inject_config import *
 from BL_objects.huntsman import *
 from errors.err_huntsman import *
-from BL_rules.base_rules import *
+from . import *
 
 
 class HuntsmanRules(BaseRules):

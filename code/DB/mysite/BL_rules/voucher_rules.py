@@ -1,6 +1,10 @@
 from BL_objects.vouchers import *
 
 from . import *
+from .hunter_rules import HunterRules
+from .pricelist_rules import PriceListRules
+from .sector_rules import SectorRules
+from .huntinggrounds_rules import HuntingGroundsRules
 from inject_config import *
 from pattern_repository.detailed_voucher import *
 from errors.err_voucher import *
@@ -190,6 +194,7 @@ class VoucherRules(BaseRules):
                                                x['animal']))
 
     def build_request(self, data: Voucher):
+        from .account_rules import AccountRules
         hunter_rules = HunterRules('', connection=self.connection)
         list_rules = PriceListRules('', connection=self.connection)
         account_rules = AccountRules('', connection=self.connection)
@@ -214,6 +219,7 @@ class VoucherRules(BaseRules):
         return data
 
     def build_request_detailed(self, data: DetailedVoucher):
+        from .account_rules import AccountRules
         hunter_rules = HunterRules('', connection=self.connection)
         list_rules = PriceListRules('', connection=self.connection)
         account_rules = AccountRules('', connection=self.connection)

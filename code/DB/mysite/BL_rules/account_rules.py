@@ -1,4 +1,7 @@
 from . import *
+from .voucher_rules import VoucherRules
+from .huntsman_rules import HuntsmanRules
+from .hunter_rules import HunterRules
 import hashlib, uuid
 
 import sys

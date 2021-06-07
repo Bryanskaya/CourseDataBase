@@ -93,6 +93,7 @@ def find(request):
 
 
 def reject_reg(request, login):
+    print("MUST")
     account_rules = AccountRules(request.session['user']['role_eng'])
     account_rules.reject_hunter(login)
 

@@ -58,6 +58,11 @@ def reject(request, id):
 
     return render(request, 'static/requests.html', locals())
 
+def delete_voucher(request, id):
+    voucher_rules = VoucherRules(request.session['user']['role_eng'])
+    voucher_rules.delete(id)
+    return HttpResponseRedirect(reverse('vouchers:huntsman_vouchers'))
+
 def reject_by_admin(request, id):
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
 

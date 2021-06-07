@@ -7,6 +7,7 @@ app_name = 'vouchers'
 urlpatterns = [
     path('requests/', lambda req, **kwargs: do_log(views_voucher.requests, req, **kwargs), name='requests'),
     path('requests/reject/<int:id>', lambda req, **kwargs: do_log(views_voucher.reject, req, **kwargs), name='reject'),
+    path('delete_voucher/<int:id>', lambda req, **kwargs: do_log(views_voucher.delete_voucher, req, **kwargs), name='delete_voucher'),
     path('requests/reject_by_admin/<int:id>', lambda req, **kwargs: do_log(views_voucher.reject_by_admin, req, **kwargs), name='reject_by_admin'),
     path('requests/rejectv_by_admin/<int:id>', lambda req, **kwargs: do_log(views_voucher.rejectv_by_admin, req, **kwargs), name='rejectv_by_admin'),
     path('requests/accept/<int:id>', lambda req, **kwargs: do_log(views_voucher.accept, req, **kwargs), name='accept'),

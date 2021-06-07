@@ -58,7 +58,7 @@
                     <td>{{elem.id_voucher}}</td>
                     <td>{{elem.animal}}</td> 
                     <td>{{elem.amount_animals}}</td>
-                    <td><a href="{% url 'vouchers:reject' elem.id_voucher %}" class="btn-del"> ✔ </a></td>
+                    <td><a href="{% url 'vouchers:delete_voucher' elem.id_voucher %}" class="btn-del"> ✔ </a></td>
                 </tr>
                 {% endfor %}
             </table>

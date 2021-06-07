@@ -142,7 +142,9 @@
               <th><b>Электронная почта</b></th>
               <th><b>Номер охотничьего билета</b></th>
               <th><b>Адрес прописки</b></th>
+              {% if request.session.user.role_eng == 'admin' %}
               <th><b>Удалить аккаунт</b></th>
+              {% endif %}
           </tr>
 
           {% for elem in hunters %}
@@ -153,7 +155,9 @@
                 <td>{{elem.email}}</td>
                 <td>{{elem.ticket_num}}</td>
                 <td>{{elem.residence}}</td>
+                {% if request.session.user.role_eng == 'admin' %}
                 <td><a href="{% url 'hunters:reject_reg' elem.login %}" class="btn-del"> ✖ </a></td>
+                {% endif %}
             </tr>
           {% endfor %}
       </table>

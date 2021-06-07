@@ -1,9 +1,9 @@
 from BL_objects.price_list import *
 
-from BL_rules.base_rules import *
-from BL_rules.sector_rules import *
-from BL_rules.huntinggrounds_rules import *
-from BL_rules.huntsman_rules import *
+from . import *
+from .sector_rules import SectorRules
+from .huntinggrounds_rules import HuntingGroundsRules
+from inject_config import *
 
 
 class PriceListRules(BaseRules):

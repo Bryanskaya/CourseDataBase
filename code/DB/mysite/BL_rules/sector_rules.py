@@ -1,4 +1,5 @@
-from BL_rules.base_rules import *
+from . import *
+from inject_config import *
 
 
 class SectorRules(BaseRules):
