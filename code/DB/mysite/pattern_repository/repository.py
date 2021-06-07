@@ -1,5 +1,5 @@
 class Repository(object):
-    # def __init__(self):
+    # def __init__.py(self):
     #     pass
 
     def create(self, obj):

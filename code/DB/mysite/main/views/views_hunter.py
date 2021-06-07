@@ -98,6 +98,3 @@ def reject_reg(request, login):
 
     return HttpResponseRedirect(reverse('hunters:show_all'))
 
-
-
-

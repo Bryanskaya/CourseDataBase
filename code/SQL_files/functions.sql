@@ -345,6 +345,7 @@ DROP TYPE table_requests CASCADE;
 CREATE TYPE table_requests AS
 (
 	id_voucher		INTEGER,
+	id_hunter		TEXT,
 	surname 		VARCHAR(30),
 	firstname 		VARCHAR(30),
 	patronymic		VARCHAR(30),
@@ -363,6 +364,7 @@ BEGIN
 	RETURN QUERY
 	(
 		SELECT id_voucher,
+				id_hunter,
 			   surname, firstname, patronymic,
 			   mobile_phone,
 			   animal,
@@ -394,6 +396,7 @@ BEGIN
 	RETURN QUERY
 	(
 		SELECT id_voucher,
+			   id_hunter,
 			   surname, firstname, patronymic,
 			   mobile_phone,
 			   animal,

@@ -1,9 +1,7 @@
 from BL_objects.vouchers import *
 
-from BL_rules.base_rules import *
-from BL_rules.pricelist_rules import *
-from BL_rules.hunter_rules import *
-from BL_rules.account_rules import *
+from . import *
+from inject_config import *
 from pattern_repository.detailed_voucher import *
 from errors.err_voucher import *
 from errors.err_general import *
@@ -215,9 +213,40 @@ class VoucherRules(BaseRules):
 
         return data
 
+    def build_request_detailed(self, data: DetailedVoucher):
+        hunter_rules = HunterRules('', connection=self.connection)
+        list_rules = PriceListRules('', connection=self.connection)
+        account_rules = AccountRules('', connection=self.connection)
+
+        data = data.get_dict()
+
+        hunter = hunter_rules.get_by_ticket_num(data['id_hunter']).get_dict()
+        account = account_rules.get_person(hunter['login']).get_dict()
+
+        data['surname'] = account['surname']
+        data['name'] = account['firstname']
+        data['patronymic'] = account['patronymic']
+        data['full_name'] = data['surname'] + ' ' + data['name'] + \
+            ' ' + data['patronymic']
+        data['mobile_phone'] = account['mobile_phone']
+        data['email'] = account['email']
+
+
+        return data
+
     def get_requests_all(self):
         vouchers_set = inject.instance(DetailedVoucherRepository)(self.connection)
-        vouchers = vouchers_set.get_requests_all()
+        requests = vouchers_set.get_requests_all()
+
+        if requests is None:
+            return None
+
+        for i in range(len(requests)):
+            requests[i] = self.build_request_detailed(requests[i])
+
+        return sorted(requests, key=lambda x: (x['surname'], x['name'],
+                                               x['patronymic'], x['id_voucher'],
+                                               x['animal']))
 
         for i in range(len(vouchers)):
             temp = vouchers[i].get_dict()

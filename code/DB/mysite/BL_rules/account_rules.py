@@ -1,13 +1,11 @@
+from . import *
 import hashlib, uuid
 
 import sys
 sys.path.append("..")
 
 from inject_config import *
-from BL_rules.base_rules import *
 from errors.err_account import *
-from BL_rules.huntsman_rules import *
-from BL_rules.voucher_rules import *
 from mail.send_email import *
 
 

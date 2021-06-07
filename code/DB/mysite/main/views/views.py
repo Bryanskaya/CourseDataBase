@@ -7,7 +7,7 @@ import sys
 
 sys.path.append("../")
 
-from BL_rules.account_rules import *
+from BL_rules.account_rules import AccountRules, BaseAccountCheck, AllRolesCheck
 from BL_rules.hunter_rules import *
 from BL_rules.huntsman_rules import *
 from BL_rules.sector_rules import *

@@ -17,6 +17,6 @@ urlpatterns = [
     path('add_voucher/', lambda req, **kwargs: do_log(views_voucher.create_by_huntsman, req, **kwargs), name='create_by_huntsman'),
     path('add_voucher_admin/', lambda req, **kwargs: do_log(views_voucher.create_by_admin, req, **kwargs), name='create_by_admin'),
     path('add_voucher_admint/', lambda req, **kwargs: do_log(views_voucher.add_by_admin, req, **kwargs), name='add_by_admin'),
-    path('requests_all/', lambda req, **kwargs: do_log(views_voucher.requests_all, req, **kwargs), name='requests_all'),
+    path('all_vouchers/admin', lambda req, **kwargs: do_log(views_voucher.requests_all, req, **kwargs), name='requests_all'),
     path('get_cur_vouchers/', lambda req, **kwargs: do_log(views_voucher.get_cur_vouchers, req, **kwargs), name='get_cur_vouchers'),
 ]

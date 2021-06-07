@@ -23,16 +23,20 @@ def requests(request):
     return render(request, 'static/requests.html', locals())
 
 def requests_all(request):
+    print('asassssssssssssssssssssssssssssssssssss')
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
     requests = voucher_rules.get_requests_all()
 
-    return render(request, 'static/requests_all.html', locals())
+    return render(request, 'static/requests.html', locals())
 
 
 def accept(request, id):
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
     voucher_rules.accept(id)
-    requests = voucher_rules.get_requests_by_login(request.session['user']['login'])
+    if request.session['user']['role_eng'] == 'admin':
+        requests = voucher_rules.get_requests_all()
+    else:
+        requests = voucher_rules.get_requests_by_login(request.session['user']['login'])
 
     return render(request, 'static/requests.html', locals())
 
@@ -47,7 +51,10 @@ def reject(request, id):
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
 
     voucher_rules.delete(id)
-    requests = voucher_rules.get_vouchers(request.session['user']['login'])
+    if request.session['user']['role_eng'] == 'admin':
+        requests = voucher_rules.get_requests_all()
+    else:
+        requests = voucher_rules.get_requests_by_login(request.session['user']['login'])
 
     return render(request, 'static/requests.html', locals())
 

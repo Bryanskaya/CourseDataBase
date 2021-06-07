@@ -1,5 +1,6 @@
 class DetailedVoucher(object):
     id_voucher = None
+    id_hunter = None
     surname = None
     firstname = None
     patronymic = None
@@ -14,6 +15,7 @@ class DetailedVoucher(object):
             return
 
         self.id_voucher = data['id_voucher']
+        self.id_hunter = data['id_hunter']
         self.surname = data['surname']
         self.firstname = data['firstname']
         self.patronymic = data['patronymic']
@@ -25,6 +27,7 @@ class DetailedVoucher(object):
 
     def get_dict(self) -> dict:
         return {'id_voucher': self.id_voucher,
+                'id_hunter': self.id_hunter,
                 'surname': self.surname,
                 'firstname': self.firstname,
                 'patronymic': self.patronymic,

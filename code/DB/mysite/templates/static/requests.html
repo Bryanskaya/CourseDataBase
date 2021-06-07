@@ -47,6 +47,10 @@
                     <th><b>Номер заявки</b></th>
                     <th><b>Животное</b></th>
                     <th><b>Количество</b></th>
+                    {% if request.session.user.role_eng == 'admin' %}
+                    <th><b>Субъект</b></th>
+                    <th><b>Сектор</b></th>
+                    {% endif %}
                     <th><b>Решение</b></th>
                 </tr>
 
@@ -58,6 +62,10 @@
                     <td>{{elem.id_voucher}}</td>
                     <td>{{elem.animal}}</td> 
                     <td>{{elem.amount_animals}}</td>
+                    {% if request.session.user.role_eng == 'admin' %}
+                    <td>{{elem.ground_name}}</td>
+                    <td>{{elem.id_sector}}</td>
+                    {% endif %}
                     <td>
                         <div style="display: flex; justify-content: center;">
                             <a href="{% url 'vouchers:accept' elem.id_voucher %}" class="btn-del"> ✔ </a>
