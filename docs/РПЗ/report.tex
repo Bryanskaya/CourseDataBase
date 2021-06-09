@@ -1,0 +1,63 @@
+%\documentclass[14pt]{extarticle}
+\documentclass[12pt, a4paper]{article}
+\include{format.inc}
+
+
+\begin{document}
+%	\includepdf[pages=-]{titlesheet.pdf}
+	
+	\setcounter{page}{3}
+	
+	\input{00-essay.tex}
+	\newpage
+	
+	% Содержание
+	\tableofcontents
+	\newpage
+	
+%	\printnomenclature[2em]
+%	В тексте писать так: $\beta$\nomenclature{$\beta$}{Вторая буква греческого алфавита}
+	
+	\input{01-introduction.tex}
+	\newpage
+	
+	\input{02-analytical_part.tex}
+	\newpage
+	
+	\input{03-construction_part.tex}
+	\newpage
+	
+	\input{99-bib.tex}
+	
+%	\input{section/introduction.tex}
+%	\section{Раздел первый}
+%	Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста Немного 
+	
+%	\subsection{ghbdtn}
+	
+%	текста Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста 
+	
+%	\begin{figure}
+%		\caption{Подпись}
+%	\end{figure}
+	
+%	Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста Немного текста 
+%	\input{section/filename.tex}
+%	...
+%	\section{}
+%	\input{section/filename.tex}
+%	\section*{Заключение}
+%	\addcontentsline{toc}{section}{Заключение}
+%	\input{section/conclusion.tex}
+	
+%	\begin{thebibliography}{9} 
+%		\addcontentsline{toc}{section}{Литература}
+%		\bibitem{lamport94} Leslie Lamport, \emph{\LaTeX: a document preparation system}. Addison Wesley, Massachusetts, 2nd edition, 1994. 
+%	\end{thebibliography}
+	
+%	\section*{Приложения}
+%	\addcontentsline{toc}{section}{Приложения}
+%	\subsection*{Приложение 1}
+%	\addcontentsline{toc}{subsection}{Приложение 1}
+%	\input{appendix/appendix_1.tex}
+\end{document}

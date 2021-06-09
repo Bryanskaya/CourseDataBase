@@ -4,6 +4,7 @@ from testBL_views.account import *
 from testBL_views.hunting_grounds import *
 from testBL_views.huntsman_views import *
 
+
 def pricelist_all():
     print('\n' + PriceListView.get_all())
 
