@@ -109,7 +109,7 @@
 		\begin{figure}[ph!]
 			\centering
 			\begin{center}
-				{\includegraphics[scale=0.28, angle=90]{schemes/uml_full.pdf}}
+				{\includegraphics[scale=0.44, angle=90]{schemes/uml_full.pdf}}
 				\caption{UML-диаграмма компонента бизнес-логики}
 				\label{fig9:image}
 			\end{center}
@@ -151,7 +151,7 @@
 		\end{center}
 	\end{figure}
 
-	Если охотник введёт некорректные данные (например, как на рисунке \ref{fig12:image}) и попробует оформить заявку, нажав на <<Отправить заявку>>
+	Если охотник введёт некорректные данные (например, как на рисунке \ref{fig12:image}) и попробует оформить путёвку, нажав на <<Отправить заявку>>, то он увидит сообщение о невалидности данных (рисунок \ref{fig13:image}).
 	
 	\begin{figure}[h]
 		\centering
@@ -161,6 +161,90 @@
 			\label{fig12:image}
 		\end{center}
 	\end{figure}
+
+	\begin{figure}[h]
+		\centering
+		\begin{center}
+			{\includegraphics[scale=0.34]{schemes/screens/msg_error.png}}
+			\caption{Сообщение о некорректном вводе данных}
+			\label{fig13:image}
+		\end{center}
+	\end{figure}
+	\newpage
+	
+	Также пользователь может воспользоваться поиском по названию субъекта (рисунок \ref{fig14:image}).
+	
+	\begin{figure}[h]
+		\centering
+		\begin{center}
+			{\includegraphics[scale=0.3245]{schemes/screens/find.png}}
+			\caption{Демонстрация работы поиска}
+			\label{fig14:image}
+		\end{center}
+	\end{figure}
+	\newpage
+
+	Если же охотник ввёл корректное число животных (рисунок \ref{fig15:image}) и нажал на <<Отправить заявку>>, то в этом случае на странице появляется соответствующее сообщение, как на рисунке \ref{fig16:image}.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{center}
+			{\includegraphics[scale=0.34]{schemes/screens/right_data.png}}
+			\caption{Корректно оформленная заявка}
+			\label{fig15:image}
+		\end{center}
+	\end{figure}
+
+	\begin{figure}[h]
+		\centering
+		\begin{center}
+			{\includegraphics[scale=0.34]{schemes/screens/msg_right.png}}
+			\caption{Сообщение об успешном оформлении заявки}
+			\label{fig16:image}
+		\end{center}
+	\end{figure}
+
+	Просмотреть все свои заявки, а также уже одобренные путёвки охотник может, кликнув на поле <<Просмотреть свои>> (рисунок \ref{fig17:image}).
+	
+	\begin{figure}[h]
+		\centering
+		\begin{center}
+			{\includegraphics[scale=0.34]{schemes/screens/to_have.png}}
+			\caption{Переход на страницу всех заявок и одобренных путёвок}
+			\label{fig17:image}
+		\end{center}
+	\end{figure}
+
+	В результате охотник попадает на страницу, изображённую на рисунке \ref{label}. На ней сначала указаны все одобренные текущему охотнику путёвки (то есть, по ним он уже может охотиться), и ниже все заявки. Также по каждой из этих двух таблиц можно осуществить поиск по субъекту. На рисунке \ref{fig15:image} указано, какая именно позиция из прайс-листа была выбрана, и уже на этой странице можно увидеть эту заявку (выделена белым цветом).
+	
+	\begin{figure}[h]
+		\centering
+		\begin{center}
+			{\includegraphics[scale=0.34]{schemes/screens/all_vouchers.png}}
+			\caption{Всех заявки и одобренные путёвок текущего охотника}
+			\label{fig18:image}
+		\end{center}
+	\end{figure}
+
+	Если по какой-то причине пользователь передумал оформлять путёвку, то он может отозвать оформленную ранее заявку, нажав на кнопку в столбце <<Отозвать>>. 
+	
+	Для наглядности была отозвана путёвка на гуся. После этого страница выглядит так, как показано на рисунке \ref{fig19:image}. 
+	
+	Показателем того, что операция прошла успешно, является соответствующее сообщение и отсутствие выбранной позиции на странице. 
+	
+	Удалить или отозвать уже одобренные путёвки охотник не может, так как считается, что покупка уже совершена, а закрыть её по определённым причинам может только егерь, закреплённый за сектором, куда была выдана путёвка, или администратор.
+	
+	\begin{figure}[h]
+		\centering
+		\begin{center}
+			{\includegraphics[scale=0.34]{schemes/screens/after_del_huntsman.png}}
+			\caption{Страница после того, как была отозвана заявка}
+			\label{fig19:image}
+		\end{center}
+	\end{figure}
+
+
+	
 	
 		
 		 
