@@ -43,6 +43,8 @@
 		\end{center}
 	\end{figure}
 
+	\subsubsection{Проектирование базы данных}
+
 	База данных должна содержать таблицы, поля и назначение которых описаны в таблицах 
 	\ref{hgtable}-\ref{vouchers_table}.
 	
@@ -50,13 +52,13 @@
 		\begin{center}
 			\caption{HuntingGrounds (таблица хозяйств)}
 			\label{hgtable}
-			\begin{tabular}{| c | l |}
+			\begin{tabular}{| p{3cm} | p{3cm} | p{8cm} |}
 				\hline
-				\textbf{Атрибут} 	& \textbf{Значение} \\
+				\textbf{Атрибут} 	& \textbf{Тип} & \textbf{Значение} \\
 				\hline
-				Id 					&	Идентификатор, PK \\ 
+				Id 					& Целое число &	Идентификатор, PK \\ 
 				\hline
-				GroundName 			&	Название \\ 
+				GroundName 			& Строка &	Название \\ 
 				\hline
 			\end{tabular}
 		\end{center}
@@ -66,14 +68,13 @@
 		\begin{center}
 			\caption{Sectors (таблица секторов)}
 			\label{sec_table}
-			\begin{tabular}{| c | l |}
+			\begin{tabular}{| p{3cm} | p{3cm} | p{8cm} |}
 				\hline
-				\textbf{Атрибут} 	& \textbf{Значение} \\
+				\textbf{Атрибут} 	& \textbf{Тип} & \textbf{Значение} \\
 				\hline
-				Id 					&	Идентификатор, PK \\ 
+				Id 					& Целое число &	Идентификатор, PK \\ 
 				\hline
-				IdHusbandry 			&	Идентификатор хозяйства,  \\ 
-				& в состав которого входит сектор, FK \\
+				IdHusbandry 		& Целое число &	Идентификатор хозяйства, в состав которого входит сектор, FK \\
 				\hline
 			\end{tabular}
 		\end{center}
@@ -83,31 +84,31 @@
 		\begin{center}
 			\caption{Accounts (таблица аккаунтов)}
 			\label{acc_table}
-			\begin{tabular}{| c | l |}
+			\begin{tabular}{| p{3cm} | p{3cm} | p{8cm} |}
 				\hline
-				\textbf{Атрибут} 	& \textbf{Значение} \\
+				\textbf{Атрибут} 	& \textbf{Тип} & \textbf{Значение} \\
 				\hline
-				Login 				&	Логин, PK \\ 
+				Login 				& Строка &	Логин, PK \\ 
 				\hline
-				Salt 				&	Соль  \\ 
+				Salt 				& Строка &	Соль  \\ 
 				\hline
-				HashedPassword 		&	Хэшированный пароль \\ 
+				HashedPassword 		& Строка &	Хэшированный пароль \\ 
 				\hline
-				Surname 			&	Фамилия \\ 
+				Surname 			& Строка &	Фамилия \\ 
 				\hline
-				Firstname 			&	Имя \\ 
+				Firstname 			& Строка &	Имя \\ 
 				\hline
-				Patronymic 			&	Отчество \\ 
+				Patronymic 			& Строка &	Отчество \\ 
 				\hline
-				DateOfBirth 		&	Дата рождения \\ 
+				DateOfBirth 		& Дата &	Дата рождения \\ 
 				\hline
-				Sex 				&	Пол \\ 
+				Sex 				& Символ &	Пол \\ 
 				\hline
-				MobilePhone 		&	Мобильный телефон \\ 
+				MobilePhone 		& Строка &	Мобильный телефон \\ 
 				\hline
-				Email 				&	Электронная почта \\ 
+				Email 				& Строка &	Электронная почта \\ 
 				\hline
-				TypeRole 			&	Роль \\ 
+				TypeRole 			& Строка &	Роль \\ 
 				\hline
 			\end{tabular}
 		\end{center}
@@ -119,14 +120,13 @@
 		\begin{center}
 			\caption{Huntsmen (таблица егерей)}
 			\label{huntsmen_table}
-			\begin{tabular}{| c | l |}
+			\begin{tabular}{| p{3cm} | p{3cm} | p{8cm} |}
 				\hline
-				\textbf{Атрибут} 	& \textbf{Значение} \\
+				\textbf{Атрибут} 	& \textbf{Тип} & \textbf{Значение} \\
 				\hline
-				Id 					&	Идентификатор сектора, за которым \\
-									& 	закреплён егерь, PK, FK \\
+				Id 					& Целое число &	Идентификатор сектора, за которым закреплён егерь, PK, FK \\
 				\hline
-				Login	 			&	Логин, FK \\ 
+				Login	 			& Строка &	Логин, FK \\ 
 				\hline
 			\end{tabular}
 		\end{center}
@@ -136,15 +136,15 @@
 		\begin{center}
 			\caption{Hunters (таблица охотников)}
 			\label{hunters_table}
-			\begin{tabular}{| c | l |}
+			\begin{tabular}{| p{3cm} | p{3cm} | p{8cm} |}
 				\hline
-				\textbf{Атрибут} 	& \textbf{Значение} \\
+				\textbf{Атрибут} 	& \textbf{Тип} & \textbf{Значение} \\
 				\hline
-				TicketNum 			&	Номер охотничьего билета, PK\\
+				TicketNum 			& Строка &	Номер охотничьего билета, PK\\
 				\hline
-				Residence			& 	Адрес прописки \\
+				Residence			& Строка & 	Адрес прописки \\
 				\hline
-				Login	 			&	Логин, FK \\ 
+				Login	 			& Строка &	Логин, FK \\ 
 				\hline
 			\end{tabular}
 		\end{center}
@@ -154,20 +154,19 @@
 		\begin{center}
 			\caption{PriceList (таблица цен на путёвки)}
 			\label{price_table}
-			\begin{tabular}{| c | l |}
+			\begin{tabular}{| p{3cm} | p{3cm} | p{8cm} |}
 				\hline
-				\textbf{Атрибут} 	& \textbf{Значение} \\
+				\textbf{Атрибут} 	& \textbf{Тип} & \textbf{Значение} \\
 				\hline
-				Id 					&	Идентификатор, PK\\
+				Id 					& Целое число &	Идентификатор, PK\\
 				\hline
-				Animal				& 	Название животного \\
+				Animal				& Строка & 	Название животного \\
 				\hline
-				Price	 			&	Цена \\ 
+				Price	 			& Вещественное число &	Цена \\ 
 				\hline
-				IsRelevant	 		&	Флаг актуальности \\ 
+				IsRelevant	 		& Логический &	Флаг актуальности \\ 
 				\hline
-				IdSector	 		&	Идентификатор сектора, за которым \\
-									& 	закреплена позиция, FK \\
+				IdSector	 		& Целое число &	Идентификатор сектора, за которым закреплена позиция, FK \\
 				\hline
 			\end{tabular}
 		\end{center}
@@ -177,25 +176,33 @@
 		\begin{center}
 			\caption{Vouchers (таблица путёвок)}
 			\label{vouchers_table}
-			\begin{tabular}{| c | l |}
+			\begin{tabular}{| p{3cm} | p{3cm} | p{8cm} |}
 				\hline
-				\textbf{Атрибут} 	& \textbf{Значение} \\
+				\textbf{Атрибут} 	& \textbf{Тип} & \textbf{Значение} \\
 				\hline
-				Id 					&	Идентификатор, PK\\
+				Id 					& Целое число &	Идентификатор, PK\\
 				\hline
-				AmountAnimals		& 	Количество животных \\
+				AmountAnimals		& Целое число & 	Количество животных \\
 				\hline
-				Price	 			&	Цена \\ 
+				Price	 			& Вещественное число &	Цена \\ 
 				\hline
-				IdHunter	 		&	Идентификатор владельца-охотника, FK \\ 
+				IdHunter	 		& Строка &	Идентификатор владельца-охотника, FK \\ 
 				\hline
-				IdPricelist	 		&	Идентификатор позиции из перечня цен, FK \\
+				IdPricelist	 		& Целое число &	Идентификатор позиции из перечня цен, FK \\
 				\hline
-				Status				& 	Статус (ждёт решения/одобрено) \\
+				Status				& Логический & 	Статус (ждёт решения/одобрено) \\
 				\hline
 			\end{tabular}
 		\end{center}
 	\end{table}
+
+	\subsection{Нормальная форма модели}
+	1 нф потому
+	2/3
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	
+	\subsection{Схемы триггеров}
+	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 	\subsection{Архитектура приложения. Модель MVC}
 	Этот шаблон проектирования предполагает разделение на три отдельных компонента: Модель (Model), Представление (View) и Контроллер (Controller). Это позволяет производить модификации какого-либо компонента независимо от других. \cite{mvc} 
@@ -206,7 +213,8 @@
 	
 	\textbf{Controller} отвечает за обработку действий пользователя, перенаправляет данные от пользователя к модели и наоборот.\\
 	
-	\subsection{Вывод}
+	\subsection*{Вывод}
+	В разделе были представлены: Use-Case диаграммы для каждой из выделенных ролей (администратора, егеря и охотника), ER-диаграмма сущностей базы данных. Также описана модель MVC, которая была выбрана для дальнейшей реализации.
 
 
 
