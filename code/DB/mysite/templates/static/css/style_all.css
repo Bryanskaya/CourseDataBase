@@ -238,3 +238,15 @@ select option:checked {
   background: #814B38;
   color: white;
 }
+
+.fix-col {
+  table-layout: fixed;
+}
+
+.fix-col-4 tr th:nth-child(4) {
+  width: 20%;
+}
+
+.fix-col-3 tr th:nth-child(3) {
+  width: 20%;
+}

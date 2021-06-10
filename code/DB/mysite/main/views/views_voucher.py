@@ -23,7 +23,6 @@ def requests(request):
     return render(request, 'static/requests.html', locals())
 
 def requests_all(request):
-    print('asassssssssssssssssssssssssssssssssssss')
     voucher_rules = VoucherRules(request.session['user']['role_eng'])
     requests = voucher_rules.get_requests_all()
 
