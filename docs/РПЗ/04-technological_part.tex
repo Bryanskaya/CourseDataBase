@@ -8,7 +8,6 @@
 				\item[1)] Опыт работы с рассматриваемым языком.
 				\item[2)] Поддержка ООП.
 				\item[3)] Большое количество литературы, связанной с ЯП Python.
-				\item[4)] Широкая применимость.
 			\end{enumerate}
 		
 			В качестве среды разработки были использованы PyCharm \cite{pycharm} и Visual Studio Code \cite{vcode}, поскольку они бесплатны для студентов, удобны в процессе разработки и ранее активно использовались.
@@ -45,16 +44,16 @@
 		\end{table}
 	\newpage
 	
-	Поскольку есть опыт работы с такой СУБД, как PostgreSQL \cite{postgresql}, то это средство было выбрано для реализации текущей задачи.
+	При выборе СУБД особо выделялось такое преимущество, как доступность приложения. Немаловажную роль играет и хорошая, полная документация. Перечисленными преимуществами обладает такая СУБД, как PostgreSQL. Это средство было выбрано для реализации текущей задачи, так как дополнительно есть опыт работы с ней.
 	
-	Что касается ORM (Object-relational mapping), то был выбран peewee \cite{peewee}, поскольку также хорошо знаком, так как активно использовался ранее.
+	Что касается ORM (Object-relational mapping), то был выбран peewee \cite{peewee}, поскольку он поддерживает PostgreSQL и является распространённые решением для выбранного языка.
 	
 	\subsubsection{Web-фреймворк}
 	Django \cite{django} был выбран в качестве Web-фреймворка по следующим причинам.
 	\begin{itemize}
 		\item Использует шаблон проектирования MVC, который был выбран ранее.
 		\item Работает с большим количеством дополнительных функций, которые значительно упрощают работу с аутентификацией пользователя, картами сайта и т.д.
-		\item Масштабируемость.
+		\item Масштабируемость. За счёт архитектуры данного фреймворка его компоненты являются достаточно независимыми, что позволяет легче расширять его функционал.
 	\end{itemize}
 
 	\subsection{UML-диаграммы}
@@ -90,7 +89,7 @@
 			\centering
 			\begin{center}
 				{\includegraphics[scale=0.6]{schemes/webGUI.pdf}}
-				\caption{UML-диаграмма компонента бизнес-логики}
+				\caption{UML-диаграмма компонента представления}
 				\label{fig8:image}
 			\end{center}
 		\end{figure}
@@ -148,7 +147,7 @@ CREATE TABLE IF NOT EXISTS hunters(
 		ticket\_num (номер охотничьего билета) - первичный ключ в таблице hunters, а login также как и в таблице huntsmen выступает в качестве внешнего ключа на таблицу accounts.
 			
 		\subsubsection{Наполнение таблиц}
-		Таблицы заполняются сгенерированными данными с помощью библиотеки Faker. Полученные данные записываются в файл, из которого далее будут подгружаться данные. На листингах \ref{lst:create_faker1}-\ref{lst:create_faker2} приведены функции генерации данных для таблицы аккаунтов (accounts) и путёвок (vouchers), примеры таких функций.
+		Таблицы заполняются сгенерированными данными с помощью библиотеки Faker. Полученные данные записываются в файл, из которого далее будут подгружаться данные. На листингах \ref{lst:create_faker1}-\ref{lst:create_faker2} приведены функции генерации данных для таблицы аккаунтов (accounts) и путёвок (vouchers), примеры таких функций. Другие таблицы заполняются аналогично.
 		
 		\begin{lstlisting}[caption = {Генерация данных для таблицы accounts}, label=lst:create_faker1]
 def generate_accounts():
@@ -217,8 +216,114 @@ def generate_vouchers():
 		
 		
 		\subsubsection{Реализация триггеров}
+		Были реализованы триггеры в соответствии с требованиями, которые описывались ранее. 
+		
+		На листинге \ref{lst:trigger1} приведён триггер ProhibitDelAdmin, препятствующий удалению аккаунта администратора, в случае, если он остался единственным в системе.
+		
+		\begin{lstlisting}[caption = {Реализация триггера ProhibitDelAdmin}, label=lst:trigger1]
+CREATE OR REPLACE FUNCTION ProhibitDelAdmin()
+RETURNS TRIGGER
+AS $$
+BEGIN	
+	IF OLD.type_role = 'админ' AND (
+		SELECT count(*)
+		FROM accounts
+		WHERE type_role = 'админ') < 2
+	THEN
+		RAISE EXCEPTION 'Profibited to delete a single admin';
+	END IF;
+	RETURN OLD;
+END;
+$$
+LANGUAGE PLpgSql;
+
+CREATE TRIGGER ProhibitDelAdmin
+BEFORE DELETE ON accounts
+FOR EACH ROW
+EXECUTE PROCEDURE ProhibitDelAdmin();
+		\end{lstlisting}
+	
+		На листинге \ref{lst:trigger2} приведёна реализация триггера FullDelHunter, каскадно удаляющего записи в других таблицах, связанных с удаляемым охотником.
+		
+		\begin{lstlisting}[caption = {Реализация триггера FullDelHunter}, label=lst:trigger2]
+CREATE OR REPLACE FUNCTION FullDelHunter()
+RETURNS TRIGGER
+AS $$
+BEGIN	
+	IF OLD.type_role != 'охотник'
+	THEN
+	RETURN OLD;
+	END IF;
+	DELETE FROM vouchers
+	WHERE vouchers.id_hunter IN (
+		SELECT hunters.ticket_num
+		FROM hunters
+		WHERE hunters.login = OLD.login);
+	
+	DELETE FROM hunters
+	WHERE hunters.login = OLD.login;
+	RETURN OLD;
+END;
+$$
+LANGUAGE PLpgSql;
+
+CREATE TRIGGER FullDelHunter
+BEFORE DELETE ON accounts
+FOR EACH ROW
+EXECUTE PROCEDURE FullDelHunter();
+		\end{lstlisting}
+	
+	На листинге \ref{lst:trigger3} приведёна реализация триггера FullDelHuntsman, каскадно удаляющего записи в других таблицах, связанных с удаляемым егерем. \\ 
+	
+		\begin{lstlisting}[caption = {Реализация триггера FullDelHuntsman}, label=lst:trigger3]
+CREATE OR REPLACE FUNCTION FullDelHuntsman()
+RETURNS TRIGGER
+AS $$
+BEGIN	
+	IF OLD.type_role != 'егерь'
+	THEN
+	RETURN OLD;
+	END IF;
+	
+	DELETE FROM huntsmen
+	WHERE huntsmen.login = OLD.login;
+	RETURN OLD;
+END;
+$$
+LANGUAGE PLpgSql;
+
+CREATE TRIGGER FullDelHuntsman
+BEFORE DELETE ON accounts
+FOR EACH ROW
+EXECUTE PROCEDURE FullDelHuntsman();
+		\end{lstlisting}
+	
+		На листинге \ref{lst:trigger4} приведёна реализация триггера AddHuntsman, проверяющего единственность егеря в секторе.
+
+		\begin{lstlisting}[caption = {Реализация триггера AddHuntsman}, label=lst:trigger4]
+CREATE OR REPLACE FUNCTION AddHuntsman()
+RETURNS TRIGGER
+AS $$
+BEGIN
+	IF NEW.id IN (
+		SELECT hunters.id
+		FROM hunters)
+	THEN
+		RAISE EXCEPTION 'Such sector has already busy';
+	END IF;
+	RETURN NEW;
+END;
+$$
+LANGUAGE PLpgSql;
+
+CREATE TRIGGER AddHuntsman
+BEFORE INSERT ON huntsmen
+FOR EACH ROW
+EXECUTE PROCEDURE AddHuntsman();
+		\end{lstlisting}
+	
 		\subsubsection{Реализация ролевой модели}
-		Для того, чтобы предоставить необходимые права доступа разным категориям пользователей (admin, huntsman, hunter), была реализована ролевая модель на уровне базы данных. Код, в котором они задаются, представлен в листингах \ref{lst:create_rights_admin}-\ref{lst:create_rights_hunter}. Другие таблицы заполняются аналогично.
+		Для того, чтобы предоставить необходимые права доступа разным категориям пользователей (admin, huntsman, hunter), была реализована ролевая модель на уровне базы данных. Код, в котором они задаются, представлен в листингах \ref{lst:create_rights_admin}-\ref{lst:create_rights_hunter}.
 		
 		\begin{lstlisting}[caption = {Создание админа}, label=lst:create_rights_admin]
 CREATE ROLE admin WITH
@@ -518,7 +623,7 @@ GRANT DELETE ON vouchers TO hunter;
 	\end{figure}
 	\newpage
 
-	Возможность оформления путёвки через администратора тоже есть, он также должен заполнить форму, аналогичную изображенной на рисунке \ref{fig30:image}, только теперь  ещё надо заполнить поле о месте проведения (рисунок \ref{fig33:image}).
+	Возможность оформления путёвки через администратора тоже есть, он также должен заполнить форму, аналогичную изображенной на рисунке \ref{fig28:image}, только теперь  ещё надо заполнить поле о месте проведения (рисунок \ref{fig33:image}).
 	
 	\begin{figure}[h!]
 		\centering
@@ -544,7 +649,7 @@ GRANT DELETE ON vouchers TO hunter;
 	\subsection*{Вывод}
 	Для реализации поставленной задачи были выбраны язык программирования Python и среды разработки Pycharm и Visual Studio Code.
 	
-	В качестве используемых СУБД и ORM были выбраны PostgreSQL и peewee, а для разработки Web-фреймворка - Django.
+	В качестве используемых СУБД и ORM были выбраны PostgreSQL и peewee, а для разработки приложения - Web-фреймворк Django.
 	
 	В разделе также были представлены в виде UML-диаграмм компонент доступа к данным, компонент бизнес-логики, представления, а также общая диаграмма приложения.
 	

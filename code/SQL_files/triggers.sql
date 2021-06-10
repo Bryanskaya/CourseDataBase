@@ -33,3 +33,106 @@ EXECUTE PROCEDURE proc_count_price();
 
 --INSERT INTO vouchers(duration_days, amount_animals, price, id_hunter, id_pricelist) VALUES (14, 5, 0, 60971869, 2);
 
+-- Удаление единственного админа
+DROP TRIGGER IF EXISTS ProhibitDelAdmin ON accounts;
+
+DROP FUNCTION ProhibitDelAdmin() cascade;
+CREATE OR REPLACE FUNCTION ProhibitDelAdmin()
+RETURNS TRIGGER
+AS $$
+BEGIN	
+	IF OLD.type_role = 'админ' AND (
+		SELECT count(*)
+		FROM accounts
+		WHERE type_role = 'админ') < 2
+	THEN
+	RAISE EXCEPTION 'Profibited to delete a single admin';
+	END IF;
+	RETURN OLD;
+END;
+$$
+LANGUAGE PLpgSql;
+
+CREATE TRIGGER ProhibitDelAdmin
+BEFORE DELETE ON accounts
+FOR EACH ROW
+EXECUTE PROCEDURE ProhibitDelAdmin();
+
+-- Каскадное удаление охотника
+DROP TRIGGER IF EXISTS FullDelHunter ON accounts;
+
+DROP FUNCTION FullDelHunter() cascade;
+CREATE OR REPLACE FUNCTION FullDelHunter()
+RETURNS TRIGGER
+AS $$
+BEGIN	
+	IF OLD.type_role != 'охотник'
+	THEN
+	RETURN OLD;
+	END IF;
+	DELETE FROM vouchers
+	WHERE vouchers.id_hunter IN (
+		SELECT hunters.ticket_num
+		FROM hunters
+		WHERE hunters.login = OLD.login);
+	DELETE FROM hunters
+	WHERE hunters.login = OLD.login;
+	RETURN OLD;
+END;
+$$
+LANGUAGE PLpgSql;
+
+CREATE TRIGGER FullDelHunter
+BEFORE DELETE ON accounts
+FOR EACH ROW
+EXECUTE PROCEDURE FullDelHunter();
+
+-- Каскадное удаление егеря
+DROP TRIGGER IF EXISTS FullDelHuntsman ON accounts;
+
+DROP FUNCTION FullDelHuntsman() cascade;
+CREATE OR REPLACE FUNCTION FullDelHuntsman()
+RETURNS TRIGGER
+AS $$
+BEGIN	
+	IF OLD.type_role != 'егерь'
+	THEN
+	RETURN OLD;
+	END IF;
+	DELETE FROM huntsmen
+	WHERE huntsmen.login = OLD.login;
+	RETURN OLD;
+END;
+$$
+LANGUAGE PLpgSql;
+
+CREATE TRIGGER FullDelHuntsman
+BEFORE DELETE ON accounts
+FOR EACH ROW
+EXECUTE PROCEDURE FullDelHuntsman();
+
+
+-- Добавление егеря
+DROP TRIGGER IF EXISTS AddHuntsman ON huntsmen;
+
+DROP FUNCTION AddHuntsman() cascade;
+CREATE OR REPLACE FUNCTION AddHuntsman()
+RETURNS TRIGGER
+AS $$
+BEGIN
+	IF NEW.id IN (
+		SELECT hunters.id
+		FROM hunters)
+	THEN
+	RAISE EXCEPTION 'Such sector has already busy';
+	END IF;
+	RETURN NEW;
+END;
+$$
+LANGUAGE PLpgSql;
+
+CREATE TRIGGER AddHuntsman
+BEFORE INSERT ON huntsmen
+FOR EACH ROW
+EXECUTE PROCEDURE AddHuntsman();
+
