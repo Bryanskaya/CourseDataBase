@@ -132,3 +132,22 @@ belowskip 	= 6	pt]	{subcaption}
 
 % Ссылки внутри текста
 \usepackage{hyperref}
+
+% Настройка листингов
+\usepackage{listings}
+\lstset{
+	language = sql,
+	extendedchars=\true,
+	keepspaces=true,
+	basicstyle=\scriptsize\sffamily,
+	showstringspaces=\false,
+	numbers=left,
+	stepnumber=1,
+	numbersep=5pt,
+	frame=single,
+	tabsize=2,
+	captionpos=t,
+	breaklines=true,
+	breakatwhitespace=false,
+	escapeinside={\#*}{*)}
+}
