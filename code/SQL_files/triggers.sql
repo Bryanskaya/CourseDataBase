@@ -58,6 +58,8 @@ BEFORE DELETE ON accounts
 FOR EACH ROW
 EXECUTE PROCEDURE ProhibitDelAdmin();
 
+-- PostgreSQL
+
 -- Каскадное удаление охотника
 DROP TRIGGER IF EXISTS FullDelHunter ON accounts;
 
@@ -77,6 +79,7 @@ BEGIN
 		WHERE hunters.login = OLD.login);
 	DELETE FROM hunters
 	WHERE hunters.login = OLD.login;
+	RAISE INFO 'Hunter was successfully deleted';
 	RETURN OLD;
 END;
 $$
@@ -86,6 +89,8 @@ CREATE TRIGGER FullDelHunter
 BEFORE DELETE ON accounts
 FOR EACH ROW
 EXECUTE PROCEDURE FullDelHunter();
+
+-- PostgreSQL
 
 -- Каскадное удаление егеря
 DROP TRIGGER IF EXISTS FullDelHuntsman ON accounts;
@@ -101,6 +106,7 @@ BEGIN
 	END IF;
 	DELETE FROM huntsmen
 	WHERE huntsmen.login = OLD.login;
+	RAISE INFO 'Huntsman was successfully deleted';
 	RETURN OLD;
 END;
 $$
@@ -110,6 +116,8 @@ CREATE TRIGGER FullDelHuntsman
 BEFORE DELETE ON accounts
 FOR EACH ROW
 EXECUTE PROCEDURE FullDelHuntsman();
+
+-- PostgreSQL
 
 
 -- Добавление егеря
@@ -121,8 +129,8 @@ RETURNS TRIGGER
 AS $$
 BEGIN
 	IF NEW.id IN (
-		SELECT hunters.id
-		FROM hunters)
+		SELECT huntsmen.id
+		FROM huntsmen)
 	THEN
 	RAISE EXCEPTION 'Such sector has already busy';
 	END IF;
@@ -135,4 +143,7 @@ CREATE TRIGGER AddHuntsman
 BEFORE INSERT ON huntsmen
 FOR EACH ROW
 EXECUTE PROCEDURE AddHuntsman();
+
+--INSERT INTO accounts VALUES ('test_trig4', '1', '1', 'test', 'test', '', '2000-05-01', 'м', '+7-898-898-89-89', 'test@mail.com', 'егерь');
+--INSERT INTO huntsmen VALUES (37, 'test_trig4');
 
