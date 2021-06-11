@@ -14,7 +14,7 @@ animals = ['утка', 'гусь', 'тетерев', 'заяц-русак', 'л�
            'глухарь', 'перепел', 'куропатка', 'заяц-беляк', 'барсук',
            'куница', 'норка', 'вальдшнеп', 'куропатка', 'перепел',
            'кряква', 'чернеть', 'чирок', 'ондатра', 'хорёк']
-price = [i for i in range(300, 8000, 150)]
+price = [i for i in range(100, 6000, 150)]
 huntsmen_sectors = [i+1 for i in range(NUM_SECTORS)]
 sex = ['м', 'ж']
 login = []
@@ -100,14 +100,10 @@ def generate_huntsmen():
         id_sector = huntsmen_sectors[ind]
         del huntsmen_sectors[ind]
 
-        experience = choice(range(0, 50))
-        salary = choice(range(10000, 80000, 5000))
         lgn = login[i]
 
-        line = "{0}|{1}|{2}|{3}\n".format(
+        line = "{0}|{1}\n".format(
             id_sector,
-            experience,
-            salary,
             lgn
         )
 
@@ -212,19 +208,22 @@ def generate_vouchers():
     f = open('vouchers.cvg', 'w')
 
     for i in range(MAX_AMOUNT + 200):
-        duration = choice(range(1, 100))
         amount = choice(range(1, 10))
         prc = 0
         ind = choice(range(1, MAX_AMOUNT))
         id_hunter = hunters[ind]
         id_pricelist = choice(range(1, MAX_AMOUNT))
+        if i % 2:
+            status = True
+        else:
+            status = False
 
         line = "{0}|{1}|{2}|{3}|{4}\n".format(
-            duration,
             amount,
             prc,
             id_hunter,
-            id_pricelist
+            id_pricelist,
+            status
         )
 
         f.write(line)
@@ -233,7 +232,7 @@ def generate_vouchers():
 
 if __name__ == "__main__":
     #generate_hunting_grounds() не трогай, сделан специальный файл
-    generate_sectors()
+    #generate_sectors()
     '''generate_price_list()
     generate_accounts()
     generate_huntsmen()

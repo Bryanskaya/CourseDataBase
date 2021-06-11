@@ -15,5 +15,10 @@ GRANT DELETE ON vouchers TO hunter;
 
 
 
+
+
+
+
+
 UPDATE accounts SET type_role = 'админ' WHERE login = '12121212';
 DELETE FROM hunters WHERE ticket_num='22222222'
