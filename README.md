@@ -1,5 +1,5 @@
 # CourseDataBase
-Курсовая работа по базам данных. Удачи, солнышко
+Курсовая работа по базам данных.
 
 ---
 # Кто что может в моей работе
@@ -59,3 +59,23 @@
 # Продумать
 0. Что делать с регистрацией егерей/охотников
 0. Что делать, если забыли логин/пароль
+
+---
+---
+# Это было ожидание, а теперь РЕАЛЬНОСТЬ
+## 1. Вход
+![image](https://user-images.githubusercontent.com/54107546/121745442-f7a89a00-cb0c-11eb-9c6e-1e73dfcc27c0.png)
+
+## 2. Регистрация
+![image](https://user-images.githubusercontent.com/54107546/121745475-042cf280-cb0d-11eb-8ae7-485c1c7dfcba.png)
+
+### 2.1 охотника
+![image](https://user-images.githubusercontent.com/54107546/121745003-70f3bd00-cb0c-11eb-9a97-38230d246ef2.png)
+
+### 2.2 егеря
+![image](https://user-images.githubusercontent.com/54107546/121745175-bca66680-cb0c-11eb-97a2-3f8c5e6a9d90.png)
+
+### 2.3 администратора
+![image](https://user-images.githubusercontent.com/54107546/121744823-24a87d00-cb0c-11eb-9cf3-0dc2bfe7fcb5.png)
+
+# И ещё очень-очень много страниц
